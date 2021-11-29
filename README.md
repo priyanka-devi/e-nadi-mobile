@@ -1,4 +1,4 @@
-Link apk A05 (e-nadi) : https://github.com/priyanka-devi/e-nadi-mobile/releases
+
 
 [![Pre-Release](https://github.com/priyanka-devi/e-nadi-mobile/actions/workflows/pre-release.yml/badge.svg)](https://github.com/priyanka-devi/e-nadi-mobile/actions/workflows/pre-release.yml)
 [![Release](https://github.com/priyanka-devi/e-nadi-mobile/actions/workflows/release.yml/badge.svg)](https://github.com/priyanka-devi/e-nadi-mobile/actions/workflows/release.yml)
@@ -6,6 +6,8 @@ Link apk A05 (e-nadi) : https://github.com/priyanka-devi/e-nadi-mobile/releases
 
 # A05-PBP
 Repository untuk projek tengah semester PBP.
+
+Link apk A05 (e-nadi) : https://github.com/priyanka-devi/e-nadi-mobile/releases
 
 ## Anggota Kelompok
 1. Anisa Maharani - 2006483100
