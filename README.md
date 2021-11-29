@@ -1,3 +1,8 @@
+
+[![Pre-Release](https://github.com/priyanka-devi/e-nadi-mobile/actions/workflows/pre-release.yml/badge.svg)](https://github.com/priyanka-devi/e-nadi-mobile/actions/workflows/pre-release.yml)
+[![Release](https://github.com/priyanka-devi/e-nadi-mobile/actions/workflows/release.yml/badge.svg)](https://github.com/priyanka-devi/e-nadi-mobile/actions/workflows/release.yml)
+
+
 # A05-PBP
 Repository untuk projek tengah semester PBP.
 
