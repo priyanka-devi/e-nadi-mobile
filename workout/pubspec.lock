@@ -43,13 +43,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0"
-  cupertino_icons:
-    dependency: "direct main"
-    description:
-      name: cupertino_icons
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.4"
   fake_async:
     dependency: transitive
     description:
@@ -74,13 +67,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  healthy_advice:
-    dependency: "direct main"
-    description:
-      path: healthy_advice
-      relative: true
-    source: path
-    version: "0.0.1"
   lints:
     dependency: transitive
     description:
@@ -109,13 +95,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
-  recipe:
-    dependency: "direct main"
-    description:
-      path: recipe
-      relative: true
-    source: path
-    version: "0.0.1"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -177,13 +156,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  workout:
-    dependency: "direct main"
-    description:
-      path: workout
-      relative: true
-    source: path
-    version: "0.0.1"
 sdks:
   dart: ">=2.12.0 <3.0.0"
   flutter: ">=1.17.0"
