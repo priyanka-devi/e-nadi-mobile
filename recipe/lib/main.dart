@@ -36,7 +36,6 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _MainPageStateIndex = 3;
-
   final _formKey = GlobalKey<FormState>();
   String textFieldsValue = "";
   late TextEditingController _controller;
