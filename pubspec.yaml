@@ -33,6 +33,8 @@ dependencies:
     path: healthy_advice
   recipe:
     path: recipe
+  summary:
+    path: summary
   workout:
     path: workout
 
