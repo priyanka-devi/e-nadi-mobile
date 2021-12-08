@@ -10,3 +10,8 @@ void main() {
     expect(calculator.addOne(0), 1);
   });
 }
+
+class Calculator {
+  addOne(int i) {}
+
+}

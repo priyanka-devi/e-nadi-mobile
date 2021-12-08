@@ -1,7 +1,24 @@
-library accounts;
+import 'package:flutter/material.dart';
+import 'package:accounts/screens/welcome_screen.dart';
+import '/constants.dart';
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  // This widget is the root of your application.
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'E-Nadi Login',
+      theme: ThemeData(
+          primaryColor: kPrimaryColor, scaffoldBackgroundColor: Colors.white),
+      home: const WelcomeScreen(),
+    );
+  }
 }
