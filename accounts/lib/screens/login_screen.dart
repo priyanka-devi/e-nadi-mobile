@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:accounts/components/already_have_an_account_check.dart';
 import 'package:accounts/screens/signup_screen.dart';
 import 'package:accounts/constants.dart';
+import 'package:accounts/components/button.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -24,8 +25,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _controller1 = TextEditingController();
   final TextEditingController _controller2 = TextEditingController();
 
-  String textFieldsValue1 = "";
-  String textFieldsValue2 = "";
+  // String textFieldsValue1 = "";
+  // String textFieldsValue2 = "";
 
   @override
   Widget build(BuildContext context) {
@@ -90,64 +91,53 @@ class _LoginScreenState extends State<LoginScreen> {
                         controller: _controller2
                     ),
 
-                    Container(
-                      width: size.width * 0.8,
-                      margin: const EdgeInsets.symmetric(vertical: 10),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(29),
-                        child: FlatButton(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 20, horizontal: 40),
-                          color: kPrimaryColor,
-                          onPressed: () async {
-                            if (_formKey.currentState!.validate()) {
-                              final response = await http.post(Uri.parse("http://10.0.2.2:8000/login_flutter/"),
-                                  headers: <String, String>{
-                                    'Content-Type': 'application/json; charset=UTF-8',},
-                                  body: jsonEncode(<String, String>{
-                                    'username': _controller1.text,
-                                    'password': _controller2.text,
-                                  })
+                    Button(
+                        text: "Login",
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            final response = await http.post(
+                                Uri.parse(
+                                    "http://10.0.2.2:8000/login_flutter/"),
+                                headers: <String, String>{
+                                  'Content-Type':
+                                  'application/json; charset=UTF-8',
+                                },
+                                body: jsonEncode(<String, String>{
+                                  'username': _controller1.text,
+                                  'password': _controller2.text,
+                                }));
+                            if (response.statusCode == 201) {
+                              // If the server did return a 201 CREATED response,
+                              // then parse the JSON.
+                              _controller1.clear();
+                              _controller2.clear();
+                              // Map<String, dynamic> data = json.decode(response.body);
+                              // print(data.values.first);
+                              print(response.body);
+
+                              showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  title: const Text('Login Success'),
+                                  content: const Text('Welcome to E-Nadi'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context, 'OK'),
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                ),
                               );
-                              if (response.statusCode == 201) {
-                                // If the server did return a 201 CREATED response,
-                                // then parse the JSON.
-                                _controller1.clear();
-                                _controller2.clear();
-                                // Map<String, dynamic> data = json.decode(response.body);
-                                // print(data.values.first);
-                                print(response.body);
-
-
-                                showDialog<String>(
-                                  context: context,
-                                  builder: (BuildContext context) => AlertDialog(
-                                    title: const Text('Login Success'),
-                                    content: const Text('Welcome to E-Nadi'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        onPressed: () => Navigator.pop(context, 'OK'),
-                                        child: const Text('OK'),
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              } else {
-                                // If the server did not return a 201 CREATED response,
-                                // then throw an exception.
-                                print("Username/Password salah");
-                              }
-                            }else{
-                              print("Ga Valid");
+                            } else {
+                              // If the server did not return a 201 CREATED response,
+                              // then throw an exception.
+                              print("Username/Password salah");
                             }
-                          },
-                          child: const Text(
-                            "LOGIN",
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                    ),
+                          } else {
+                            print("Ga Valid");
+                          }
+                        }),
                     SizedBox(height: size.height * 0.03),
                     AlreadyHaveAnAccountCheck(
                       press: () {
