@@ -39,7 +39,7 @@ Aplikasi ini membantu pengguna untuk memantau pola hidup sehat. Hal ini dilatarb
 - Workout Tracker 
 - Sleep Tracker 
 - Food Recipe 
-- Activity Summary
+- Activity Summary : Halaman ini berisi informasi terkait profil pengguna serta rangkuman aktivitas yang mereka lakukan berupa durasi tidur dan olahraga pada suatu hari tertentu. Pada halaman ini, pengguna dapat melihat dan mengubah username, first name, last name, serta email yang telah didaftarkan ketika sign up, serta jenis kelamin, usia, pekerjaan, nomor telepon, dan alamat yang dapat dilengkapi setelah mendaftarkan akun. Untuk mengakses halaman ini, pengguna harus sudah log in. Jika belum, pengguna tidak dapat melihat apa pun pada halaman ini dan akan langsung diarahkan untuk melakukan log in terlebih dahulu. Modul ini akan mengambil data username, first name, last name, email, jenis kelamin, usia, pekerjaan, nomor telepon, dan alamat seorang pengguna dari database django dan menampilkannya pada halaman Activity Summary.
 - Healthy Advice : Halaman ini berisi artikel-artikel kesehatan yang dimaksudkan sebagai saran. Artikel-artikel ini diperbaharui secara berkala oleh admin e-nadi. Pengunjung dapat saling berbagi cerita lewat kolom komentar jika sudah log in. Pengunjung yang sudah log in juga bisa mengedit komentar yang sudah diposting atau menghapus komentar tersebut. Pengunjung yang tidak log in tidak dapat menuliskan komentar dan hanya bisa melihat komentar-komentar yang sudah ada.
 
 ## 👨‍👩‍👧‍👦 Persona
