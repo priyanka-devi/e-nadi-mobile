@@ -109,17 +109,18 @@ class _LoginScreenState extends State<LoginScreen> {
                             if (response.statusCode == 201) {
                               // If the server did return a 201 CREATED response,
                               // then parse the JSON.
-                              _controller1.clear();
-                              _controller2.clear();
-                              // Map<String, dynamic> data = json.decode(response.body);
-                              // print(data.values.first);
-                              print(response.body);
+
+                              // print(response.body);
 
                               showDialog<String>(
                                 context: context,
                                 builder: (BuildContext context) => AlertDialog(
                                   title: const Text('Login Success'),
-                                  content: const Text('Welcome to E-Nadi'),
+                                  content: Text('Welcome to E-Nadi, ' + _controller1.text ),
+                                  shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(2.0))
+                                  ),
+                                  backgroundColor: kPrimaryLightColor,
                                   actions: <Widget>[
                                     TextButton(
                                       onPressed: () =>
@@ -129,13 +130,26 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ],
                                 ),
                               );
+                              _controller1.clear();
+                              _controller2.clear();
                             } else {
                               // If the server did not return a 201 CREATED response,
                               // then throw an exception.
-                              print("Username/Password salah");
+                              showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) => AlertDialog(
+                                  title: const Text('Login Failed'),
+                                  content: const Text('Wrong Username or Password'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.pop(context, 'OK'),
+                                      child: const Text('OK'),
+                                    ),
+                                  ],
+                                ),
+                              );
                             }
-                          } else {
-                            print("Ga Valid");
                           }
                         }),
                     SizedBox(height: size.height * 0.03),

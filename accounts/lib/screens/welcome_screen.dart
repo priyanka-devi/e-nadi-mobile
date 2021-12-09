@@ -1,3 +1,4 @@
+import 'package:accounts/components/button.dart';
 import 'package:flutter/material.dart';
 import '/constants.dart';
 
@@ -48,50 +49,20 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   SizedBox(height: size.height * 0.05),
                   SizedBox(height: size.height * 0.05),
-                  Container(
-                    width: size.width * 0.8,
-                    margin: const EdgeInsets.symmetric(vertical: 10),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(29),
-                      child: FlatButton(
-                        padding:
-                            const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                        color: kPrimaryColor,
-                        onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return const LoginScreen();
-                          }));
-                        },
-                        child: const Text(
-                          "LOGIN",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    width: size.width * 0.8,
-                    margin: const EdgeInsets.symmetric(vertical: 10),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(29),
-                      child: FlatButton(
-                        padding:
-                            const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
-                        color: kPrimaryColor,
-                        onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return const SignUpScreen();
-                          }));
-                        },
-                        child: const Text(
-                          "SIGN UP",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
+                  Button(text: "LOGIN",
+                      onPressed: () async{
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                              return const LoginScreen();
+                            }));
+                      }),
+                  Button(text: "SIGN UP",
+                      onPressed: () async{
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                              return const SignUpScreen();
+                            }));
+                  }),
                 ],
               ),
             )
