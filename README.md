@@ -40,7 +40,7 @@ Aplikasi ini membantu pengguna untuk memantau pola hidup sehat. Hal ini dilatarb
 
 - Workout Tracker : Halaman ini mencatat sudah berapa waktu dalam satuan menit pada hari itu user telah berolahraga. User dapat mengupdate dan mereset catatan waktu tersebut. User yang tidak login tidak akan bisa menggunakan fitur ini.
 
-- Sleep Tracker
+- Sleep Tracker : Halaman ini mencatat sudah berapa lama waktu user tidur dalam satuan jam pada hari itu. User dapat mengupdate dan mereset catatan waktu tersebut. User dapat mengetahui kualitas tidur user setelah mencatat jam waktu tidur user. User yang tidak login tidak akan bisa menggunakan fitur ini.
 
 - Food Recipe : Page ini akan menunjukan card yang berisi informasi terkait resep - resep makanan sehat yang bisa diakses semua pengguna. Pada page ini juga terdapat fitur comments & feedback dimana pengguna dapat meninggalkan komentar serta dapat menghapus komentar yang sudah diposting. Namun untuk memakai fitur tersebut pengguna perlu melakukan login, apabila belum melakukan login, pengguna hanya bisa melihat comment & feedback yang sudah ada.  Modul ini akan mengambil data nama user, tanggal, dan isi komentar suatu user pada web service django. Untuk me-reuse sebuah URL views yang akan dipanggil oleh profile, terdapat suatu method pada views.py yang bertujuan untuk mengirim data dari model get_all_comment (HttpResponse) pada Django dalam format JSON yang nanti akan di fetch dari sisi Flutter.
 
