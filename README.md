@@ -20,6 +20,13 @@ Link apk A05 (e-nadi) : https://github.com/priyanka-devi/e-nadi-mobile/releases
 ## 🔗 Website Link
 Link herokuapp [  https://e-nadi.herokuapp.com/  ]
 
+## 🐱‍💻 Integrasi dengan Web Service
+Berikut adalah langkah-langkah yang akan kami lakukan untuk mengintegrasikan aplikasi dengan web server 
+
+1. Melengkapi API endpoint pada backend Django menggunakan JsonResponse dari website e-nadi yang sudah dibuat pada project tengah semester.
+2. Menerapkan tampilan frontend menggunakan flutter yang disesuaikan dengan web e-nadi untuk mobile device
+3. Mengintegrasikan frontend dan backend menggunakan API yang disediakan oleh backend Django
+
 ## 🏋️ Brief
 Pada pandemi Covid-19 yang terus menyerang penduduk dunia tanpa henti, kesehatan tubuh serta pola hidup sehat merupakan hal esensial yang harus dijaga.  Pola hidup sehat adalah gaya hidup yang memperhatikan segala aspek kondisi kesehatan. Mulai dari makanan, minuman, nutrisi yang dikonsumsi dan perilaku kita sehari- hari. Baik itu dalam sebuah rutinitas olahraga yang tentu akan menjaga kondisi kesehatan dan juga akan menghindarkan kita dari penyakit. Dengan adanya pandemi Covid-19 saat ini banyak masyarakat terpaksa untuk membatasi aktivitas di luar rumah. Pembatasan aktivitas di luar rumah ini mengakibatkan banyak masyarakat tidak melakukan olahraga atau memiliki pola hidup yang buruk. Untuk itu, kami hadir bertujuan untuk membantu dan memantau pola hidup sehat masyarakat dengan cara membuat sebuah aplikasi bagi masyarakat Indonesia berbasis website. 
 
