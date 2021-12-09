@@ -40,7 +40,7 @@ Aplikasi ini membantu pengguna untuk memantau pola hidup sehat. Hal ini dilatarb
 - Sleep Tracker 
 - Food Recipe 
 - Activity Summary
-- Healthy Advice
+- Healthy Advice : Halaman ini berisi artikel-artikel kesehatan yang dimaksudkan sebagai saran. Artikel-artikel ini diperbaharui secara berkala oleh admin e-nadi. Pengunjung dapat saling berbagi cerita lewat kolom komentar jika sudah log in. Pengunjung yang sudah log in juga bisa mengedit komentar yang sudah diposting atau menghapus komentar tersebut. Pengunjung yang tidak log in tidak dapat menuliskan komentar dan hanya bisa melihat komentar-komentar yang sudah ada.
 
 ## 👨‍👩‍👧‍👦 Persona
 **1. Udin Deyzel**
