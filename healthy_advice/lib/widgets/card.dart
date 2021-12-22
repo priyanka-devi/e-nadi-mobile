@@ -5,6 +5,9 @@
 // entire card.
 
 import 'package:flutter/material.dart';
+import 'package:healthy_advice/screens/article_detail.dart';
+import 'package:healthy_advice/screens/healthy_advice_home.dart';
+import 'package:healthy_advice/screens/article_detail.dart';
 
 
 class CardSehat extends StatefulWidget {
@@ -67,7 +70,12 @@ class _CardSehatState extends State<CardSehat> {
                           side: BorderSide(width: 2, color: Colors.teal),
                           padding: EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 8),
                           shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context,  MaterialPageRoute(
+                            builder: (_) => ArticleDetail(),
+                          ),
+                          );
+                        },
                         child: const Text('View Details'),
                       ),
                     ]

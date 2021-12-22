@@ -8,15 +8,17 @@ import 'package:healthy_advice/widgets/carousel.dart';
 import 'package:healthy_advice/widgets/comment_textField.dart';
 import 'package:healthy_advice/Model/isi_comment.dart';
 import 'package:healthy_advice/Model/isi_article.dart';
+import 'package:healthy_advice/screens/drawer_screen.dart';
 
 class HealthyAdviceHome extends StatefulWidget {
-  const HealthyAdviceHome({Key? key}) : super(key: key);
-
+  const HealthyAdviceHome({Key? key, required this.title}) : super(key: key);
+  final String title;
   @override
   _HealthyAdviceHomeState createState() => _HealthyAdviceHomeState();
 }
 
 class _HealthyAdviceHomeState extends State<HealthyAdviceHome> {
+
   List<IsiComment> extractedData = [];
   List<IsiArticle> extractedArticle = [];
   articleData() async {
@@ -75,77 +77,85 @@ class _HealthyAdviceHomeState extends State<HealthyAdviceHome> {
   }
 
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          CarouselHealthyAdv(),
-          SizedBox(height: 24),
-          FutureBuilder(
-              future: articleData(),
-              builder: (context, AsyncSnapshot snapshot) {
-                if (snapshot.data == null) {
-                  return Container(
-                    child: Center(
-                        child: Text(
-                          "Loading...",
-                        )),
-                  );
-                } else {
-                  return Column(
-                      children:
-                      extractedArticle.map((anu) {
-                        return CardSehat(
-                          createdAt: anu.fields.createdAt,
-                          imageArticle: anu.fields.imageArticle,
-                          deskripsi: anu.fields.deskripsi,
-                          imageLink: anu.fields.imageLink,
-                          title: anu.fields.title,
-                        );
-                      }).toList()
-                  );
-
-                }
-              }),
-          // CardSehat(),
-          // CardSehat(),
-          // CardSehat(),
-          SizedBox(
-            height: 20,
-          ),
-          CommentTextField(),
-          FutureBuilder(
-              future: fetchData(),
-              builder: (context, AsyncSnapshot snapshot) {
-                if (snapshot.data == null) {
-                  return Container(
-                    child: Center(
-                        child: Text(
-                          "Loading...",
-                        )),
-                  );
-                } else {
-                  return Column(
-                    children:
-                      extractedData.map((anu) {
-                    return CardComment(
-                      commentatorName : anu.fields.commentatorName,
-                      commentField : anu.fields.commentField,
-                    );
-                  }).toList()
-                  );
-
-                }
-              }),
-          // CardComment(),
-          // CardComment(),
-          // CardComment(),
-          // CardComment(),
-          SizedBox(
-            height: 20,
-          ),
-
-        ],
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.title),
       ),
+      drawer: DrawerScreen(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            CarouselHealthyAdv(),
+            SizedBox(height: 24),
+            FutureBuilder(
+                future: articleData(),
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (snapshot.data == null) {
+                    return Container(
+                      child: Center(
+                          child: Text(
+                            "Loading...",
+                          )),
+                    );
+                  } else {
+                    return Column(
+                        children:
+                        extractedArticle.map((anu) {
+                          return CardSehat(
+                            createdAt: anu.fields.createdAt,
+                            imageArticle: anu.fields.imageArticle,
+                            deskripsi: anu.fields.deskripsi,
+                            imageLink: anu.fields.imageLink,
+                            title: anu.fields.title,
+                          );
+                        }).toList()
+                    );
+
+                  }
+                }),
+            // CardSehat(),
+            // CardSehat(),
+            // CardSehat(),
+            SizedBox(
+              height: 20,
+            ),
+            CommentTextField(),
+            FutureBuilder(
+                future: fetchData(),
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (snapshot.data == null) {
+                    return Container(
+                      child: Center(
+                          child: Text(
+                            "Loading...",
+                          )),
+                    );
+                  } else {
+                    return Column(
+                        children:
+                        extractedData.map((anu) {
+                          return CardComment(
+                            commentatorName : anu.fields.commentatorName,
+                            commentField : anu.fields.commentField,
+                          );
+                        }).toList()
+                    );
+
+                  }
+                }),
+            // CardComment(),
+            // CardComment(),
+            // CardComment(),
+            // CardComment(),
+            SizedBox(
+              height: 20,
+            ),
+
+          ],
+        ),
+      ),
+
     );
+
   }
 }

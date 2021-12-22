@@ -85,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // SingleChildScrollView(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
-          HealthyAdviceHome()
+          HealthyAdviceHome(title: 'e-nadi Healthy Advice'),
       // ),
     );
   }
