@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 class ArticleDetail extends StatefulWidget {
-  const ArticleDetail({Key? key}) : super(key: key);
+  const ArticleDetail({Key? key, required this.title, required this.imageArticle, required this.deskripsi, required this.createdAt}) : super(key: key);
+  final String title;
+  final String deskripsi;
+  final String imageArticle;
+  final String createdAt;
 
   @override
   _ArticleDetailState createState() => _ArticleDetailState();
@@ -22,19 +26,19 @@ class _ArticleDetailState extends State<ArticleDetail> {
           child: Column(
             children: [
               SizedBox(height: 20,),
-              Image.network("https://d1vbn70lmn1nqe.cloudfront.net/prod/wp-content/uploads/2021/10/25025409/manfaat-istirahat-yang-cukup-dan-cara-memperolehnya-halodoc.jpg.webp"),
+              Image.network(widget.imageArticle),
               SizedBox(height: 20,),
-              Text("Manfaat Istirahat yang Cukup dan Cara Memperolehnya", style: TextStyle (
+              Text(widget.title, style: TextStyle (
                 fontSize: 24, fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center),
               SizedBox(height: 20,),
-              Text("Oct. 28, 2021", style: TextStyle(
+              Text(widget.createdAt, style: TextStyle(
                 fontWeight: FontWeight.bold, fontSize: 20
               ),
                 textAlign: TextAlign.center,),
               SizedBox(height: 20,),
-              Text("Halodoc, Jakarta - Di zaman modern yang semakin sibuk ini, istirahat yang cukup menjadi hal yang sudah tidak lagi diprioritaskan. Padahal istirahat yang cukup sangat penting untuk membantu menjaga kesehatan dan kesejahteraan kamu secara optimal. Manfaat Istirahat yang Cukup dan Cara Memperolehnya Halodoc, Jakarta - Di zaman modern yang semakin sibuk ini, istirahat yang cukup menjadi hal yang sudah tidak lagi diprioritaskan. Padahal istirahat yang cukup sangat penting untuk membantu menjaga kesehatan dan kesejahteraan kamu secara optimal. Faktanya, tidur sama pentingnya dengan olahraga teratur dan makan makanan yang seimbang. Tidak hanya bisa membuat kamu merasa lebih segar, istirahat yang cukup juga bisa memberikan banyak manfaat kesehatan, antara lain: Memperkuat Sistem Kekebalan Tubuh Istirahat yang cukup setiap malam sudah dikaitkan dengan sistem kekebalan tubuh yang kuat. Hal itu karena tidur memungkinkan tubuh untuk memperbaiki, meregenerasi, dan memulihkan diri.",
+              Text(widget.deskripsi,
               style: TextStyle(
                 fontWeight: FontWeight.normal, fontSize: 16,
               ),

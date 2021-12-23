@@ -36,6 +36,7 @@ class _CardCommentState extends State<CardComment> {
                                 fontSize: 12,
                                 fontWeight: FontWeight.bold,
                               ),
+                              textAlign: TextAlign.left,
                             ),
 
                           ],
@@ -45,15 +46,62 @@ class _CardCommentState extends State<CardComment> {
                           children: [
                             Text("User", style: TextStyle(
                               fontSize: 12,
-                            ),),
+                            ),
+                              textAlign: TextAlign.left,),
 
                           ],
                         ),
 
                         SizedBox(height: 8,),
-                        Text(widget.commentField, style: TextStyle(
-                          fontSize: 12,
-                        ),),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Flexible(
+                                  // width: double.infinity,
+                                  child: Text(widget.commentField, style: TextStyle(
+                                    fontSize: 12,
+                                  ),
+                                    textAlign: TextAlign.left,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            ElevatedButton(
+                                style: ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 12),
+                                  primary: Colors.blueAccent,
+                                  onPrimary: Colors.white,
+                                  side: BorderSide(width: 2, color: Colors.blueAccent),
+                                  padding: EdgeInsets.only(left: 4, right: 4, top: 2, bottom: 2),
+                                  shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(4.0)),),
+                                onPressed: (){
+
+                                },
+                                child: const Text('Edit')
+                            ),
+                            SizedBox(width: 8,),
+                            ElevatedButton(
+                                style: ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 12),
+                                  primary: Colors.red,
+                                  onPrimary: Colors.white,
+                                  side: BorderSide(width: 2, color: Colors.red),
+                                  padding: EdgeInsets.only(left: 4, right: 4, top: 2, bottom: 2),
+                                  shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(4.0)),),
+                                onPressed: (){
+
+                                },
+                                child: const Text('Delete')
+                            ),
+
+                          ],
+                        ),
                       ]
                   ),),
               ],

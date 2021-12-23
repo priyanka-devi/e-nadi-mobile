@@ -29,9 +29,6 @@ class _CardSehatState extends State<CardSehat> {
       child: Card(
         child: InkWell(
           splashColor: Colors.blue.withAlpha(30),
-          onTap: () {
-            print('Card tapped.');
-          },
           child: SizedBox(
             width: 300,
             child: Column(
@@ -72,7 +69,11 @@ class _CardSehatState extends State<CardSehat> {
                           shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),),
                         onPressed: () {
                           Navigator.push(context,  MaterialPageRoute(
-                            builder: (_) => ArticleDetail(),
+                            builder: (_) => ArticleDetail(
+                                title: widget.title,
+                                imageArticle: widget.imageArticle,
+                                deskripsi: widget.deskripsi,
+                                createdAt: widget.createdAt),
                           ),
                           );
                         },
