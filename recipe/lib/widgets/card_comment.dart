@@ -69,7 +69,26 @@ class _CardCommentState extends State<CardComment> {
                           ),
                         ),
                       ],
-                    )
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              textStyle: const TextStyle(fontSize: 15),
+                              primary: Colors.red,
+                              onPrimary: Colors.white,
+                              side: BorderSide(width: 4, color: Colors.red),
+                              padding: EdgeInsets.only(
+                                  left: 4, right: 4, top: 2, bottom: 2),
+                              shape: new RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(4.0)),
+                            ),
+                            onPressed: () {},
+                            child: const Text('Delete')),
+                      ],
+                    ),
                   ]),
                 ),
               ],
