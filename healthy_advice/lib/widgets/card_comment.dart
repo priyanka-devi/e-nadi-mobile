@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healthy_advice/widgets/modal_edit.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -83,6 +84,11 @@ class _CardCommentState extends State<CardComment> {
                                   shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(4.0)),),
                                 onPressed: (){
 
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context){
+                                        return ModalEdit(isUser: true);
+                                      });
                                 },
                                 child: const Text('Edit')
                             ),
