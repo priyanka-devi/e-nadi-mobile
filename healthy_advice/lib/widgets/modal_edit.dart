@@ -14,7 +14,6 @@ class _ModalEditState extends State<ModalEdit> {
   Widget build(BuildContext context) {
     return AlertDialog(
 
-
         title:
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -32,13 +31,17 @@ class _ModalEditState extends State<ModalEdit> {
         ),
         actions: [
           TextButton(
-            child: Text("Post"),
+            child: Text("Post",
+            style: TextStyle(
+                fontSize: 16
+            ),),
             onPressed: () {},
           ),
           TextButton(
             child: Text("Cancel",
             style: TextStyle(
-              color: Colors.red
+              color: Colors.red,
+                fontSize: 16
             ),),
             onPressed: () {
               Navigator.pop(context);

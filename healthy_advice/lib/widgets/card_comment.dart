@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healthy_advice/widgets/modal_delete.dart';
 import 'package:healthy_advice/widgets/modal_edit.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -101,6 +102,11 @@ class _CardCommentState extends State<CardComment> {
                                   padding: EdgeInsets.only(left: 4, right: 4, top: 2, bottom: 2),
                                   shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(4.0)),),
                                 onPressed: (){
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context){
+                                        return ModalDelete(isUser: true);
+                                      });
 
                                 },
                                 child: const Text('Delete')
