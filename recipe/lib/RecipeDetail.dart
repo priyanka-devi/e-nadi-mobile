@@ -1,7 +1,9 @@
 // ignore_for_file: file_names, prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:recipe/widgets/carouselRecipe.dart';
 
 class RecipeDetail extends StatelessWidget {
   const RecipeDetail({Key? key}) : super(key: key);
@@ -11,15 +13,15 @@ class RecipeDetail extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: NetworkImage(
-              "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/backgrounds%2Fdave-hoefler-PEkfSAxeplg-unsplash.jpg?alt=media&token=8b7e1d44-a52f-49f9-a3ae-e542cca0f368"),
-          fit: BoxFit.cover,
-        ),
-      ),
+      // decoration: const BoxDecoration(
+      //   image: DecorationImage(
+      //     image: NetworkImage(
+      //         "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/backgrounds%2Fdave-hoefler-PEkfSAxeplg-unsplash.jpg?alt=media&token=8b7e1d44-a52f-49f9-a3ae-e542cca0f368"),
+      //     fit: BoxFit.cover,
+      //   ),
+      // ),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: const Text("Bruschetta Grilled Chicken"),
         ),
@@ -32,7 +34,7 @@ class RecipeDetail extends StatelessWidget {
           child: Scrollbar(
             isAlwaysShown: true,
             thickness: 5,
-            child: ListView(children: [
+            child: ListView(children: <Widget>[
               Container(
                 height: 550,
                 decoration: BoxDecoration(
@@ -44,7 +46,7 @@ class RecipeDetail extends StatelessWidget {
                       BoxShadow(
                         offset: Offset(0, 10),
                         blurRadius: 60,
-                        color: Colors.orange.shade800.withOpacity(0.80),
+                        color: Colors.grey,
                       )
                     ],
                     image: DecorationImage(
@@ -61,6 +63,19 @@ class RecipeDetail extends StatelessWidget {
               Container(
                 child: buildCardRecipeIng(),
                 margin: EdgeInsets.fromLTRB(25, 20, 25, 10),
+              ),
+              Container(
+                child: Text('FEATURED RECIPE',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    )),
+                margin: EdgeInsets.fromLTRB(20, 30, 0, 20),
+              ),
+              Container(
+                padding: EdgeInsets.all(20),
+                child: CarouselRecipe(),
               ),
               Positioned(
                   child: ButtonBar(

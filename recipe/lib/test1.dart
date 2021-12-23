@@ -1,12 +1,10 @@
-// ignore_for_file: prefer_const_constructors, unnecessary_new, non_constant_identifier_names, unused_field, use_key_in_widget_constructors
+// ignore_for_file: prefer_const_constructors, unnecessary_new, non_constant_identifier_names
 
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:recipe/RecipeDetail.dart';
 import 'package:http/http.dart' as http;
-import 'package:recipe/model/comment_recipe.dart';
-import 'package:recipe/widgets/card_comment.dart';
 
 void main() {
   runApp(MyApp());
@@ -42,33 +40,22 @@ class _MainPageState extends State<MainPage> {
   final _formKey = GlobalKey<FormState>();
   String textFieldsValue = "";
   late TextEditingController _controller;
-
-  //Ganti nama isi Comment
-  List<IsiComment> extractedData = [];
+  
+  
+  List<dynamic> extractedData = [];
   fetchData() async {
     const url = 'https://e-nadi.herokuapp.com/recipe/get_all_comment';
     try {
-      extractedData = [];
       final response = await http.get(Uri.parse(url));
       // print(response.body);
-      final dataJson = jsonDecode(response.body);
-      for (var i in dataJson) {
-        Fields fields = Fields(
-            commentatorName: i["fields"]["username"],
-            commentField: i["fields"]["content"],
-            commentDate: i["fields"]["post_date"]);
-        IsiComment comment =
-            IsiComment(model: i["model"], pk: i["pk"], fields: fields);
-        extractedData.add(comment);
-      }
-      print(extractedData.length);
+      extractedData = jsonDecode(response.body);
+      print(extractedData);
       return extractedData;
     } catch (error) {
       print(error);
     }
   }
 
-  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     setState(() {
@@ -113,6 +100,12 @@ class _MainPageState extends State<MainPage> {
       style: optionStyle,
     ),
   ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _MainPageStateIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -203,6 +196,7 @@ class _MainPageState extends State<MainPage> {
                         ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
+                            extractedData.add(textFieldsValue);
                             print(textFieldsValue);
                           }
                         },
@@ -222,19 +216,46 @@ class _MainPageState extends State<MainPage> {
                                 )),
                               );
                             } else {
-                              return Column(
-                                  children: extractedData.map((i) {
-                                return CardComment(
-                                  commentatorName: i.fields.commentatorName,
-                                  commentField: i.fields.commentField,
-                                  commentDate: i.fields.commentDate,
-                                );
-                              }).toList());
+                              return ListView.separated(
+                                shrinkWrap: true,
+                                itemCount: snapshot.data.length,
+                                itemBuilder: (context, index) {
+                                  return Column(
+                                    children: [
+                                      Text(
+                                          snapshot.data[index]["fields"]
+                                                  ["username"]
+                                              .toString(),
+                                          textAlign: TextAlign.right,
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 20,
+                                          )),
+                                      Text(snapshot.data[index]["fields"]
+                                              ["post_date"]
+                                          .toString()),
+                                      Text(
+                                          snapshot.data[index]["fields"]
+                                                  ["content"]
+                                              .toString(),
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w300,
+                                            fontSize: 18,
+                                          )),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                    ],
+                                  );
+                                },
+                                separatorBuilder: (context, index) {
+                                  return Divider(
+                                    thickness: 1,
+                                  );
+                                },
+                              );
                             }
                           }),
-                      SizedBox(
-                        height: 20,
-                      ),
                     ],
                   ),
                 ),
