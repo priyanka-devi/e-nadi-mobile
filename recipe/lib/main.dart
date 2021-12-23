@@ -215,12 +215,10 @@ class _MainPageState extends State<MainPage> {
                           future: fetchData(),
                           builder: (context, AsyncSnapshot snapshot) {
                             if (snapshot.data == null) {
-                              return Container(
-                                child: Center(
-                                    child: Text(
-                                  "Loading...",
-                                )),
-                              );
+                              return Center(
+                                  child: Text(
+                                "Loading...",
+                              ));
                             } else {
                               return Column(
                                   children: extractedData.map((i) {

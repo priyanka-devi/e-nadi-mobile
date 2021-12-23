@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:recipe/RecipeDetail.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class CarouselRecipe extends StatefulWidget {
@@ -72,8 +71,8 @@ class _CarouselRecipeState extends State<CarouselRecipe> {
     'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/honey-walnut-shrimp-horizontal-1548093880.png',
     'https://hips.hearstapps.com/del.h-cdn.co/assets/17/25/1498147867-delish-easy-crockpot-chicken-and-dumplings-horizontal-1024.jpg?crop=1xw:1xh;center,top&resize=480:*',
   ];
+  @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

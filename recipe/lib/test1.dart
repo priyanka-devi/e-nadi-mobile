@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unnecessary_new, non_constant_identifier_names
+// ignore_for_file: prefer_const_constructors, unnecessary_new, non_constant_identifier_names, use_key_in_widget_constructors
 
 import 'dart:convert';
 
@@ -39,7 +39,6 @@ class _MainPageState extends State<MainPage> {
 
   final _formKey = GlobalKey<FormState>();
   String textFieldsValue = "";
-  late TextEditingController _controller;
   
   
   List<dynamic> extractedData = [];
@@ -67,7 +66,6 @@ class _MainPageState extends State<MainPage> {
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController();
   }
 
   static TextStyle optionStyle =
