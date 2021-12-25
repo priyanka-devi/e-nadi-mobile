@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:recipe/widgets/action_delete.dart';
 
 class CardComment extends StatefulWidget {
   const CardComment(
@@ -85,7 +86,13 @@ class _CardCommentState extends State<CardComment> {
                               shape: new RoundedRectangleBorder(
                                   borderRadius: new BorderRadius.circular(4.0)),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return ModalDelete(isUser: true);
+                                  });
+                            },
                             child: const Text('Delete')),
                       ],
                     ),
