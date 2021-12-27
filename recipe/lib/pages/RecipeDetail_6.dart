@@ -3,25 +3,25 @@
 import 'package:flutter/material.dart';
 import 'package:recipe/widgets/carouselRecipe.dart';
 
-class RecipeDetail extends StatelessWidget {
-  const RecipeDetail({Key? key}) : super(key: key);
+class RecipeDetail_6 extends StatelessWidget {
+  const RecipeDetail_6({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       height: double.infinity,
-      // decoration: const BoxDecoration(
-      //   image: DecorationImage(
-      //     image: NetworkImage(
-      //         "https://firebasestorage.googleapis.com/v0/b/flutterbricks-public.appspot.com/o/backgrounds%2Fdave-hoefler-PEkfSAxeplg-unsplash.jpg?alt=media&token=8b7e1d44-a52f-49f9-a3ae-e542cca0f368"),
-      //     fit: BoxFit.cover,
-      //   ),
-      // ),
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: NetworkImage(
+              "https://c0.wallpaperflare.com/preview/457/952/1022/paper-texture-structure-stained-paper.jpg"),
+          fit: BoxFit.cover,
+        ),
+      ),
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: const Text("Bruschetta Grilled Chicken"),
+          title: const Text("Chicken Soup"),
         ),
         body: Theme(
           data: Theme.of(context).copyWith(
@@ -34,7 +34,7 @@ class RecipeDetail extends StatelessWidget {
             thickness: 5,
             child: ListView(children: <Widget>[
               Container(
-                height: 550,
+                height: 400,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(63),
@@ -49,7 +49,7 @@ class RecipeDetail extends StatelessWidget {
                     ],
                     image: DecorationImage(
                       image: NetworkImage(
-                        'https://hips.hearstapps.com/del.h-cdn.co/assets/17/23/1496939954-bruschetta-chicken-1sm.jpg?crop=1.0xw:1xh;center,top&resize=768:*',
+                        'https://hips.hearstapps.com/del.h-cdn.co/assets/17/25/1498147867-delish-easy-crockpot-chicken-and-dumplings-horizontal-1024.jpg?crop=1xw:1xh;center,top&resize=480:*',
                       ),
                       fit: BoxFit.cover,
                     )),
@@ -123,17 +123,13 @@ class RecipeDetail extends StatelessWidget {
               const SizedBox(height: 4),
               Container(
                 child: Text(
-                    ''' 1. Dalam mangkuk kecil, campurkan minyak, setengah jus lemon, 1 sendok teh garam, 1/4 sendok teh merica, dan bumbu Italia (atau oregano) dan kocok hingga tercampur. 
+                    ''' 1. Taburkan bawang bombay di bagian bawah slow cooker besar, lalu taburi dengan ayam. Bumbui dengan oregano, garam, dan merica.
 
-2. Pindahkan ke tas besar yang bisa ditutup kembali bersama dengan ayam; segel dan dinginkan selama 30 menit.
+2. Tuang sup dan kaldu di atas ayam, lalu tambahkan thyme dan daun salam. Tutup dan masak di High sampai ayam matang, sekitar 3 jam
               
-3. Panaskan panggangan di atas sedang-tinggi lalu tambahkan ayam, buang sisa bumbunya. Panggang sampai hangus dan matang dengan suhu internal 165 °, sekitar 5 hingga 7 menit per sisi.
+3. Buang thyme dan daun salam, lalu suwir ayam dengan dua garpu. Aduk seledri, wortel, kacang polong, dan bawang putih. Potong atau sobek biskuit menjadi potongan-potongan kecil lalu aduk ke dalam campuran ayam. Sendokkan cairan di atas biskuit apa pun di atasnya.
           
-4. Sementara itu, campurkan tomat, bawang putih, kemangi, dan sisa air jeruk lemon, lalu bumbui dengan garam dan merica. 
-
-5. Saat ayam masih di panggangan, tutupi setiap dada dengan 1 irisan mozzarella dan tutup sampai keju meleleh, 2 hingga 3 menit. Top ayam dengan campuran tomat.
-          
-6. Hiasi dengan Parmesan dan sajikan
+4. Masak dengan mode Tinggi hingga sayuran empuk dan biskuit matang, aduk setiap 30 menit, sekitar 1 jam hingga 1 jam 30 menit lagi
           
           ''',
                     style: TextStyle(
@@ -167,19 +163,21 @@ class RecipeDetail extends StatelessWidget {
               Container(
                 child: Text('''
 
-4 sendok teh. minyak zaitun extra-virgin dan Jus dari 1 lemon. 
+3 sdm. minyak zaitun extra-virgin, dan peras jus dari 1 lemon
 
-garam kosher dan Lada hitam yang baru digiling
+3 siung bawang putih, cincang
 
-1 sendok teh. Bumbu Italia atau oregano kering 
-                    
-4 dada ayam bebas antibiotik tanpa kulit tanpa tulang, ditumbuk hingga ketebalan merata
+1 sendok teh. Bumbu Italia atau oregano kering
 
-2 siung bawang putih, cincang
+1 pons paha ayam
 
-1 sendok teh. basil yang baru dicincang
- 
-4 potong mozarella Parmesan yang baru diparut, untuk disajikan
+garam dan lada hitam yang fresh
+
+1/2 pon asparagus, buang ujungnya
+
+1 zucchini, diiris menjadi setengah bulan
+
+1 lemon, di iris
                     ''',
                     textAlign: TextAlign.center,
                     maxLines: 20,

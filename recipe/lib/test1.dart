@@ -3,7 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:recipe/RecipeDetail.dart';
+import 'package:recipe/pages/RecipeDetail.dart';
 import 'package:http/http.dart' as http;
 
 void main() {

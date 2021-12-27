@@ -3,7 +3,12 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:recipe/RecipeDetail.dart';
+import 'package:recipe/pages/RecipeDetail.dart';
+import 'package:recipe/pages/RecipeDetail_2.dart';
+import 'package:recipe/pages/RecipeDetail_3.dart';
+import 'package:recipe/pages/RecipeDetail_4.dart';
+import 'package:recipe/pages/RecipeDetail_5.dart';
+import 'package:recipe/pages/RecipeDetail_6.dart';
 import 'package:http/http.dart' as http;
 import 'package:recipe/model/comment_recipe.dart';
 import 'package:recipe/widgets/card_comment.dart';
@@ -415,7 +420,7 @@ class _MainPageState extends State<MainPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const RecipeDetail()),
+                          builder: (context) => const RecipeDetail_2()),
                     );
                   },
                 ),
@@ -483,7 +488,7 @@ class _MainPageState extends State<MainPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const RecipeDetail()),
+                          builder: (context) => const RecipeDetail_3()),
                     );
                   },
                 ),
@@ -551,7 +556,7 @@ class _MainPageState extends State<MainPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const RecipeDetail()),
+                          builder: (context) => const RecipeDetail_4()),
                     );
                   },
                 ),
@@ -619,7 +624,7 @@ class _MainPageState extends State<MainPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const RecipeDetail()),
+                          builder: (context) => const RecipeDetail_5()),
                     );
                   },
                 ),
@@ -687,7 +692,7 @@ class _MainPageState extends State<MainPage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const RecipeDetail()),
+                          builder: (context) => const RecipeDetail_6()),
                     );
                   },
                 ),
