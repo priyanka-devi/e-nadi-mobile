@@ -90,7 +90,7 @@ class _CardCommentState extends State<CardComment> {
                               showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
-                                    return ModalDelete(isUser: true);
+                                    return ModalDelete(isLogin: true);
                                   });
                             },
                             child: const Text('Delete')),

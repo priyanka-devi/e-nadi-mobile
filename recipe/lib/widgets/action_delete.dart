@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ModalDelete extends StatefulWidget {
-  const ModalDelete({Key? key, required this.isUser}) : super(key: key);
-  final bool isUser;
+  const ModalDelete({Key? key, required this.isLogin}) : super(key: key);
+  final bool isLogin;
 
   @override
   _ModalDeleteState createState() => _ModalDeleteState();
