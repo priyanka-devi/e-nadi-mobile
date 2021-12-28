@@ -97,7 +97,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           if (_formKey.currentState!.validate()) {
                             final response = await http.post(
                                 Uri.parse(
-                                    "http://10.0.2.2:8000/login_flutter/"),
+                                    "https://e-nadi.herokuapp.com/authentication/login_flutter/"),
                                 headers: <String, String>{
                                   'Content-Type':
                                   'application/json; charset=UTF-8',
