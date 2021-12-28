@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter/services.dart';
+import 'dart:convert' as convert;
 
 class CommentTextField extends StatefulWidget {
   const CommentTextField({Key? key}) : super(key: key);
@@ -10,11 +13,11 @@ class CommentTextField extends StatefulWidget {
 class _CommentTextFieldState extends State<CommentTextField> {
   final _formKey = GlobalKey<FormState>();
   String textFieldsValue ="";
-  late TextEditingController _controller;
+  // late TextEditingController _controller;
   @override
   void initState() {
     super.initState();
-    _controller = TextEditingController();
+    // _controller = TextEditingController();
   }
   // @override
   // void dispose() {
@@ -64,10 +67,33 @@ class _CommentTextFieldState extends State<CommentTextField> {
                         side: BorderSide(width: 2, color: Colors.indigo),
                         padding: EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 8),
                         shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),),
-                      onPressed: (){
+                      onPressed: () async {
                         if (_formKey.currentState!.validate()){
-                          print(textFieldsValue);
-                        }
+                          final response = await http.post(Uri.parse(
+                              "http://10.0.2.2:8000/healthy_advice/addAPI",
+                              ),
+                            headers: {
+                          "Content-Type" : 'application/json; charset=UTF-8'
+                          },
+                            body:
+                            convert.jsonEncode(<String, String>{
+                              'commentator_name': "priyanka_devi",
+                              'comment_field': textFieldsValue.toString(),
+                              }));
+                          if (response.statusCode == 200) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("Comment success"),
+                          ));
+                          }
+                          else {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                          content:
+                          Text("Please try again."),
+                          ));
+                          }
+                          // print(textFieldsValue);
+                        };
 
                       },
                       child: const Text('POST'),

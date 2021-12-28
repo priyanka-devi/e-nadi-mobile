@@ -5,9 +5,10 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class CardComment extends StatefulWidget {
-  const CardComment({Key? key, required this.commentatorName, required this.commentField}) : super(key: key);
+  const CardComment({Key? key, required this.commentatorName, required this.commentField, required this.commentPk}) : super(key: key);
   final String commentatorName;
   final String commentField;
+  final int commentPk;
   @override
   _CardCommentState createState() => _CardCommentState();
 }
@@ -88,7 +89,7 @@ class _CardCommentState extends State<CardComment> {
                                   showDialog(
                                       context: context,
                                       builder: (BuildContext context){
-                                        return ModalEdit(isUser: true);
+                                        return ModalEdit(isUser: true, comment: widget,);
                                       });
                                 },
                                 child: const Text('Edit')
@@ -105,7 +106,7 @@ class _CardCommentState extends State<CardComment> {
                                   showDialog(
                                       context: context,
                                       builder: (BuildContext context){
-                                        return ModalDelete(isUser: true);
+                                        return ModalDelete(isUser: true, comment: widget,);
                                       });
 
                                 },

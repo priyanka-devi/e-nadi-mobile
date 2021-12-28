@@ -1,9 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:healthy_advice/widgets/card_comment.dart';
+import 'dart:convert' as convert;
+import 'package:http/http.dart' as http;
 
 class ModalDelete extends StatefulWidget {
-  const ModalDelete({Key? key, required this.isUser}) : super(key: key);
+  const ModalDelete({Key? key, required this.comment, required this.isUser}) : super(key: key);
   final bool isUser;
+  final CardComment comment;
 
   @override
   _ModalDeleteState createState() => _ModalDeleteState();
@@ -55,8 +59,31 @@ class _ModalDeleteState extends State<ModalDelete> {
                       side: BorderSide(width: 2, color: Colors.red),
                       padding: EdgeInsets.only(left: 4, right: 4, top: 2, bottom: 2),
                       shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(4.0)),),
-                    onPressed: (){
-
+                    onPressed: () async{
+                      final response = await http.post(Uri.parse(
+                        "http://10.0.2.2:8000/healthy_advice/delete/" + widget.comment.commentPk.toString(),
+                      ),
+                          headers: {
+                            "Content-Type" : 'application/json; charset=UTF-8'
+                          },
+                          body:
+                          convert.jsonEncode(<String, String>{
+                            'pk': widget.comment.commentPk.toString(),
+                          }));
+                      Navigator.pop(context);
+                      if (response.statusCode == 200) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("Delete success"),
+                            ));
+                      }
+                      else {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content:
+                          Text("Please try again."),
+                        ));
+                      }
+                      // print(textFieldsValue);
                     },
                     child: const Text('Delete')
                 ),

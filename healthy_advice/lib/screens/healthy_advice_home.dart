@@ -49,7 +49,7 @@ class _HealthyAdviceHomeState extends State<HealthyAdviceHome> {
 
   fetchData() async {
 
-    const url = 'https://e-nadi.herokuapp.com/healthy_advice/get_all_comment';
+    const url = "http://10.0.2.2:8000/healthy_advice/get_all_comment";
     try {
       extractedData = [];
       final response = await http.get(Uri.parse(url));
@@ -63,7 +63,7 @@ class _HealthyAdviceHomeState extends State<HealthyAdviceHome> {
             IsiComment(model: anu["model"], pk: anu["pk"], fields: fields);
         extractedData.add(comment);
       }
-      print(extractedData.length);
+      // print(extractedData.length);
       return extractedData;
     } catch (error) {
       print(error);
@@ -137,6 +137,7 @@ class _HealthyAdviceHomeState extends State<HealthyAdviceHome> {
                           return CardComment(
                             commentatorName : anu.fields.commentatorName,
                             commentField : anu.fields.commentField,
+                            commentPk : anu.pk,
                           );
                         }).toList()
                     );
