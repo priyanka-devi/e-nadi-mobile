@@ -1,6 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:accounts/utils/drawer_screen.dart';
+import 'package:sleep/models/models_sleep.dart';
+
+import 'package:http/http.dart' as http;
+import 'package:sleep/screens/widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -51,6 +57,32 @@ class SleepPage extends StatefulWidget {
 }
 
 class _SleepPageState extends State<SleepPage> {
+
+  List<Sleep> extractedData = [];
+
+    fetchData() async {
+    const url = "http://127.0.0.1:8000/sleep/get_sleep";
+    try {
+      extractedData = [];
+      final response = await http.get(Uri.parse(url));
+      // print(response.body);
+      final dataJson = jsonDecode(response.body);
+      for (var anu in dataJson) {
+        Fields fields = Fields(
+            user: anu["fields"]["user"],
+            today: anu["fields"]["today"],
+            time: anu["fields"]["time"]);
+        Sleep sleep =
+            Sleep(model: anu["model"], pk: anu["pk"], fields: fields);
+        extractedData.add(sleep);
+      }
+      print(extractedData.length);
+      return extractedData;
+    } catch (error) {
+      print(error);
+    }
+  }
+
   TextStyle style1 = TextStyle(
     fontFamily: 'Poppins',
     fontSize: 17,
@@ -63,10 +95,13 @@ class _SleepPageState extends State<SleepPage> {
   String _date = "18 - November - 2021";
   bool _update = false;
 
+  _counter = extractedData[0]
+
   TextEditingController _hours = TextEditingController();
 
   void _incrementCounter() {
     setState(() {
+      fetchData();
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
       // so that the display can reflect the updated values. If we changed
@@ -209,93 +244,114 @@ class _SleepPageState extends State<SleepPage> {
                 Container(
                     padding: EdgeInsets.only(top: 20),
                     child: Text("Tell Us About Your Sleep Today!")),
-              ],
-            ),
-            height: 100,
-            width: double.infinity,
-            color: Colors.blueAccent,
-          ),
-          Container(
-            margin: EdgeInsets.only(top: 20),
-            child: Text("About Your Sleep"),
-          ),
-          Container(
-            padding: EdgeInsets.all(20),
-            margin: EdgeInsets.all(15.0),
-            decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-            child: Column(
-              children: [
-                Text(
-                    "Date: $_date\nYour Sleep Time: $_counter Hours\nSleep Quality: $_condition"),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    TextButton(
-                      child: new Text('Update'),
-                      onPressed: () {
-                        if (_update == false) {
-                          _updateCondition();
-                        }
-                      },
-                    ),
-                    TextButton(
-                      child: Text('Reset'),
-                      onPressed: () {
-                        _counter = 0;
-                        _changeCondition();
-                        if (_update == true) {
-                          _updateCondition();
-                        }
-                      },
-                    ),
-                  ],
-                ),
-                if (_update == true)
-                  TextFormField(
-                    controller: _hours,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.digitsOnly
-                    ],
-                    decoration: InputDecoration(
-                      fillColor: Color(0xffF1F0F5),
-                      filled: true,
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(),
-                      ),
-                    ),
-                    validator: (value) {
-                      return (value != null) ? 'Field is required' : null;
-                    },
-                  ),
-                if (_update == true)
-                  TextButton(
-                    child: Text('Submit'),
-                    onPressed: () {
-                      int _text = int.parse(_hours.text);
-                      if (_text > -1 && _text < 25) {
-                        _counter = _text;
-                        _changeCondition();
-                        _updateCondition();
+                    FutureBuilder(
+                    future: fetchData(),
+                    builder: (context, AsyncSnapshot snapshot) {
+                      if (snapshot.data == null) {
+                        return Container(
+                          child: Center(
+                              child: Text(
+                            "Loading...",
+                          )),
+                        );
                       } else {
-                        print('Input must be a number in range 0-24');
+                        return Column(
+                            children: extractedData.map((anu) {
+                          return SleepCard(
+                            user: anu.fields.user,
+                            today: anu.fields.today,
+                            time: anu.fields.time,
+                          );
+                        }).toList());
                       }
-                    },
-                  ),
+                    }),
               ],
             ),
-            //style: Theme.of(context).textTheme.headline4,),
-          ),
-          Container(
-            child: Column(
-              children: [
-                Container(child: Text("About Us")),
-              ],
-            ),
-            height: 100,
-            width: double.infinity,
-            color: Colors.blueAccent,
+    //         height: 100,
+    //         width: double.infinity,
+    //         color: Colors.blueAccent,
+    //       ),
+    //       Container(
+    //         margin: EdgeInsets.only(top: 20),
+    //         child: Text("About Your Sleep"),
+    //       ),
+    //       Container(
+    //         padding: EdgeInsets.all(20),
+    //         margin: EdgeInsets.all(15.0),
+    //         decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+    //         child: Column(
+    //           children: [
+    //             Text(
+    //                 "Date: $_date\nYour Sleep Time: $_counter Hours\nSleep Quality: $_condition"),
+    //             Row(
+    //               mainAxisAlignment: MainAxisAlignment.center,
+    //               children: <Widget>[
+    //                 TextButton(
+    //                   child: new Text('Update'),
+    //                   onPressed: () {
+    //                     if (_update == false) {
+    //                       _updateCondition();
+    //                     }
+    //                   },
+    //                 ),
+    //                 TextButton(
+    //                   child: Text('Reset'),
+    //                   onPressed: () {
+    //                     _counter = 0;
+    //                     _changeCondition();
+    //                     if (_update == true) {
+    //                       _updateCondition();
+    //                     }
+    //                   },
+    //                 ),
+    //               ],
+    //             ),
+    //             if (_update == true)
+    //               TextFormField(
+    //                 controller: _hours,
+    //                 keyboardType: TextInputType.number,
+    //                 inputFormatters: <TextInputFormatter>[
+    //                   FilteringTextInputFormatter.digitsOnly
+    //                 ],
+    //                 decoration: InputDecoration(
+    //                   fillColor: Color(0xffF1F0F5),
+    //                   filled: true,
+    //                   enabledBorder: OutlineInputBorder(
+    //                     borderRadius: BorderRadius.circular(10),
+    //                     borderSide: BorderSide(),
+    //                   ),
+    //                 ),
+    //                 validator: (value) {
+    //                   return (value != null) ? 'Field is required' : null;
+    //                 },
+    //               ),
+    //             if (_update == true)
+    //               TextButton(
+    //                 child: Text('Submit'),
+    //                 onPressed: () {
+    //                   int _text = int.parse(_hours.text);
+    //                   if (_text > -1 && _text < 25) {
+    //                     _counter = _text;
+    //                     _changeCondition();
+    //                     _updateCondition();
+    //                   } else {
+    //                     print('Input must be a number in range 0-24');
+    //                   }
+    //                 },
+    //               ),
+    //           ],
+    //         ),
+    //         //style: Theme.of(context).textTheme.headline4,),
+    //       ),
+    //       Container(
+    //         child: Column(
+    //           children: [
+    //             Container(child: Text("About Us")),
+    //           ],
+    //         ),
+    //         height: 100,
+    //         width: double.infinity,
+    //         color: Colors.blueAccent,
           ),
         ],
       ),
