@@ -35,6 +35,8 @@ dependencies:
     path: recipe
   summary:
     path: summary
+  sleep:
+    path: sleep
   workout:
     path: workout
   accounts:
