@@ -8,7 +8,8 @@ import 'package:recipe/widgets/card_comment.dart';
 import 'package:recipe/main.dart';
 
 class ModalDelete extends StatefulWidget {
-  const ModalDelete({Key? key, required this.isUser, required this.comment}) : super(key: key);
+  const ModalDelete({Key? key, required this.isUser, required this.comment})
+      : super(key: key);
   final bool isUser;
   final CardComment comment;
 
@@ -56,8 +57,8 @@ class _ModalDeleteState extends State<ModalDelete> {
                     primary: Colors.grey,
                     onPrimary: Colors.white,
                     side: const BorderSide(width: 2, color: Colors.grey),
-                    padding:
-                        const EdgeInsets.only(left: 4, right: 4, top: 2, bottom: 2),
+                    padding: const EdgeInsets.only(
+                        left: 4, right: 4, top: 2, bottom: 2),
                     shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(4.0)),
                   ),
@@ -74,39 +75,37 @@ class _ModalDeleteState extends State<ModalDelete> {
                     primary: Colors.red,
                     onPrimary: Colors.white,
                     side: const BorderSide(width: 2, color: Colors.red),
-                    padding:
-                        const EdgeInsets.only(left: 4, right: 4, top: 2, bottom: 2),
+                    padding: const EdgeInsets.only(
+                        left: 4, right: 4, top: 2, bottom: 2),
                     shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(4.0)),
                   ),
-                  onPressed: () async{
-                      final response = await http.post(Uri.parse(
-                        "http://10.0.2.2:8000/recipe/delete/" + widget.comment.commentPk.toString(),
-                      ),
-                          headers: {
-                            "Content-Type" : 'application/json; charset=UTF-8'
-                          },
-                          body:
-                          convert.jsonEncode(<String, String>{
-                            'pk': widget.comment.commentPk.toString(),
-                          }));
-                      Navigator.pop(context);
-                      if (response.statusCode == 200) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text("Delete success"),
-                            ));
-                        Navigator.pushReplacementNamed(
-                            context, MainPage.routeName);
-                      }
-                      else {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
-                          content:
-                          Text("Please try again."),
-                        ));
-                      }
-                      // print(textFieldsValue);
-                    },
+                  onPressed: () async {
+                    final response = await http.post(
+                        Uri.parse(
+                          "http://10.0.2.2:8000/recipe/delete/" +
+                              widget.comment.commentPk.toString(),
+                        ),
+                        headers: {
+                          "Content-Type": 'application/json; charset=UTF-8'
+                        },
+                        body: convert.jsonEncode(<String, String>{
+                          'pk': widget.comment.commentPk.toString(),
+                        }));
+                    Navigator.pop(context);
+                    if (response.statusCode == 200) {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Delete success"),
+                      ));
+                      Navigator.pushReplacementNamed(
+                          context, RecipePage.routeName);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text("Please try again."),
+                      ));
+                    }
+                    // print(textFieldsValue);
+                  },
                   child: const Text('Delete')),
             ],
           ),

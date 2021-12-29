@@ -24,28 +24,28 @@ class MyApp extends StatelessWidget {
   static String title = 'Recipe Page';
   const MyApp({Key? key}) : super(key: key);
   MyApp createState() => MyApp();
-
+  
   @override
   Widget build(BuildContext context) => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: title,
         theme: ThemeData(primarySwatch: Colors.deepOrange),
-        home: MainPage(title: title),
+        home: RecipePage(title: title),
       );
 }
 
-class MainPage extends StatefulWidget {
+class RecipePage extends StatefulWidget {
   final String title;
   static const routeName = '/recipe';
-  const MainPage({
+  const RecipePage({
     required this.title,
   });
 
   @override
-  _MainPageState createState() => _MainPageState();
+  _RecipePageState createState() => _RecipePageState();
 }
 
-class _MainPageState extends State<MainPage> {
+class _RecipePageState extends State<RecipePage> {
   String cdate = DateFormat("yyyy-MM-dd").format(DateTime.now());
   final _formKey = GlobalKey<FormState>();
   String textFieldsValue = "";
@@ -106,7 +106,7 @@ class _MainPageState extends State<MainPage> {
         body: ListView(
           padding: EdgeInsets.all(16),
           children: [
-            // _widgetOptions.elementAt(_MainPageStateIndex),
+            // _widgetOptions.elementAt(_RecipePageStateIndex),
             Container(
               child: buildRecipeCard1(),
               margin: EdgeInsets.fromLTRB(0, 0, 10, 20),
@@ -198,7 +198,7 @@ class _MainPageState extends State<MainPage> {
                           ));
 
                           Navigator.pushReplacementNamed(
-                              context, MainPage.routeName);
+                              context, RecipePage.routeName);
                         } else {
                           ScaffoldMessenger.of(context)
                               .showSnackBar(const SnackBar(
