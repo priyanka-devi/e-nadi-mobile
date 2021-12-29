@@ -1,6 +1,5 @@
 // ignore_for_file: unnecessary_new
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
@@ -56,9 +55,9 @@ class _ModalDeleteState extends State<ModalDelete> {
                     textStyle: const TextStyle(fontSize: 16),
                     primary: Colors.grey,
                     onPrimary: Colors.white,
-                    side: BorderSide(width: 2, color: Colors.grey),
+                    side: const BorderSide(width: 2, color: Colors.grey),
                     padding:
-                        EdgeInsets.only(left: 4, right: 4, top: 2, bottom: 2),
+                        const EdgeInsets.only(left: 4, right: 4, top: 2, bottom: 2),
                     shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(4.0)),
                   ),
@@ -74,9 +73,9 @@ class _ModalDeleteState extends State<ModalDelete> {
                     textStyle: const TextStyle(fontSize: 16),
                     primary: Colors.red,
                     onPrimary: Colors.white,
-                    side: BorderSide(width: 2, color: Colors.red),
+                    side: const BorderSide(width: 2, color: Colors.red),
                     padding:
-                        EdgeInsets.only(left: 4, right: 4, top: 2, bottom: 2),
+                        const EdgeInsets.only(left: 4, right: 4, top: 2, bottom: 2),
                     shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(4.0)),
                   ),

@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:recipe/widgets/carouselRecipe.dart';
 
-class RecipeDetail_4 extends StatelessWidget {
-  const RecipeDetail_4({Key? key}) : super(key: key);
+class RecipeDetail4 extends StatelessWidget {
+  const RecipeDetail4({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
