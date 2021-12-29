@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:accounts/utils/drawer_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -118,70 +119,71 @@ class _SleepPageState extends State<SleepPage> {
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      drawer: Drawer(
-        child: Container(
-          color: Colors.lightBlue,
-          child: Column(
-            children: <Widget>[
-              ListTileTheme(
-                  minVerticalPadding: 20,
-                  child: Text(
-                    'e-Nadi',
-                    style: style1,
-                  )),
-              ListTile(
-                title: Text(
-                  'Home',
-                  style: style1,
-                ),
-                onTap: () {},
-              ),
-              ListTile(
-                title: Text(
-                  'Workout Tracker',
-                  style: style1,
-                ),
-                onTap: () {},
-              ),
-              ListTile(
-                title: Text(
-                  'Sleep Tracker',
-                  style: style1,
-                ),
-                onTap: () {},
-              ),
-              ListTile(
-                title: Text(
-                  'Recipe',
-                  style: style1,
-                ),
-                onTap: () {},
-              ),
-              ListTile(
-                title: Text(
-                  'Activity Summary',
-                  style: style1,
-                ),
-                onTap: () {},
-              ),
-              ListTile(
-                title: Text(
-                  'Healthy Advice',
-                  style: style1,
-                ),
-                onTap: () {},
-              ),
-              ListTile(
-                title: Text(
-                  'Username',
-                  style: style1,
-                ),
-                onTap: () {},
-              ),
-            ],
-          ),
-        ),
-      ),
+      drawer: DrawerScreen(),
+      // drawer: Drawer(
+      //   child: Container(
+      //     color: Colors.lightBlue,
+      //     child: Column(
+      //       children: <Widget>[
+      //         ListTileTheme(
+      //             minVerticalPadding: 20,
+      //             child: Text(
+      //               'e-Nadi',
+      //               style: style1,
+      //             )),
+      //         ListTile(
+      //           title: Text(
+      //             'Home',
+      //             style: style1,
+      //           ),
+      //           onTap: () {},
+      //         ),
+      //         ListTile(
+      //           title: Text(
+      //             'Workout Tracker',
+      //             style: style1,
+      //           ),
+      //           onTap: () {},
+      //         ),
+      //         ListTile(
+      //           title: Text(
+      //             'Sleep Tracker',
+      //             style: style1,
+      //           ),
+      //           onTap: () {},
+      //         ),
+      //         ListTile(
+      //           title: Text(
+      //             'Recipe',
+      //             style: style1,
+      //           ),
+      //           onTap: () {},
+      //         ),
+      //         ListTile(
+      //           title: Text(
+      //             'Activity Summary',
+      //             style: style1,
+      //           ),
+      //           onTap: () {},
+      //         ),
+      //         ListTile(
+      //           title: Text(
+      //             'Healthy Advice',
+      //             style: style1,
+      //           ),
+      //           onTap: () {},
+      //         ),
+      //         ListTile(
+      //           title: Text(
+      //             'Username',
+      //             style: style1,
+      //           ),
+      //           onTap: () {},
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      // ),
       body: Column(
         // Column is also a layout widget. It takes a list of children and
         // arranges them vertically. By default, it sizes itself to fit its
