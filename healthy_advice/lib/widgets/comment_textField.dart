@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:healthy_advice/screens/healthy_advice_home.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter/services.dart';
 import 'dart:convert' as convert;
+import 'package:provider/provider.dart';
+import 'package:accounts/utils/network_service.dart';
 
 class CommentTextField extends StatefulWidget {
   const CommentTextField({Key? key}) : super(key: key);
@@ -10,6 +10,7 @@ class CommentTextField extends StatefulWidget {
   @override
   _CommentTextFieldState createState() => _CommentTextFieldState();
 }
+
 
 class _CommentTextFieldState extends State<CommentTextField> {
   final _formKey = GlobalKey<FormState>();
@@ -20,6 +21,8 @@ class _CommentTextFieldState extends State<CommentTextField> {
   }
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<NetworkService>();
+    print(request.username);
     return Center(
         child:
         Column(
@@ -63,18 +66,16 @@ class _CommentTextFieldState extends State<CommentTextField> {
                         shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(8.0)),),
                       onPressed: () async {
                         if (_formKey.currentState!.validate()){
-                          final response = await http.post(Uri.parse(
-                              "http://10.0.2.2:8000/healthy_advice/addAPI",
-                              ),
-                            headers: {
-                          "Content-Type" : 'application/json; charset=UTF-8'
-                          },
-                            body:
-                            convert.jsonEncode(<String, String>{
-                              'commentator_name': "priyanka_devi",
-                              'comment_field': textFieldsValue.toString(),
+                          // final response = await http.post(Uri.parse(
+                          //     //****
+                          //     "http://10.0.2.2:8000/healthy_advice/addAPI",
+                          //     ),
+                          final response = await request.postJson("http://10.0.2.2:8000/healthy_advice/addAPI",
+                              convert.jsonEncode(<String, String>{
+                                'commentator_name': request.username,
+                                'comment_field': textFieldsValue.toString(),
                               }));
-                          if (response.statusCode == 200) {
+                          if (response["status"] == "success") {
                           ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text("Comment success"),
                           ));
@@ -82,9 +83,6 @@ class _CommentTextFieldState extends State<CommentTextField> {
                           // builder: (context) => HealthyAdviceHome(title: 'e-nadi Healthy Advice');
                           Navigator.pushReplacementNamed(
                                 context, HealthyAdviceHome.routeName);
-                          // },
-                          // );
-
                           }
                           else {
                           ScaffoldMessenger.of(context)
@@ -93,7 +91,6 @@ class _CommentTextFieldState extends State<CommentTextField> {
                           Text("Please try again."),
                           ));
                           }
-                          // print(textFieldsValue);
                         };
 
                       },

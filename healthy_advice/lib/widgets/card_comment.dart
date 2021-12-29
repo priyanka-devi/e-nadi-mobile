@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:healthy_advice/widgets/modal_delete.dart';
 import 'package:healthy_advice/widgets/modal_edit.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'package:provider/provider.dart';
+import 'package:accounts/utils/network_service.dart';
+
 
 class CardComment extends StatefulWidget {
   const CardComment({Key? key, required this.commentatorName, required this.commentField, required this.commentPk}) : super(key: key);
@@ -17,6 +18,7 @@ class _CardCommentState extends State<CardComment> {
   @override
 
   Widget build(BuildContext context) {
+    final request = context.watch<NetworkService>();
     return Center(
       child: Card(
         child: InkWell(
@@ -76,7 +78,8 @@ class _CardCommentState extends State<CardComment> {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
+                          children:
+                            widget.commentatorName == request.username?[
                             ElevatedButton(
                                 style: ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 12),
                                   primary: Colors.blueAccent,
@@ -113,7 +116,8 @@ class _CardCommentState extends State<CardComment> {
                                 child: const Text('Delete')
                             ),
 
-                          ],
+                          ]:
+                                [],
                         ),
                       ]
                   ),),

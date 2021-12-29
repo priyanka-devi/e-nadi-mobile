@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -9,6 +8,8 @@ import 'package:healthy_advice/widgets/comment_textField.dart';
 import 'package:healthy_advice/Model/isi_comment.dart';
 import 'package:healthy_advice/Model/isi_article.dart';
 import 'package:accounts/utils/drawer_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:accounts/utils/network_service.dart';
 
 class HealthyAdviceHome extends StatefulWidget {
   static const routeName = '/healthy_advice';
@@ -22,6 +23,9 @@ class _HealthyAdviceHomeState extends State<HealthyAdviceHome> {
 
   List<IsiComment> extractedData = [];
   List<IsiArticle> extractedArticle = [];
+  //*****
+  bool isUser = false;
+
   articleData() async {
 
     const url = 'https://e-nadi.herokuapp.com/healthy_advice/get_all_article';
@@ -49,8 +53,7 @@ class _HealthyAdviceHomeState extends State<HealthyAdviceHome> {
 
 
   fetchData() async {
-    print("masuk sini");
-
+    //*********
     const url = "http://10.0.2.2:8000/healthy_advice/get_all_comment";
     try {
       extractedData = [];
@@ -65,25 +68,28 @@ class _HealthyAdviceHomeState extends State<HealthyAdviceHome> {
             IsiComment(model: anu["model"], pk: anu["pk"], fields: fields);
         extractedData.add(comment);
       }
-      print(extractedData.length);
+      // print(extractedData.length);
       return extractedData;
     } catch (error) {
       print(error);
     }
   }
 
-  // void didChangeDependencies() {
-  //     fetchData();
-  //     articleData();
-  //     super.didChangeDependencies();
-  // }
 
   Widget build(BuildContext context) {
+    final request = context.watch<NetworkService>();
+    request.username != "" ?
+    isUser = true :
+    isUser = false;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      drawer: DrawerScreen(),
+      drawer:
+      isUser ?
+      DrawerScreen() :
+      //    ***** belum beda
+      DrawerScreen(),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -121,7 +127,11 @@ class _HealthyAdviceHomeState extends State<HealthyAdviceHome> {
             SizedBox(
               height: 20,
             ),
-            CommentTextField(),
+            isUser?
+            CommentTextField() :
+            Container(
+              child: Text("Please login to add a comment"),
+            ),
             FutureBuilder(
                 future: fetchData(),
                 builder: (context, AsyncSnapshot snapshot) {

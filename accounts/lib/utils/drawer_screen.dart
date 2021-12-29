@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:healthy_advice/screens/healthy_advice_home.dart';
+import 'package:provider/provider.dart';
+import 'package:accounts/utils/network_service.dart';
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({Key? key}) : super(key: key);
@@ -10,6 +13,7 @@ class DrawerScreen extends StatefulWidget {
 class _DrawerScreenState extends State<DrawerScreen> {
   @override
   Widget build(BuildContext context) {
+    // final request = context.watch<NetworkService>();
     return Drawer(
       child: ListView(
         children: <Widget>[
@@ -21,7 +25,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
             iconData: Icons.home,
             title: "Home",
             onTilePressed: () {
-
+              Navigator.pushReplacementNamed(context, HealthyAdviceHome.routeName);
             },
           ),
           DrawerListTile(

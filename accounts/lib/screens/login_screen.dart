@@ -8,6 +8,8 @@ import 'package:accounts/screens/signup_screen.dart';
 import 'package:accounts/constants.dart';
 import 'package:accounts/components/button.dart';
 import 'package:provider/provider.dart';
+import 'package:healthy_advice/screens/healthy_advice_home.dart';
+
 
 class LoginScreen extends StatefulWidget {
   final VoidCallback? onSignIn;
@@ -87,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             final response = await request.login(
-                                "https://e-nadi.herokuapp.com/authentication/login_flutter/",
+                                "http://10.0.2.2:8000/authentication/login_flutter/",
                                 {
                                   'username': _controller1.text,
                                   'password': _controller2.text,
@@ -110,7 +112,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   actions: <Widget>[
                                     TextButton(
                                       onPressed: () =>
-                                          Navigator.pop(context, 'OK'),
+                                          Navigator.pushReplacementNamed(context, HealthyAdviceHome.routeName),
                                       child: const Text('OK'),
                                     ),
                                   ],
