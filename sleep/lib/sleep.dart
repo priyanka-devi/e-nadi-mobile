@@ -1,5 +1,3 @@
-library sleep;
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -27,13 +25,14 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Sleep Tracker'),
+      home: const SleepPage(title: 'Sleep Tracker'),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+class SleepPage extends StatefulWidget {
+  static const routeName = '/sleep';
+  const SleepPage({Key? key, required this.title}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -47,10 +46,10 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<SleepPage> createState() => _SleepPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _SleepPageState extends State<SleepPage> {
   TextStyle style1 = TextStyle(
     fontFamily: 'Poppins',
     fontSize: 17,
@@ -97,9 +96,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _updateCondition() {
     setState(() {
-      if(_update == false){
+      if (_update == false) {
         _update = true;
-      } else{
+      } else {
         _update = false;
       }
     });
@@ -115,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
+        // Here we take the value from the SleepPage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
@@ -226,34 +225,29 @@ class _MyHomePageState extends State<MyHomePage> {
               children: [
                 Text(
                     "Date: $_date\nYour Sleep Time: $_counter Hours\nSleep Quality: $_condition"),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-
                     TextButton(
                       child: new Text('Update'),
                       onPressed: () {
-                        if (_update == false){
+                        if (_update == false) {
                           _updateCondition();
                         }
                       },
                     ),
-
                     TextButton(
                       child: Text('Reset'),
                       onPressed: () {
                         _counter = 0;
                         _changeCondition();
-                        if (_update == true){
+                        if (_update == true) {
                           _updateCondition();
                         }
                       },
                     ),
-
                   ],
                 ),
-
                 if (_update == true)
                   TextFormField(
                     controller: _hours,
@@ -269,29 +263,24 @@ class _MyHomePageState extends State<MyHomePage> {
                         borderSide: BorderSide(),
                       ),
                     ),
-                    validator: (value){
-                      return (value != null)
-                          ? 'Field is required'
-                          : null;
+                    validator: (value) {
+                      return (value != null) ? 'Field is required' : null;
                     },
                   ),
-
                 if (_update == true)
                   TextButton(
                     child: Text('Submit'),
                     onPressed: () {
                       int _text = int.parse(_hours.text);
-                      if(_text>-1 && _text<25) {
+                      if (_text > -1 && _text < 25) {
                         _counter = _text;
                         _changeCondition();
                         _updateCondition();
-                      }
-                      else {
+                      } else {
                         print('Input must be a number in range 0-24');
                       }
                     },
                   ),
-
               ],
             ),
             //style: Theme.of(context).textTheme.headline4,),
@@ -316,4 +305,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sleep/sleep.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,7 +25,11 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: SleepPage(title: 'e-nadi Healthy Advice'),
+      routes: <String, WidgetBuilder>{
+        SleepPage.routeName: (context) =>
+            SleepPage(title: 'e-nadi Healthy Advice'),
+      },
     );
   }
 }
