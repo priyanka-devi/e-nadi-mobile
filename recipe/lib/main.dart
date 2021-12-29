@@ -12,6 +12,7 @@ import 'package:recipe/pages/RecipeDetail_6.dart';
 import 'package:http/http.dart' as http;
 import 'package:recipe/model/comment_recipe.dart';
 import 'package:recipe/widgets/card_comment.dart';
+import 'dart:convert' as convert;
 
 void main() {
   runApp(MyApp());
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
   static String title = 'Recipe Page';
   const MyApp({Key? key}) : super(key: key);
   MyApp createState() => MyApp();
+  
   @override
   Widget build(BuildContext context) => MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -32,13 +34,14 @@ class MyApp extends StatelessWidget {
 
 class MainPage extends StatefulWidget {
   final String title;
-
+  static const routeName = '/recipe';
   const MainPage({
     required this.title,
   });
 
   @override
   _MainPageState createState() => _MainPageState();
+  
 }
 
 class _MainPageState extends State<MainPage> {
@@ -51,24 +54,30 @@ class _MainPageState extends State<MainPage> {
   //Ganti nama isi Comment
   List<IsiComment> extractedData = [];
   fetchData() async {
-    const url = 'https://e-nadi.herokuapp.com/recipe/get_all_comment';
-    try {
-      extractedData = [];
-      final response = await http.get(Uri.parse(url));
-      final dataJson = jsonDecode(response.body);
-      for (var i in dataJson) {
-        Fields fields = Fields(
-            commentatorName: i["fields"]["username"],
-            commentField: i["fields"]["content"],
-            commentDate: i["fields"]["post_date"]);
-        IsiComment comment =
-            IsiComment(model: i["model"], pk: i["pk"], fields: fields);
-        extractedData.add(comment);
+    // const url = 'https://e-nadi.herokuapp.com/recipe/get_all_comment';
+    final response = await http
+        .get(Uri.parse('https://e-nadi.herokuapp.com/recipe/get_all_comment'));
+    if (response.statusCode == 200) {
+      try {
+        extractedData = [];
+        // final response = await http.get(Uri.parse(url));
+        final dataJson = jsonDecode(response.body);
+        for (var i in dataJson) {
+          Fields fields = Fields(
+              commentatorName: i["fields"]["username"],
+              commentField: i["fields"]["content"],
+              commentDate: i["fields"]["post_date"]);
+          IsiComment comment =
+              IsiComment(model: i["model"], pk: i["pk"], fields: fields);
+          extractedData.add(comment);
+        }
+        print(extractedData.length);
+        return extractedData;
+      } catch (error) {
+        print(error);
       }
-      print(extractedData.length);
-      return extractedData;
-    } catch (error) {
-      print(error);
+    } else {
+      return [];
     }
   }
 
@@ -205,10 +214,38 @@ class _MainPageState extends State<MainPage> {
                           shape: new RoundedRectangleBorder(
                               borderRadius: new BorderRadius.circular(18.0)),
                         ),
-                        onPressed: () {
+                        onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            print(textFieldsValue);
+                            final response = await http.post(
+                                Uri.parse(
+                                  "http://10.0.2.2:8000/recipe/addAPI",
+                                ),
+                                headers: {
+                                  "Content-Type":
+                                      'application/json; charset=UTF-8'
+                                },
+                                body: convert.jsonEncode(<String, String>{
+                                  'commentator_name': "betaTester_Hafiz",
+                                  'comment_field': textFieldsValue.toString(),
+                                  'comment_date': textFieldsValue.toString(), //Gk tau bener atau gk Check lagi
+                                }));
+                            if (response.statusCode == 200) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text("Comment success"),
+                              ));
+
+                              Navigator.pushReplacementNamed(
+                                  context, MainPage.routeName);
+                            } else {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text("Please try again."),
+                              ));
+                            }
+                            // print(textFieldsValue);
                           }
+                          ;
                         },
                         child: const Text('Post'),
                       ),
@@ -230,6 +267,7 @@ class _MainPageState extends State<MainPage> {
                                   commentatorName: i.fields.commentatorName,
                                   commentField: i.fields.commentField,
                                   commentDate: i.fields.commentDate,
+                                  commentPk: i.pk,
                                 );
                               }).toList());
                             }

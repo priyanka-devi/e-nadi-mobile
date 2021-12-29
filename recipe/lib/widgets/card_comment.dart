@@ -4,15 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:recipe/widgets/action_delete.dart';
 
 class CardComment extends StatefulWidget {
-  const CardComment(
-      {Key? key,
-      required this.commentatorName,
-      required this.commentField,
-      required this.commentDate})
-      : super(key: key);
+  const CardComment({
+    Key? key,
+    required this.commentatorName,
+    required this.commentField,
+    required this.commentDate,
+    required this.commentPk,
+  }) : super(key: key);
   final String commentatorName;
   final String commentField;
   final String commentDate;
+  final int commentPk;
   @override
   _CardCommentState createState() => _CardCommentState();
 }
@@ -90,7 +92,7 @@ class _CardCommentState extends State<CardComment> {
                               showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
-                                    return ModalDelete(isLogin: true);
+                                    return ModalDelete(isUser: true, comment: widget,);
                                   });
                             },
                             child: const Text('Delete')),

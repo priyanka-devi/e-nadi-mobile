@@ -1,9 +1,17 @@
+// ignore_for_file: unnecessary_new
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert' as convert;
+import 'package:http/http.dart' as http;
+import 'package:recipe/widgets/card_comment.dart';
+
+import 'package:recipe/main.dart';
 
 class ModalDelete extends StatefulWidget {
-  const ModalDelete({Key? key, required this.isLogin}) : super(key: key);
-  final bool isLogin;
+  const ModalDelete({Key? key, required this.isUser, required this.comment}) : super(key: key);
+  final bool isUser;
+  final CardComment comment;
 
   @override
   _ModalDeleteState createState() => _ModalDeleteState();
@@ -28,7 +36,7 @@ class _ModalDeleteState extends State<ModalDelete> {
               fontSize: 24,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 12,
           ),
           const Text(
@@ -36,7 +44,7 @@ class _ModalDeleteState extends State<ModalDelete> {
             style: TextStyle(fontSize: 16, color: Colors.black45),
             textAlign: TextAlign.center,
           ),
-          SizedBox(
+          const SizedBox(
             height: 12,
           ),
           Row(
@@ -58,7 +66,7 @@ class _ModalDeleteState extends State<ModalDelete> {
                     Navigator.pop(context);
                   },
                   child: const Text('Cancel')),
-              SizedBox(
+              const SizedBox(
                 width: 8,
               ),
               ElevatedButton(
@@ -72,7 +80,34 @@ class _ModalDeleteState extends State<ModalDelete> {
                     shape: new RoundedRectangleBorder(
                         borderRadius: new BorderRadius.circular(4.0)),
                   ),
-                  onPressed: () {},
+                  onPressed: () async{
+                      final response = await http.post(Uri.parse(
+                        "http://10.0.2.2:8000/recipe/delete/" + widget.comment.commentPk.toString(),
+                      ),
+                          headers: {
+                            "Content-Type" : 'application/json; charset=UTF-8'
+                          },
+                          body:
+                          convert.jsonEncode(<String, String>{
+                            'pk': widget.comment.commentPk.toString(),
+                          }));
+                      Navigator.pop(context);
+                      if (response.statusCode == 200) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text("Delete success"),
+                            ));
+                        Navigator.pushReplacementNamed(
+                            context, MainPage.routeName);
+                      }
+                      else {
+                        ScaffoldMessenger.of(context)
+                            .showSnackBar(const SnackBar(
+                          content:
+                          Text("Please try again."),
+                        ));
+                      }
+                      // print(textFieldsValue);
+                    },
                   child: const Text('Delete')),
             ],
           ),
