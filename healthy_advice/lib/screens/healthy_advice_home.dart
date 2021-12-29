@@ -8,7 +8,7 @@ import 'package:healthy_advice/widgets/carousel.dart';
 import 'package:healthy_advice/widgets/comment_textField.dart';
 import 'package:healthy_advice/Model/isi_comment.dart';
 import 'package:healthy_advice/Model/isi_article.dart';
-import 'package:healthy_advice/screens/drawer_screen.dart';
+import 'package:accounts/utils/drawer_screen.dart';
 
 class HealthyAdviceHome extends StatefulWidget {
   static const routeName = '/healthy_advice';

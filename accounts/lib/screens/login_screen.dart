@@ -7,7 +7,6 @@ import 'package:accounts/components/already_have_an_account_check.dart';
 import 'package:accounts/screens/signup_screen.dart';
 import 'package:accounts/constants.dart';
 import 'package:accounts/components/button.dart';
-
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
