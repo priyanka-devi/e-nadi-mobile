@@ -14,17 +14,10 @@ class CommentTextField extends StatefulWidget {
 class _CommentTextFieldState extends State<CommentTextField> {
   final _formKey = GlobalKey<FormState>();
   String textFieldsValue ="";
-  // late TextEditingController _controller;
   @override
   void initState() {
     super.initState();
-    // _controller = TextEditingController();
   }
-  // @override
-  // void dispose() {
-  //   _controller.dispose();
-  //   super.dispose();
-  // }
   @override
   Widget build(BuildContext context) {
     return Center(
