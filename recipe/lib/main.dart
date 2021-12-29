@@ -13,6 +13,7 @@ import 'package:http/http.dart' as http;
 import 'package:recipe/model/comment_recipe.dart';
 import 'package:recipe/widgets/card_comment.dart';
 import 'dart:convert' as convert;
+import  'package:intl/intl.dart';
 
 void main() {
   runApp(MyApp());
@@ -46,7 +47,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _MainPageStateIndex = 3;
-
+  String cdate = DateFormat("yyyy-MM-dd").format(DateTime.now());
   final _formKey = GlobalKey<FormState>();
   String textFieldsValue = "";
   late TextEditingController _controller;
@@ -227,7 +228,7 @@ class _MainPageState extends State<MainPage> {
                                 body: convert.jsonEncode(<String, String>{
                                   'commentator_name': "betaTester_Hafiz",
                                   'comment_field': textFieldsValue.toString(),
-                                  'comment_date': textFieldsValue.toString(), //Gk tau bener atau gk Check lagi
+                                  'comment_date': cdate.toString(), //Gk tau bener atau gk Check lagi
                                 }));
                             if (response.statusCode == 200) {
                               ScaffoldMessenger.of(context)
