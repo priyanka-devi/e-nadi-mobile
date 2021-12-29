@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:healthy_advice/screens/healthy_advice_home.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/services.dart';
 import 'dart:convert' as convert;
@@ -84,6 +85,13 @@ class _CommentTextFieldState extends State<CommentTextField> {
                           ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(content: Text("Comment success"),
                           ));
+                          // Route route = MaterialPageRoute(
+                          // builder: (context) => HealthyAdviceHome(title: 'e-nadi Healthy Advice');
+                          Navigator.pushReplacementNamed(
+                                context, HealthyAdviceHome.routeName);
+                          // },
+                          // );
+
                           }
                           else {
                           ScaffoldMessenger.of(context)

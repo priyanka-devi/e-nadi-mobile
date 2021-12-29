@@ -27,9 +27,11 @@ class MyApp extends StatelessWidget {
       ),
       home:
         HealthyAdviceHome(title: 'e-nadi Healthy Advice'),
-        routes: <String, WidgetBuilder>{
-          '/healthy-advixe': (context) => HealthyAdviceHome(title: 'e-nadi Healthy Advice'),
+        routes:
+        <String, WidgetBuilder>{
+          HealthyAdviceHome.routeName : (context) => HealthyAdviceHome(title: 'e-nadi Healthy Advice'),
         },
+
       // const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }

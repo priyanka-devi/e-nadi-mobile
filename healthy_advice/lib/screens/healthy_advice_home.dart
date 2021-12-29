@@ -11,6 +11,7 @@ import 'package:healthy_advice/Model/isi_article.dart';
 import 'package:healthy_advice/screens/drawer_screen.dart';
 
 class HealthyAdviceHome extends StatefulWidget {
+  static const routeName = '/healthy_advice';
   const HealthyAdviceHome({Key? key, required this.title}) : super(key: key);
   final String title;
   @override
@@ -48,6 +49,7 @@ class _HealthyAdviceHomeState extends State<HealthyAdviceHome> {
 
 
   fetchData() async {
+    print("masuk sini");
 
     const url = "http://10.0.2.2:8000/healthy_advice/get_all_comment";
     try {
@@ -63,18 +65,18 @@ class _HealthyAdviceHomeState extends State<HealthyAdviceHome> {
             IsiComment(model: anu["model"], pk: anu["pk"], fields: fields);
         extractedData.add(comment);
       }
-      // print(extractedData.length);
+      print(extractedData.length);
       return extractedData;
     } catch (error) {
       print(error);
     }
   }
 
-  void didChangeDependencies() {
-      fetchData();
-      articleData();
-      super.didChangeDependencies();
-  }
+  // void didChangeDependencies() {
+  //     fetchData();
+  //     articleData();
+  //     super.didChangeDependencies();
+  // }
 
   Widget build(BuildContext context) {
     return Scaffold(

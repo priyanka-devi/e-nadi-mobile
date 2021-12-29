@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:healthy_advice/screens/healthy_advice_home.dart';
 import 'package:healthy_advice/widgets/card_comment.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
@@ -75,6 +76,8 @@ class _ModalEditState extends State<ModalEdit> {
                   ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("Comment success"),
                       ));
+                  Navigator.pushReplacementNamed(
+                      context, HealthyAdviceHome.routeName);
                 }
                 else {
                   ScaffoldMessenger.of(context)
