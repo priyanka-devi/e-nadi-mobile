@@ -48,9 +48,7 @@ class RecipeDetail extends StatelessWidget {
                       )
                     ],
                     image: DecorationImage(
-                      image: NetworkImage(
-                        'https://hips.hearstapps.com/del.h-cdn.co/assets/17/23/1496939954-bruschetta-chicken-1sm.jpg?crop=1.0xw:1xh;center,top&resize=768:*',
-                      ),
+                      image: AssetImage('assets/recipie/recipe1.jpg'),
                       fit: BoxFit.cover,
                     )),
               ),

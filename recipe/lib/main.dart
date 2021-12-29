@@ -283,9 +283,7 @@ class _MainPageState extends State<MainPage> {
             Stack(
               children: [
                 Ink.image(
-                  image: NetworkImage(
-                    'https://hips.hearstapps.com/del.h-cdn.co/assets/17/23/1496939954-bruschetta-chicken-1sm.jpg?crop=1.0xw:1xh;center,top&resize=768:*',
-                  ),
+                  image: AssetImage('assets/recipie/recipe1.jpg'),
                   colorFilter: ColorFilter.mode(
                       Colors.black.withOpacity(0.3), BlendMode.darken),
                   height: 240,
@@ -351,9 +349,7 @@ class _MainPageState extends State<MainPage> {
             Stack(
               children: [
                 Ink.image(
-                  image: NetworkImage(
-                    'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/honey-walnut-shrimp-horizontal-1548093880.png',
-                  ),
+                  image: AssetImage('assets/recipie/recipe2.png'),
                   colorFilter: ColorFilter.mode(
                       Colors.black.withOpacity(0.3), BlendMode.darken),
                   height: 240,
@@ -419,9 +415,7 @@ class _MainPageState extends State<MainPage> {
             Stack(
               children: [
                 Ink.image(
-                  image: NetworkImage(
-                    'https://hips.hearstapps.com/del.h-cdn.co/assets/16/21/1464039955-delish-summer-salads-caprese-zoodles.jpg',
-                  ),
+                  image: AssetImage('assets/recipie/recipe3.jpg'),
                   colorFilter: ColorFilter.mode(
                       Colors.black.withOpacity(0.3), BlendMode.darken),
                   height: 240,
@@ -487,9 +481,7 @@ class _MainPageState extends State<MainPage> {
             Stack(
               children: [
                 Ink.image(
-                  image: NetworkImage(
-                    'https://hips.hearstapps.com/del.h-cdn.co/assets/17/27/1499459298-delish-garlicky-greek-chicken-front00-00-02-20still002.jpg',
-                  ),
+                  image: AssetImage('assets/recipie/recipe4.jpg'),
                   colorFilter: ColorFilter.mode(
                       Colors.black.withOpacity(0.3), BlendMode.darken),
                   height: 240,
@@ -555,9 +547,7 @@ class _MainPageState extends State<MainPage> {
             Stack(
               children: [
                 Ink.image(
-                  image: NetworkImage(
-                    'https://hips.hearstapps.com/del.h-cdn.co/assets/17/36/1600x2399/gallery-1504715772-delish-baked-salmon-1.jpg?resize=480:*',
-                  ),
+                  image: AssetImage('assets/recipie/recipe5.jpg'),
                   colorFilter: ColorFilter.mode(
                       Colors.black.withOpacity(0.3), BlendMode.darken),
                   height: 240,
@@ -623,9 +613,7 @@ class _MainPageState extends State<MainPage> {
             Stack(
               children: [
                 Ink.image(
-                  image: NetworkImage(
-                    'https://hips.hearstapps.com/del.h-cdn.co/assets/17/25/1498147867-delish-easy-crockpot-chicken-and-dumplings-horizontal-1024.jpg?crop=1xw:1xh;center,top&resize=480:*',
-                  ),
+                  image: AssetImage('assets/recipie/recipe6.jpg'),
                   colorFilter: ColorFilter.mode(
                       Colors.black.withOpacity(0.3), BlendMode.darken),
                   height: 240,

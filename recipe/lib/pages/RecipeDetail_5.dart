@@ -48,9 +48,7 @@ class RecipeDetail5 extends StatelessWidget {
                       )
                     ],
                     image: DecorationImage(
-                      image: NetworkImage(
-                        'https://hips.hearstapps.com/del.h-cdn.co/assets/17/36/1600x2399/gallery-1504715772-delish-baked-salmon-1.jpg?resize=480:*',
-                      ),
+                      image: AssetImage('assets/recipie/recipe5.jpg'),
                       fit: BoxFit.cover,
                     )),
               ),
