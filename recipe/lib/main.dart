@@ -14,6 +14,8 @@ import 'package:recipe/model/comment_recipe.dart';
 import 'package:recipe/widgets/card_comment.dart';
 import 'dart:convert' as convert;
 import 'package:intl/intl.dart';
+import 'package:accounts/utils/drawer_screen.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -132,6 +134,7 @@ class _MainPageState extends State<MainPage> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
+        drawer: DrawerScreen() ,
         body: ListView(
           padding: EdgeInsets.all(16),
           children: [
@@ -271,53 +274,7 @@ class _MainPageState extends State<MainPage> {
             ),
           ],
         ),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-              backgroundColor: Colors.red,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.local_hotel),
-              label: 'Workout Tracker',
-              backgroundColor: Colors.green,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.nights_stay),
-              label: 'Sleep Tracker',
-              backgroundColor: Colors.purple,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.food_bank),
-              label: 'Recipe',
-              backgroundColor: Colors.pink,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.health_and_safety_outlined),
-              label: 'Activity Summary',
-              backgroundColor: Colors.pink,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.medical_services_rounded),
-              label: 'Healthy Advice',
-              backgroundColor: Colors.pink,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle),
-              label: 'Profile',
-              backgroundColor: Colors.pink,
-            ),
-          ],
-          currentIndex: _MainPageStateIndex,
-          selectedItemColor: Colors.amber[800],
-          onTap: (index) {
-            setState(() {
-              _MainPageStateIndex = index;
-            });
-          },
-        ),
+
       );
 
   Widget buildRecipeCard1() => Card(
