@@ -96,36 +96,6 @@ class _MainPageState extends State<MainPage> {
     _controller = TextEditingController();
   }
 
-  static TextStyle optionStyle =
-      TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
-  static final List<Widget> _widgetOptions = <Widget>[
-    Column(),
-    Text(
-      'Index 0: Home',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 1: Workout',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 2: Sleep Advice',
-      style: optionStyle,
-    ),
-    Text(''),
-    Text(
-      'Index 4: Activity Summary',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 5: Healthy Advice',
-      style: optionStyle,
-    ),
-    Text(
-      'Index 6: Profile',
-      style: optionStyle,
-    ),
-  ];
 
   @override
   Widget build(BuildContext context) => Scaffold(
