@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -20,37 +22,35 @@ class HealthyAdviceHome extends StatefulWidget {
 }
 
 class _HealthyAdviceHomeState extends State<HealthyAdviceHome> {
-
   List<IsiComment> extractedData = [];
   List<IsiArticle> extractedArticle = [];
   //*****
   bool isUser = false;
 
   articleData() async {
-
     const url = 'https://e-nadi.herokuapp.com/healthy_advice/get_all_article';
     try {
       extractedArticle = [];
       final response = await http.get(Uri.parse(url));
       // print(response.body);
       final dataJson = jsonDecode(response.body);
-      for (var dataArticle in dataJson){
+      for (var dataArticle in dataJson) {
         FieldsArticle fields = FieldsArticle(
             title: dataArticle["fields"]["title"],
             imageLink: dataArticle["fields"]["image_link"],
             imageArticle: dataArticle["fields"]["image_article"],
             deskripsi: dataArticle["fields"]["deskripsi"],
             createdAt: dataArticle["fields"]["created_at"]);
-        IsiArticle article =
-        IsiArticle(model: dataArticle["model"], pk: dataArticle["pk"], fields: fields);
+        IsiArticle article = IsiArticle(
+            model: dataArticle["model"], pk: dataArticle["pk"], fields: fields);
         extractedArticle.add(article);
       }
       return extractedArticle;
     } catch (error) {
+      // ignore: avoid_print
       print(error);
     }
   }
-
 
   fetchData() async {
     //*********
@@ -60,7 +60,7 @@ class _HealthyAdviceHomeState extends State<HealthyAdviceHome> {
       final response = await http.get(Uri.parse(url));
       // print(response.body);
       final dataJson = jsonDecode(response.body);
-      for (var anu in dataJson){
+      for (var anu in dataJson) {
         Fields fields = Fields(
             commentatorName: anu["fields"]["commentator_name"],
             commentField: anu["fields"]["comment_field"]);
@@ -71,89 +71,82 @@ class _HealthyAdviceHomeState extends State<HealthyAdviceHome> {
       // print(extractedData.length);
       return extractedData;
     } catch (error) {
+      // ignore: avoid_print
       print(error);
     }
   }
 
-
+  @override
   Widget build(BuildContext context) {
     final request = context.watch<NetworkService>();
-    request.username != "" ?
-    isUser = true :
-    isUser = false;
+    request.username != "" ? isUser = true : isUser = false;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      drawer:
-      isUser ?
-      DrawerScreen() :
-      //    ***** belum beda
-      DrawerScreen(),
+      drawer: isUser ? const DrawerScreen() : const DrawerScreen(),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            CarouselHealthyAdv(),
-            SizedBox(height: 24),
+            const CarouselHealthyAdv(),
+            const SizedBox(height: 24),
             FutureBuilder(
                 future: articleData(),
                 builder: (context, AsyncSnapshot snapshot) {
                   if (snapshot.data == null) {
+                    // ignore: avoid_unnecessary_containers
                     return Container(
-                      child: Center(
+                      child: const Center(
                           child: Text(
-                            "Loading...",
-                          )),
+                        "Loading...",
+                      )),
                     );
                   } else {
                     return Column(
-                        children:
-                        extractedArticle.map((anu) {
-                          return CardSehat(
-                            createdAt: anu.fields.createdAt,
-                            imageArticle: anu.fields.imageArticle,
-                            deskripsi: anu.fields.deskripsi,
-                            imageLink: anu.fields.imageLink,
-                            title: anu.fields.title,
-                          );
-                        }).toList()
-                    );
-
+                        children: extractedArticle.map((anu) {
+                      return CardSehat(
+                        createdAt: anu.fields.createdAt,
+                        imageArticle: anu.fields.imageArticle,
+                        deskripsi: anu.fields.deskripsi,
+                        imageLink: anu.fields.imageLink,
+                        title: anu.fields.title,
+                      );
+                    }).toList());
                   }
                 }),
             // CardSehat(),
             // CardSehat(),
             // CardSehat(),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
-            isUser?
-            CommentTextField() :
-            Container(
-              child: Text("Please login to add a comment"),
-            ),
+            isUser
+                ? const CommentTextField()
+                :
+                // ignore: avoid_unnecessary_containers
+                Container(
+                    child: const Text("Please login to add a comment"),
+                  ),
             FutureBuilder(
                 future: fetchData(),
                 builder: (context, AsyncSnapshot snapshot) {
                   if (snapshot.data == null) {
+                    // ignore: avoid_unnecessary_containers
                     return Container(
                       child: Center(
                           child: Text(
-                            "Loading...",
-                          )),
+                        "Loading...",
+                      )),
                     );
                   } else {
                     return Column(
-                        children:
-                        extractedData.map((anu) {
-                          return CardComment(
-                            commentatorName : anu.fields.commentatorName,
-                            commentField : anu.fields.commentField,
-                            commentPk : anu.pk,
-                          );
-                        }).toList()
-                    );
-
+                        children: extractedData.map((anu) {
+                      return CardComment(
+                        commentatorName: anu.fields.commentatorName,
+                        commentField: anu.fields.commentField,
+                        commentPk: anu.pk,
+                      );
+                    }).toList());
                   }
                 }),
             // CardComment(),
@@ -163,12 +156,9 @@ class _HealthyAdviceHomeState extends State<HealthyAdviceHome> {
             SizedBox(
               height: 20,
             ),
-
           ],
         ),
       ),
-
     );
-
   }
 }
