@@ -16,7 +16,6 @@ import 'dart:convert' as convert;
 import 'package:intl/intl.dart';
 import 'package:accounts/utils/drawer_screen.dart';
 
-
 void main() {
   runApp(MyApp());
 }
@@ -47,7 +46,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  int _MainPageStateIndex = 3;
   String cdate = DateFormat("yyyy-MM-dd").format(DateTime.now());
   final _formKey = GlobalKey<FormState>();
   String textFieldsValue = "";
@@ -134,7 +132,7 @@ class _MainPageState extends State<MainPage> {
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        drawer: DrawerScreen() ,
+        drawer: DrawerScreen(),
         body: ListView(
           padding: EdgeInsets.all(16),
           children: [
@@ -239,7 +237,6 @@ class _MainPageState extends State<MainPage> {
                         }
                         // print(textFieldsValue);
                       }
-                      
                     },
                     child: const Text('Post'),
                   ),
@@ -274,7 +271,6 @@ class _MainPageState extends State<MainPage> {
             ),
           ],
         ),
-
       );
 
   Widget buildRecipeCard1() => Card(
