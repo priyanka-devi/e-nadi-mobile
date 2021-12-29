@@ -1,3 +1,5 @@
+publish_to: none
+
 name: workout
 description: A new Flutter package project.
 version: 0.0.1
@@ -10,6 +12,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  provider: ^6.0.1
+  enadi_mobile:
+    path: ../.
 
 dev_dependencies:
   flutter_test:
