@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:accounts/screens/welcome_screen.dart';
 import 'package:accounts/constants.dart';
+import 'package:workout/screens/workout_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,6 +27,11 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
             primaryColor: kPrimaryColor, scaffoldBackgroundColor: Colors.white),
         home: const WelcomeScreen(),
+        routes: {
+          WorkoutPage.routeName: (context) => const WorkoutPage(title: 'e-nadi Healthy Advice'),
+
+
+        },
       ),
     );
   }

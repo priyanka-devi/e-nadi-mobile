@@ -70,6 +70,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
                           ),
                         ),
                         TextField(
+                          decoration: InputDecoration(labelText: 'Add to counter'),
                           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                           keyboardType: TextInputType.number,
                           controller: myController,
