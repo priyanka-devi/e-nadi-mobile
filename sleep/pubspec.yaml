@@ -1,19 +1,15 @@
-name: accounts
+name: sleep
 description: A new Flutter package project.
 version: 0.0.1
 homepage:
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.15.1 <3.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.2
-  http: ^0.13.4
-  provider: ^6.0.1
-  shared_preferences: ^2.0.11
 
 dev_dependencies:
   flutter_test:

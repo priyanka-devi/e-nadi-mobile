@@ -1,15 +1,14 @@
-import 'dart:convert';
-
 import 'package:accounts/components/textfield_input.dart';
 import 'package:accounts/components/textfield_inputpassword.dart';
 import 'package:accounts/screens/welcome_screen.dart';
+import 'package:accounts/utils/network_service.dart';
 import 'package:flutter/material.dart';
 import 'package:accounts/components/already_have_an_account_check.dart';
 import 'package:accounts/screens/signup_screen.dart';
 import 'package:accounts/constants.dart';
 import 'package:accounts/components/button.dart';
 
-import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   final VoidCallback? onSignIn;
@@ -30,6 +29,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<NetworkService>();
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SizedBox(
@@ -80,45 +80,32 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     const SizedBox(height: 10),
                     const SizedBox(height: 10),
-
-                    RoundedInput(
-                        hint: "Username",
-                        controller: _controller1
-                    ),
-
+                    RoundedInput(hint: "Username", controller: _controller1),
                     RoundedPasswordField(
-                        hint: "Password",
-                        controller: _controller2
-                    ),
-
+                        hint: "Password", controller: _controller2),
                     Button(
                         text: "Login",
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
-                            final response = await http.post(
-                                Uri.parse(
-                                    "http://10.0.2.2:8000/login_flutter/"),
-                                headers: <String, String>{
-                                  'Content-Type':
-                                  'application/json; charset=UTF-8',
-                                },
-                                body: jsonEncode(<String, String>{
+                            final response = await request.login(
+                                "https://e-nadi.herokuapp.com/authentication/login_flutter/",
+                                {
                                   'username': _controller1.text,
                                   'password': _controller2.text,
-                                }));
-                            if (response.statusCode == 201) {
+                                });
+
+                            if (response['status']) {
                               // If the server did return a 201 CREATED response,
                               // then parse the JSON.
-
-                              // print(response.body);
 
                               showDialog<String>(
                                 context: context,
                                 builder: (BuildContext context) => AlertDialog(
                                   title: const Text('Login Success'),
-                                  content: Text('Welcome to E-Nadi, ' + _controller1.text ),
-                                  shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(Radius.circular(2.0))
+                                  content: Text('Welcome to E-Nadi, ' +
+                                      response['username']),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30),
                                   ),
                                   backgroundColor: kPrimaryLightColor,
                                   actions: <Widget>[
@@ -139,7 +126,12 @@ class _LoginScreenState extends State<LoginScreen> {
                                 context: context,
                                 builder: (BuildContext context) => AlertDialog(
                                   title: const Text('Login Failed'),
-                                  content: const Text('Wrong Username or Password'),
+                                  content:
+                                  const Text('Wrong Username or Password'),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30),
+                                  ),
+                                  backgroundColor: kPrimaryLightColor,
                                   actions: <Widget>[
                                     TextButton(
                                       onPressed: () =>
@@ -157,8 +149,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       press: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return const SignUpScreen();
-                        }));
+                              return const SignUpScreen();
+                            }));
                       },
                       login: true,
                     ),
