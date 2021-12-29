@@ -1,5 +1,9 @@
+import 'package:accounts/utils/network_service.dart';
 import 'package:flutter/material.dart';
 import 'package:healthy_advice/screens/healthy_advice_home.dart';
+import 'package:provider/provider.dart';
+import 'package:accounts/screens/welcome_screen.dart';
+import 'package:accounts/constants.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,12 +29,11 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home:
-        HealthyAdviceHome(title: 'e-nadi Healthy Advice'),
-        routes:
-        <String, WidgetBuilder>{
-          HealthyAdviceHome.routeName : (context) => HealthyAdviceHome(title: 'e-nadi Healthy Advice'),
-        },
+      home: HealthyAdviceHome(title: 'e-nadi Healthy Advice'),
+      routes: <String, WidgetBuilder>{
+        HealthyAdviceHome.routeName: (context) =>
+            HealthyAdviceHome(title: 'e-nadi Healthy Advice'),
+      },
 
       // const MyHomePage(title: 'Flutter Demo Home Page'),
     );
