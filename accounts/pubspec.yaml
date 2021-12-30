@@ -1,3 +1,5 @@
+publish_to: 'none'
+
 name: accounts
 description: A new Flutter package project.
 version: 0.0.1
@@ -14,12 +16,15 @@ dependencies:
   http: ^0.13.4
   provider: ^6.0.1
   shared_preferences: ^2.0.11
+  enadi_mobile:
+    path: ../.
 
 dev_dependencies:
   flutter_launcher_icons:
   flutter_launcher_name:
   flutter_test:
     sdk: flutter
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
