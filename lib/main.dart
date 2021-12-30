@@ -1,4 +1,4 @@
-import 'package:enadi_mobile/network_service.dart';
+import 'package:accounts/utils/network_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:accounts/screens/welcome_screen.dart';
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           home: const WelcomeScreen(),
           routes: {
             RecipePage.routeName: (context) =>
-                const RecipePage(title: 'Recipe'),
+                const RecipePage(title: 'e-Nadi Recipe'),
           }),
     );
   }

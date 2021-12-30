@@ -7,7 +7,7 @@ import 'package:accounts/components/already_have_an_account_check.dart';
 import 'package:accounts/screens/signup_screen.dart';
 import 'package:accounts/constants.dart';
 import 'package:accounts/components/button.dart';
-
+import 'package:recipe/main.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -66,8 +66,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                              return const WelcomeScreen();
-                            }));
+                          return const WelcomeScreen();
+                        }));
                       },
                     ),
                     const SizedBox(height: 20),
@@ -111,7 +111,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   actions: <Widget>[
                                     TextButton(
                                       onPressed: () =>
-                                          Navigator.pop(context, 'OK'),
+                                          Navigator.pushReplacementNamed(
+                                              context, RecipePage.routeName),
                                       child: const Text('OK'),
                                     ),
                                   ],
@@ -127,7 +128,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 builder: (BuildContext context) => AlertDialog(
                                   title: const Text('Login Failed'),
                                   content:
-                                  const Text('Wrong Username or Password'),
+                                      const Text('Wrong Username or Password'),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30),
                                   ),
@@ -149,8 +150,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       press: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                              return const SignUpScreen();
-                            }));
+                          return const SignUpScreen();
+                        }));
                       },
                       login: true,
                     ),

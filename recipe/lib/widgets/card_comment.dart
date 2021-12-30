@@ -1,19 +1,21 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_new, non_constant_identifier_names
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_new
 
 import 'package:flutter/material.dart';
 import 'package:recipe/widgets/action_delete.dart';
+import 'package:provider/provider.dart';
+import 'package:accounts/utils/network_service.dart';
 
 class CardComment extends StatefulWidget {
   const CardComment({
     Key? key,
-    required this.username,
-    required this.content,
-    required this.post_date,
+    required this.commentatorName,
+    required this.commentField,
+    required this.commentDate,
     required this.commentPk,
   }) : super(key: key);
-  final String username;
-  final String content;
-  final String post_date;
+  final String commentatorName;
+  final String commentField;
+  final String commentDate;
   final int commentPk;
   @override
   _CardCommentState createState() => _CardCommentState();
@@ -22,6 +24,7 @@ class CardComment extends StatefulWidget {
 class _CardCommentState extends State<CardComment> {
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<NetworkService>();
     return Center(
       child: Card(
         child: InkWell(
@@ -39,7 +42,7 @@ class _CardCommentState extends State<CardComment> {
                     Row(
                       children: [
                         Text(
-                          widget.username,
+                          widget.commentatorName,
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -53,7 +56,7 @@ class _CardCommentState extends State<CardComment> {
                     Row(
                       children: [
                         Text(
-                          widget.post_date,
+                          widget.commentDate,
                           style: TextStyle(
                             fontSize: 18,
                           ),
@@ -66,7 +69,7 @@ class _CardCommentState extends State<CardComment> {
                     Column(
                       children: [
                         Text(
-                          widget.content,
+                          widget.commentField,
                           style: TextStyle(
                             fontSize: 20,
                           ),
@@ -76,7 +79,8 @@ class _CardCommentState extends State<CardComment> {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
+                      children: widget.commentatorName == request.username
+                          ? [
                         ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               textStyle: const TextStyle(fontSize: 15),
@@ -99,7 +103,8 @@ class _CardCommentState extends State<CardComment> {
                                   });
                             },
                             child: const Text('Delete')),
-                      ],
+                      ]
+                      :[],
                     ),
                   ]),
                 ),

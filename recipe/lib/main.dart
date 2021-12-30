@@ -15,7 +15,7 @@ import 'package:recipe/widgets/card_comment.dart';
 import 'dart:convert' as convert;
 import 'package:intl/intl.dart';
 import 'package:accounts/utils/drawer_screen.dart';
-import 'package:enadi_mobile/network_service.dart';
+import 'package:accounts/utils/network_service.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -51,6 +51,7 @@ class _RecipePageState extends State<RecipePage> {
   String cdate = DateFormat("yyyy-MM-dd").format(DateTime.now());
   final _formKey = GlobalKey<FormState>();
   String textFieldsValue = "";
+  late TextEditingController _controller;
 
   bool isUser = false;
   //Ganti nama isi Comment
@@ -66,16 +67,17 @@ class _RecipePageState extends State<RecipePage> {
         final dataJson = jsonDecode(response.body);
         for (var i in dataJson) {
           Fields fields = Fields(
-              username: i["fields"]["username"],
-              content: i["fields"]["content"],
-              post_date: i["fields"]["post_date"]);
+              commentatorName: i["fields"]["username"],
+              commentField: i["fields"]["content"],
+              commentDate: i["fields"]["post_date"]);
           IsiComment comment =
               IsiComment(model: i["model"], pk: i["pk"], fields: fields);
           extractedData.add(comment);
         }
+        print(extractedData.length);
         return extractedData;
       } catch (error) {
-        return [];
+        print(error);
       }
     } else {
       return [];
@@ -142,9 +144,6 @@ class _RecipePageState extends State<RecipePage> {
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                       )),
-                  onChanged: (String? value) {
-                    textFieldsValue = value!;
-                  },
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Please Insert a Feedback';
@@ -172,9 +171,9 @@ class _RecipePageState extends State<RecipePage> {
                       final response = await request.postJson(
                           "http://10.0.2.2:8000/recipe/addAPI",
                           convert.jsonEncode(<String, String>{
-                            'username': request.username,
-                            'content': textFieldsValue.toString(),
-                            'post_date': cdate.toString(),
+                            'commentator_name': request.username,
+                            'comment_field': textFieldsValue.toString(),
+                            'comment_date': cdate
                           }));
                       if (response["status"] == "success") {
                         ScaffoldMessenger.of(context)
@@ -190,6 +189,7 @@ class _RecipePageState extends State<RecipePage> {
                           content: Text("Please try again."),
                         ));
                       }
+                      // print(textFieldsValue);
                     }
                   },
                   child: const Text('Post'),
@@ -209,9 +209,9 @@ class _RecipePageState extends State<RecipePage> {
                         return Column(
                             children: extractedData.map((i) {
                           return CardComment(
-                            username: i.fields.username,
-                            content: i.fields.content,
-                            post_date: i.fields.post_date,
+                            commentatorName: i.fields.commentatorName,
+                            commentField: i.fields.commentField,
+                            commentDate: i.fields.commentDate,
                             commentPk: i.pk,
                           );
                         }).toList());

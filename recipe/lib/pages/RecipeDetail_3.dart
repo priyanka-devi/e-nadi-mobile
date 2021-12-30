@@ -48,7 +48,9 @@ class RecipeDetail3 extends StatelessWidget {
                       )
                     ],
                     image: DecorationImage(
-                      image: AssetImage('assets/recipie/recipe3.jpg'),
+                      image: NetworkImage(
+                        'https://hips.hearstapps.com/del.h-cdn.co/assets/16/21/1464039955-delish-summer-salads-caprese-zoodles.jpg',
+                      ),
                       fit: BoxFit.cover,
                     )),
               ),

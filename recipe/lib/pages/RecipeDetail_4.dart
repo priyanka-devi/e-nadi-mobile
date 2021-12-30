@@ -48,7 +48,9 @@ class RecipeDetail4 extends StatelessWidget {
                       )
                     ],
                     image: DecorationImage(
-                      image: AssetImage('assets/recipie/recipe4.jpg'),
+                      image: NetworkImage(
+                        'https://hips.hearstapps.com/del.h-cdn.co/assets/17/27/1499459298-delish-garlicky-greek-chicken-front00-00-02-20still002.jpg',
+                      ),
                       fit: BoxFit.cover,
                     )),
               ),

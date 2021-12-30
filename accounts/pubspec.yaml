@@ -4,7 +4,6 @@ publish_to: 'none'
 version: 0.0.1
 homepage:
 
-
 environment:
   sdk: ">=2.12.0 <3.0.0"
   flutter: ">=1.17.0"
@@ -19,7 +18,6 @@ dependencies:
   
   enadi_mobile:
     path: ../.
-
 dev_dependencies:
   flutter_launcher_icons:
   flutter_launcher_name:

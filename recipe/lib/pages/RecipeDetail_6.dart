@@ -48,7 +48,9 @@ class RecipeDetail6 extends StatelessWidget {
                       )
                     ],
                     image: DecorationImage(
-                      image: AssetImage('assets/recipie/recipe6.jpg'),
+                      image: NetworkImage(
+                        'https://hips.hearstapps.com/del.h-cdn.co/assets/17/25/1498147867-delish-easy-crockpot-chicken-and-dumplings-horizontal-1024.jpg?crop=1xw:1xh;center,top&resize=480:*',
+                      ),
                       fit: BoxFit.cover,
                     )),
               ),
