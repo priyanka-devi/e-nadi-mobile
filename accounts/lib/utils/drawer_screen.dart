@@ -1,4 +1,5 @@
 import 'package:accounts/screens/login_screen.dart';
+import 'package:enadi_mobile/main.dart';
 import 'package:flutter/material.dart';
 import 'package:healthy_advice/screens/healthy_advice_home.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +27,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
             iconData: Icons.home,
             title: "Home",
             onTilePressed: () {
-
+              Navigator.pushReplacementNamed(
+                  context, HomeDummy.routeName);
             },
           ),
           DrawerListTile(
@@ -57,11 +59,9 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   context, HealthyAdviceHome.routeName);
             },
           ),
-          DrawerListTile(
-            iconData: Icons.arrow_back_rounded,
-            title: "Log out",
-            onTilePressed: () async {
-              final response = await request.logoutAccount("http://10.0.2.2:8000/authentication/logout/");//"https://e-nadi.herokuapp.com/authentication/logout/");
+          ElevatedButton(
+            onPressed: () async {
+              final response = await request.logoutAccount("https://e-nadi.herokuapp.com/authentication/logout_flutter/");
               if (response['status']){
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Successfully logged out!"),));
                 Navigator.pushReplacementNamed(
@@ -71,7 +71,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   content: Text("Failed to Logout"),
                 ));
               }
-            },
+            }, child: const Text("Logout"),
           ),
         ],
       ),

@@ -63,7 +63,8 @@ class _ModalEditState extends State<ModalEdit> {
               // print(widget.comment.commentPk);
               // if (_formKey.currentState!.validate()){
               final response = await request.postJson(
-                  "https://e-nadi.herokuapp.com/healthy_advice/editCommentAPI/" +
+                  // "http://10.0.2.2:8000/healthy_advice/editCommentAPI/" +
+                "https://e-nadi.herokuapp.com/healthy_advice/editCommentAPI/" +
                       widget.comment.commentPk.toString(),
                   convert.jsonEncode(<String, String>{
                     'commentator_name': request.username,

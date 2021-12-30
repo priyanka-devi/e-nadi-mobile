@@ -43,7 +43,7 @@ class NetworkService {
     }
 
     http.Response response =
-    await _client.post(Uri.parse(url), body: data, headers: headers);
+        await _client.post(Uri.parse(url), body: data, headers: headers);
 
     _updateCookie(response);
 
@@ -63,7 +63,7 @@ class NetworkService {
       c.withCredentials = true;
     }
     http.Response response =
-    await _client.get(Uri.parse(url), headers: headers);
+        await _client.get(Uri.parse(url), headers: headers);
     _updateCookie(response);
     return json.decode(response.body); // Expects and returns JSON request body
   }
@@ -74,7 +74,7 @@ class NetworkService {
       c.withCredentials = true;
     }
     http.Response response =
-    await _client.post(Uri.parse(url), body: data, headers: headers);
+        await _client.post(Uri.parse(url), body: data, headers: headers);
     _updateCookie(response);
     return json.decode(response.body); // Expects and returns JSON request body
   }
@@ -87,7 +87,9 @@ class NetworkService {
     // Add additional header
     headers['Content-Type'] = 'application/json; charset=UTF-8';
     http.Response response =
-    await _client.post(Uri.parse(url), body: data, headers: headers);
+        await _client.post(Uri.parse(url), body: data, headers: headers);
+    // ignore: avoid_print
+    print(response.body);
     // Remove used additional header
     headers.remove('Content-Type');
     _updateCookie(response);
@@ -143,6 +145,7 @@ class NetworkService {
 
   Future<dynamic> logoutAccount(String url) async {
     http.Response response = await _client.post(Uri.parse(url));
+    // ignore: avoid_print
     print(response.body);
 
     if (response.statusCode == 200) {
