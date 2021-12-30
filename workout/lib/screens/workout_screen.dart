@@ -1,5 +1,4 @@
 import 'package:accounts/utils/network_service.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -94,8 +93,10 @@ class _WorkoutPageState extends State<WorkoutPage> {
               future: getWorkout(request),
               builder: (context, AsyncSnapshot snapshot) {
                 if (snapshot.data == null) {
-                  return Text("Loading...");
-                } else return Text("Workout Tracker");
+                  return const Text("Loading...");
+                } else {
+                  return const Text("Workout Tracker");
+                }
               }
             ),
             Card(
@@ -103,18 +104,18 @@ class _WorkoutPageState extends State<WorkoutPage> {
               child: Column(
                 children: [
                   ListTile(
-                    leading: Icon(Icons.sports_handball_outlined),
+                    leading: const Icon(Icons.sports_handball_outlined),
                     title: Text(now.day.toString() + ' | ' + now.month.toString() + ' | ' + now.year.toString(),
                       style: Theme.of(context).textTheme.headline5,),
                     subtitle: Text(
-                      '$_username',
+                      _username,
                       style: TextStyle(color: Colors.black.withOpacity(0.6)),
                     ),
                   ),
 
                   Container(
                     padding: const EdgeInsets.all(40.0),
-                    child: new Column(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
@@ -125,7 +126,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
                           ),
                         ),
                         TextField(
-                          decoration: InputDecoration(labelText: 'Add to counter'),
+                          decoration: const InputDecoration(labelText: 'Add to counter'),
                           inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                           keyboardType: TextInputType.number,
                           controller: myController,
