@@ -84,7 +84,7 @@ class _CommentTextFieldState extends State<CommentTextField> {
                       //     "http://10.0.2.2:8000/healthy_advice/addAPI",
                       //     ),
                       final response = await request.postJson(
-                          "http://10.0.2.2:8000/healthy_advice/addAPI",
+                          "https://e-nadi.herokuapp.com/healthy_advice/addAPI",
                           convert.jsonEncode(<String, String>{
                             'commentator_name': request.username,
                             'comment_field': textFieldsValue.toString(),

@@ -54,7 +54,7 @@ class _HealthyAdviceHomeState extends State<HealthyAdviceHome> {
 
   fetchData() async {
     //*********
-    const url = "http://10.0.2.2:8000/healthy_advice/get_all_comment";
+    const url = "https://e-nadi.herokuapp.com/healthy_advice/get_all_comment";
     try {
       extractedData = [];
       final response = await http.get(Uri.parse(url));

@@ -12,6 +12,7 @@ import 'package:healthy_advice/screens/healthy_advice_home.dart';
 
 
 class LoginScreen extends StatefulWidget {
+  static const routeName = '/login';
   final VoidCallback? onSignIn;
 
   const LoginScreen({Key? key, this.onSignIn}) : super(key: key);
@@ -89,7 +90,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             final response = await request.login(
-                                "http://10.0.2.2:8000/authentication/login_flutter/",
+                              "http://10.0.2.2:8000/authentication/login_flutter/",
+                                // "https://e-nadi.herokuapp.com/authentication/login_flutter/",
                                 {
                                   'username': _controller1.text,
                                   'password': _controller2.text,

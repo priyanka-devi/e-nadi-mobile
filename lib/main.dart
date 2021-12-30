@@ -1,3 +1,4 @@
+import 'package:accounts/screens/login_screen.dart';
 import 'package:accounts/utils/network_service.dart';
 import 'package:flutter/material.dart';
 import 'package:healthy_advice/screens/healthy_advice_home.dart';
@@ -27,10 +28,10 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
             primaryColor: kPrimaryColor, scaffoldBackgroundColor: Colors.white),
         home: const WelcomeScreen(),
-        // home: HealthyAdviceHome(title: 'e-nadi Healthy Advice'),
+
         routes: {
           HealthyAdviceHome.routeName: (context) => const HealthyAdviceHome(title: 'e-nadi Healthy Advice'),
-
+          LoginScreen.routeName : (context) => const LoginScreen(),
 
         },
       ),

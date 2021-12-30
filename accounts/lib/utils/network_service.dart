@@ -143,6 +143,7 @@ class NetworkService {
 
   Future<dynamic> logoutAccount(String url) async {
     http.Response response = await _client.post(Uri.parse(url));
+    print(response.body);
 
     if (response.statusCode == 200) {
       loggedIn = false;
