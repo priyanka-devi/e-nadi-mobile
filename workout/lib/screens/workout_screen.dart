@@ -2,6 +2,7 @@ import 'package:accounts/utils/network_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:accounts/utils/drawer_screen.dart';
 import 'dart:convert';
 
 
@@ -85,6 +86,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      drawer: const DrawerScreen(),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

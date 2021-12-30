@@ -2,15 +2,16 @@ import 'package:accounts/components/textfield_input.dart';
 import 'package:accounts/components/textfield_inputpassword.dart';
 import 'package:accounts/screens/welcome_screen.dart';
 import 'package:accounts/utils/network_service.dart';
+import 'package:enadi_mobile/main.dart';
 import 'package:flutter/material.dart';
 import 'package:accounts/components/already_have_an_account_check.dart';
 import 'package:accounts/screens/signup_screen.dart';
 import 'package:accounts/constants.dart';
 import 'package:accounts/components/button.dart';
-
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const routeName = '/login';
   final VoidCallback? onSignIn;
 
   const LoginScreen({Key? key, this.onSignIn}) : super(key: key);
@@ -66,8 +67,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                              return const WelcomeScreen();
-                            }));
+                          return const WelcomeScreen();
+                        }));
                       },
                     ),
                     const SizedBox(height: 20),
@@ -88,6 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             final response = await request.login(
+                                // "http://10.0.2.2:8000/authentication/login_flutter/",
                                 "https://e-nadi.herokuapp.com/authentication/login_flutter/",
                                 {
                                   'username': _controller1.text,
@@ -111,7 +113,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                   actions: <Widget>[
                                     TextButton(
                                       onPressed: () =>
-                                          Navigator.pop(context, 'OK'),
+                                          Navigator.pushReplacementNamed(
+                                              context, HomeDummy.routeName),
                                       child: const Text('OK'),
                                     ),
                                   ],
@@ -127,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 builder: (BuildContext context) => AlertDialog(
                                   title: const Text('Login Failed'),
                                   content:
-                                  const Text('Wrong Username or Password'),
+                                      const Text('Wrong Username or Password'),
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30),
                                   ),
@@ -149,8 +152,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       press: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                              return const SignUpScreen();
-                            }));
+                          return const SignUpScreen();
+                        }));
                       },
                       login: true,
                     ),
