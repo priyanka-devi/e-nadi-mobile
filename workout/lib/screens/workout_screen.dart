@@ -1,7 +1,9 @@
 import 'package:accounts/utils/network_service.dart';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'dart:convert';
 
 
 class WorkoutPage extends StatefulWidget {
@@ -15,21 +17,66 @@ class WorkoutPage extends StatefulWidget {
 
 class _WorkoutPageState extends State<WorkoutPage> {
   int _counter = 0;
-  String _username = "";
+  String _username = "user";
   DateTime now = DateTime.now();
   final myController = TextEditingController();
 
-  void _incrementCounter() {
-    setState(() {
-      _counter += int.tryParse(myController.text)!;
-      myController.clear();
-    });
+  getWorkout(request) async {
+    const url = 'https://e-nadi.herokuapp.com/workout/get';
+    final response = await request.get(url);
+    if (response['w_username'] != ""){
+      setState(() {
+        now = DateTime.now();
+        _username = response['w_username'];
+        _counter = response['w_counter'];
+      });
+
+    }
+    return "Not Null";
   }
 
-  void _reset() {
-    setState(() {
-      _counter = 0;
-    });
+  void _incrementCounter(request) async {
+    if (int.tryParse(myController.text) != null){
+      int temp = int.tryParse(myController.text)!;
+      final response = await request.postJson(
+          "https://e-nadi.herokuapp.com/workout/post",
+          jsonEncode(<String, int>{
+            'add': temp,
+          }));
+
+      if (response['w_username'] != ""){
+        setState(() {
+          now = DateTime.now();
+          _username = response['w_username'];
+          _counter = response['w_counter'];
+        });
+
+      }  else {
+        setState(() {
+          now = DateTime.now();
+          _counter += temp;
+        });
+      }
+    }
+    myController.clear();
+  }
+
+  void _reset(request) async {
+    const url = 'https://e-nadi.herokuapp.com/workout/freset';
+    final response = await request.get(url);
+    if (response['w_username'] != ""){
+      setState(() {
+        now = DateTime.now();
+        _username = response['w_username'];
+        _counter = response['w_counter'];
+      });
+
+    } else {
+      setState(() {
+        now = DateTime.now();
+        _counter = 0;
+      });
+    }
   }
 
   @override
@@ -43,6 +90,14 @@ class _WorkoutPageState extends State<WorkoutPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            FutureBuilder(
+              future: getWorkout(request),
+              builder: (context, AsyncSnapshot snapshot) {
+                if (snapshot.data == null) {
+                  return Text("Loading...");
+                } else return Text("Workout Tracker");
+              }
+            ),
             Card(
               clipBehavior: Clip.antiAlias,
               child: Column(
@@ -52,7 +107,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
                     title: Text(now.day.toString() + ' | ' + now.month.toString() + ' | ' + now.year.toString(),
                       style: Theme.of(context).textTheme.headline5,),
                     subtitle: Text(
-                      'User',
+                      '$_username',
                       style: TextStyle(color: Colors.black.withOpacity(0.6)),
                     ),
                   ),
@@ -82,7 +137,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
                               //textColor: const Color(0xFF6200EE),
                               onPressed: () {
                                 // Perform some action
-                                _incrementCounter();
+                                _incrementCounter(request);
                               },
                               child: const Text('UPDATE'),
                             ),
@@ -90,7 +145,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
                               //textColor: const Color(0xFF6200EE),
                               onPressed: () {
                                 // Perform some action
-                                _reset();
+                                _reset(request);
                               },
                               child: const Text('RESET'),
                             ),
