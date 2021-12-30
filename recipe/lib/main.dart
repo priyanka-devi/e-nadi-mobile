@@ -169,7 +169,7 @@ class _RecipePageState extends State<RecipePage> {
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       final response = await request.postJson(
-                          "http://10.0.2.2:8000/healthy_advice/addAPI",
+                          "http://10.0.2.2:8000/recipe/addAPI",
                           convert.jsonEncode(<String, String>{
                             'commentator_name': request.username,
                             'comment_field': textFieldsValue.toString(),
