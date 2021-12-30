@@ -2,15 +2,16 @@ import 'package:accounts/components/textfield_input.dart';
 import 'package:accounts/components/textfield_inputpassword.dart';
 import 'package:accounts/screens/welcome_screen.dart';
 import 'package:accounts/utils/network_service.dart';
+import 'package:enadi_mobile/main.dart';
 import 'package:flutter/material.dart';
 import 'package:accounts/components/already_have_an_account_check.dart';
 import 'package:accounts/screens/signup_screen.dart';
 import 'package:accounts/constants.dart';
 import 'package:accounts/components/button.dart';
-import 'package:recipe/main.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
+  static const routeName = '/login';
   final VoidCallback? onSignIn;
 
   const LoginScreen({Key? key, this.onSignIn}) : super(key: key);
@@ -88,6 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             final response = await request.login(
+                                // "http://10.0.2.2:8000/authentication/login_flutter/",
                                 "https://e-nadi.herokuapp.com/authentication/login_flutter/",
                                 {
                                   'username': _controller1.text,
@@ -112,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     TextButton(
                                       onPressed: () =>
                                           Navigator.pushReplacementNamed(
-                                              context, RecipePage.routeName),
+                                              context, HomeDummy.routeName),
                                       child: const Text('OK'),
                                     ),
                                   ],
