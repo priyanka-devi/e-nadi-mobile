@@ -5,6 +5,7 @@ import 'package:healthy_advice/screens/healthy_advice_home.dart';
 import 'package:provider/provider.dart';
 import 'package:accounts/utils/network_service.dart';
 import 'package:recipe/main.dart';
+import 'package:workout/screens/workout_screen.dart';
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({Key? key}) : super(key: key);
@@ -34,7 +35,9 @@ class _DrawerScreenState extends State<DrawerScreen> {
           DrawerListTile(
             iconData: Icons.assignment_turned_in_rounded,
             title: "Workout Tracker",
-            onTilePressed: () {},
+            onTilePressed: () {
+              Navigator.pushReplacementNamed(context, WorkoutPage.routeName);
+            },
           ),
           DrawerListTile(
             iconData: Icons.airline_seat_individual_suite,
