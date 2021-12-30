@@ -95,8 +95,6 @@ class _SleepPageState extends State<SleepPage> {
   String _date = "18 - November - 2021";
   bool _update = false;
 
-  _counter = extractedData[0]
-
   TextEditingController _hours = TextEditingController();
 
   void _incrementCounter() {

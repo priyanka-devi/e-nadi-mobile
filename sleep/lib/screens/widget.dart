@@ -6,6 +6,7 @@
 import 'package:flutter/material.dart';
 import 'package:sleep/models/models_sleep.dart';
 import 'package:sleep/sleep.dart';
+import 'package:accounts/utils/network_service.dart';
 
 // import 'package:healthy_advice/screens/article_detail.dart';
 // import 'package:healthy_advice/screens/article_detail.dart';
@@ -27,6 +28,7 @@ class SleepCard extends StatefulWidget {
 }
 
 class _SleepCardState extends State<SleepCard> {
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -68,47 +70,47 @@ class _SleepCardState extends State<SleepCard> {
                       ),
                       textAlign: TextAlign.left,
                     ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    // Row(
-                    //   children: [
-                    //     Text(
-                    //       "Created at : " + widget.createdAt,
-                    //       style: TextStyle(
-                    //         fontSize: 12,
-                    //       ),
-                    //     ),
-                    //   ],
+                    // SizedBox(
+                    //   height: 20,
                     // ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    // ElevatedButton(
-                    //   style: ElevatedButton.styleFrom(
-                    //     textStyle: const TextStyle(fontSize: 20),
-                    //     primary: Colors.teal,
-                    //     onPrimary: Colors.white,
-                    //     side: BorderSide(width: 2, color: Colors.teal),
-                    //     padding: EdgeInsets.only(
-                    //         left: 12, right: 12, top: 8, bottom: 8),
-                    //     shape: new RoundedRectangleBorder(
-                    //         borderRadius: new BorderRadius.circular(8.0)),
-                    //   ),
-                    //   onPressed: () {
-                    //     Navigator.push(
-                    //       context,
-                    //       MaterialPageRoute(
-                    //         builder: (_) => Sleep(
-                    //             title: widget.title,
-                    //             imageArticle: widget.imageArticle,
-                    //             deskripsi: widget.deskripsi,
-                    //             createdAt: widget.createdAt),
-                    //       ),
-                    //     );
-                    //   },
-                    //   child: const Text('View Details'),
+                    // // Row(
+                    // //   children: [
+                    // //     Text(
+                    // //       "Created at : " + widget.createdAt,
+                    // //       style: TextStyle(
+                    // //         fontSize: 12,
+                    // //       ),
+                    // //     ),
+                    // //   ],
+                    // // ),
+                    // SizedBox(
+                    //   height: 20,
                     // ),
+                    // // ElevatedButton(
+                    // //   style: ElevatedButton.styleFrom(
+                    // //     textStyle: const TextStyle(fontSize: 20),
+                    // //     primary: Colors.teal,
+                    // //     onPrimary: Colors.white,
+                    // //     side: BorderSide(width: 2, color: Colors.teal),
+                    // //     padding: EdgeInsets.only(
+                    // //         left: 12, right: 12, top: 8, bottom: 8),
+                    // //     shape: new RoundedRectangleBorder(
+                    // //         borderRadius: new BorderRadius.circular(8.0)),
+                    // //   ),
+                    // //   onPressed: () {
+                    // //     Navigator.push(
+                    // //       context,
+                    // //       MaterialPageRoute(
+                    // //         builder: (_) => Sleep(
+                    // //             title: widget.title,
+                    // //             imageArticle: widget.imageArticle,
+                    // //             deskripsi: widget.deskripsi,
+                    // //             createdAt: widget.createdAt),
+                    // //       ),
+                    // //     );
+                    // //   },
+                    // //   child: const Text('View Details'),
+                    // // ),
                   ]),
                 ),
               ],
