@@ -1,4 +1,8 @@
+// ignore_for_file: unnecessary_string_interpolations
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:enadi_mobile/network_service.dart';
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({Key? key}) : super(key: key);
@@ -10,61 +14,46 @@ class DrawerScreen extends StatefulWidget {
 class _DrawerScreenState extends State<DrawerScreen> {
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<NetworkService>();
     return Drawer(
       child: ListView(
         children: <Widget>[
           const UserAccountsDrawerHeader(
-            accountName: Text("Priyanka Devi"),
-            accountEmail: Text("priyankadevi64@gmail.com"),
-          ),
+              accountName: Text("Test"), accountEmail: null),
           DrawerListTile(
             iconData: Icons.home,
             title: "Home",
-            onTilePressed: () {
-
-            },
+            onTilePressed: () {},
           ),
           DrawerListTile(
-            iconData : Icons.assignment_turned_in_rounded,
+            iconData: Icons.assignment_turned_in_rounded,
             title: "Workout Tracker",
-            onTilePressed: () {
-
-            },
+            onTilePressed: () {},
           ),
           DrawerListTile(
             iconData: Icons.airline_seat_individual_suite,
             title: "Sleep Tracker",
-            onTilePressed: () {
-
-            },
+            onTilePressed: () {},
           ),
           DrawerListTile(
             iconData: Icons.flatware_outlined,
             title: "Recipe",
-            onTilePressed: () {
-
-            },
+            onTilePressed: () {},
           ),
           DrawerListTile(
             iconData: Icons.article,
             title: "Activity Summary",
-            onTilePressed: () {
-
-            },
+            onTilePressed: () {},
           ),
           DrawerListTile(
             iconData: Icons.apartment,
             title: "Healthy Advice",
-            onTilePressed: () {
-
-            },
+            onTilePressed: () {},
           ),
           DrawerListTile(
             iconData: Icons.arrow_back_rounded,
             title: "Log out",
-            onTilePressed: () {
-
-            },
+            onTilePressed: () {},
           ),
         ],
       ),
@@ -73,10 +62,15 @@ class _DrawerScreenState extends State<DrawerScreen> {
 }
 
 class DrawerListTile extends StatelessWidget {
-  final IconData iconData ;
+  final IconData iconData;
   final String title;
   final VoidCallback onTilePressed;
-  const DrawerListTile({Key? key, required this.iconData, required this.title, required this.onTilePressed}) : super(key: key);
+  const DrawerListTile(
+      {Key? key,
+      required this.iconData,
+      required this.title,
+      required this.onTilePressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +78,10 @@ class DrawerListTile extends StatelessWidget {
       onTap: onTilePressed,
       dense: true,
       leading: Icon(iconData),
-      title: Text(title, style: const TextStyle(fontSize: 16),),
+      title: Text(
+        title,
+        style: const TextStyle(fontSize: 16),
+      ),
     );
   }
 }

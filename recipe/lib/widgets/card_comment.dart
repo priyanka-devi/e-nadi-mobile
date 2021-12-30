@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_new
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, unnecessary_new, non_constant_identifier_names
 
 import 'package:flutter/material.dart';
 import 'package:recipe/widgets/action_delete.dart';
@@ -6,14 +6,14 @@ import 'package:recipe/widgets/action_delete.dart';
 class CardComment extends StatefulWidget {
   const CardComment({
     Key? key,
-    required this.commentatorName,
-    required this.commentField,
-    required this.commentDate,
+    required this.username,
+    required this.content,
+    required this.post_date,
     required this.commentPk,
   }) : super(key: key);
-  final String commentatorName;
-  final String commentField;
-  final String commentDate;
+  final String username;
+  final String content;
+  final String post_date;
   final int commentPk;
   @override
   _CardCommentState createState() => _CardCommentState();
@@ -39,7 +39,7 @@ class _CardCommentState extends State<CardComment> {
                     Row(
                       children: [
                         Text(
-                          widget.commentatorName,
+                          widget.username,
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -53,7 +53,7 @@ class _CardCommentState extends State<CardComment> {
                     Row(
                       children: [
                         Text(
-                          widget.commentDate,
+                          widget.post_date,
                           style: TextStyle(
                             fontSize: 18,
                           ),
@@ -63,10 +63,10 @@ class _CardCommentState extends State<CardComment> {
                     SizedBox(
                       height: 8,
                     ),
-                    Row(
+                    Column(
                       children: [
                         Text(
-                          widget.commentField,
+                          widget.content,
                           style: TextStyle(
                             fontSize: 20,
                           ),

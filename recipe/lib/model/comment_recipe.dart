@@ -36,24 +36,24 @@ class IsiComment {
 
 class Fields {
   Fields({
-    required this.commentatorName,
-    required this.commentField,
-    required this.commentDate,
+    required this.username,
+    required this.content,
+    required this.post_date,
   });
 
-  String commentatorName;
-  String commentField;
-  String commentDate;
+  String username;
+  String content;
+  String post_date;
 
   factory Fields.fromJson(Map<String, dynamic> json) => Fields(
-        commentatorName: json["username"],
-        commentField: json["content"],
-        commentDate: json["post_date"],
+        username: json["username"],
+        content: json["content"],
+        post_date: json["post_date"],
       );
 
   Map<String, dynamic> toJson() => {
-        "username": commentatorName,
-        "content": commentField,
-        "post_date": commentDate,
+        "username": username,
+        "content": content,
+        "post_date": post_date,
       };
 }

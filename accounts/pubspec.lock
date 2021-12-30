@@ -29,6 +29,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  carousel_slider:
+    dependency: transitive
+    description:
+      name: carousel_slider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.0"
   characters:
     dependency: transitive
     description:
@@ -78,6 +85,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
+  enadi_mobile:
+    dependency: "direct main"
+    description:
+      path: ".."
+      relative: true
+    source: path
+    version: "1.0.0+1"
   fake_async:
     dependency: transitive
     description:
@@ -135,6 +149,20 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  healthy_advice:
+    dependency: transitive
+    description:
+      path: "../healthy_advice"
+      relative: true
+    source: path
+    version: "0.0.1"
+  home:
+    dependency: transitive
+    description:
+      path: "../home"
+      relative: true
+    source: path
+    version: "0.0.1"
   http:
     dependency: "direct main"
     description:
@@ -156,6 +184,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.19"
+  intl:
+    dependency: transitive
+    description:
+      name: intl
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.17.0"
   js:
     dependency: transitive
     description:
@@ -254,6 +289,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.0.1"
+  recipe:
+    dependency: transitive
+    description:
+      path: "../recipe"
+      relative: true
+    source: path
+    version: "1.0.0+1"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -315,6 +357,20 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  sleep:
+    dependency: transitive
+    description:
+      path: "../sleep"
+      relative: true
+    source: path
+    version: "0.0.1"
+  smooth_page_indicator:
+    dependency: transitive
+    description:
+      name: smooth_page_indicator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.0-nullsafety.0"
   source_span:
     dependency: transitive
     description:
@@ -343,6 +399,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
+  summary:
+    dependency: transitive
+    description:
+      path: "../summary"
+      relative: true
+    source: path
+    version: "0.0.1"
   term_glyph:
     dependency: transitive
     description:
@@ -378,6 +441,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.3.3"
+  workout:
+    dependency: transitive
+    description:
+      path: "../workout"
+      relative: true
+    source: path
+    version: "0.0.1"
   xdg_directories:
     dependency: transitive
     description:
@@ -400,5 +470,5 @@ packages:
     source: hosted
     version: "2.2.1"
 sdks:
-  dart: ">=2.14.0 <3.0.0"
+  dart: ">=2.15.1 <3.0.0"
   flutter: ">=2.5.0"

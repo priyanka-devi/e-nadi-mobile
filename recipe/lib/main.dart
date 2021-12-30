@@ -15,7 +15,7 @@ import 'package:recipe/widgets/card_comment.dart';
 import 'dart:convert' as convert;
 import 'package:intl/intl.dart';
 import 'package:accounts/utils/drawer_screen.dart';
-import 'package:accounts/utils/network_service.dart';
+import 'package:enadi_mobile/network_service.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -51,7 +51,6 @@ class _RecipePageState extends State<RecipePage> {
   String cdate = DateFormat("yyyy-MM-dd").format(DateTime.now());
   final _formKey = GlobalKey<FormState>();
   String textFieldsValue = "";
-  late TextEditingController _controller;
 
   bool isUser = false;
   //Ganti nama isi Comment
@@ -67,17 +66,16 @@ class _RecipePageState extends State<RecipePage> {
         final dataJson = jsonDecode(response.body);
         for (var i in dataJson) {
           Fields fields = Fields(
-              commentatorName: i["fields"]["username"],
-              commentField: i["fields"]["content"],
-              commentDate: i["fields"]["post_date"]);
+              username: i["fields"]["username"],
+              content: i["fields"]["content"],
+              post_date: i["fields"]["post_date"]);
           IsiComment comment =
               IsiComment(model: i["model"], pk: i["pk"], fields: fields);
           extractedData.add(comment);
         }
-        print(extractedData.length);
         return extractedData;
       } catch (error) {
-        print(error);
+        return [];
       }
     } else {
       return [];
@@ -144,6 +142,9 @@ class _RecipePageState extends State<RecipePage> {
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(8),
                       )),
+                  onChanged: (String? value) {
+                    textFieldsValue = value!;
+                  },
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Please Insert a Feedback';
@@ -171,9 +172,9 @@ class _RecipePageState extends State<RecipePage> {
                       final response = await request.postJson(
                           "http://10.0.2.2:8000/recipe/addAPI",
                           convert.jsonEncode(<String, String>{
-                            'commentator_name': request.username,
-                            'comment_field': textFieldsValue.toString(),
-                            'comment_date': cdate
+                            'username': request.username,
+                            'content': textFieldsValue.toString(),
+                            'post_date': cdate.toString(),
                           }));
                       if (response["status"] == "success") {
                         ScaffoldMessenger.of(context)
@@ -189,7 +190,6 @@ class _RecipePageState extends State<RecipePage> {
                           content: Text("Please try again."),
                         ));
                       }
-                      // print(textFieldsValue);
                     }
                   },
                   child: const Text('Post'),
@@ -209,9 +209,9 @@ class _RecipePageState extends State<RecipePage> {
                         return Column(
                             children: extractedData.map((i) {
                           return CardComment(
-                            commentatorName: i.fields.commentatorName,
-                            commentField: i.fields.commentField,
-                            commentDate: i.fields.commentDate,
+                            username: i.fields.username,
+                            content: i.fields.content,
+                            post_date: i.fields.post_date,
                             commentPk: i.pk,
                           );
                         }).toList());
@@ -238,7 +238,9 @@ class _RecipePageState extends State<RecipePage> {
             Stack(
               children: [
                 Ink.image(
-                  image: AssetImage('assets/recipie/recipe1.jpg'),
+                  image: NetworkImage(
+                    'https://hips.hearstapps.com/del.h-cdn.co/assets/17/23/1496939954-bruschetta-chicken-1sm.jpg?crop=1.0xw:1xh;center,top&resize=768:*',
+                  ),
                   colorFilter: ColorFilter.mode(
                       Colors.black.withOpacity(0.3), BlendMode.darken),
                   height: 240,
@@ -304,7 +306,9 @@ class _RecipePageState extends State<RecipePage> {
             Stack(
               children: [
                 Ink.image(
-                  image: AssetImage('assets/recipie/recipe2.png'),
+                  image: NetworkImage(
+                    'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/honey-walnut-shrimp-horizontal-1548093880.png',
+                  ),
                   colorFilter: ColorFilter.mode(
                       Colors.black.withOpacity(0.3), BlendMode.darken),
                   height: 240,
@@ -370,7 +374,9 @@ class _RecipePageState extends State<RecipePage> {
             Stack(
               children: [
                 Ink.image(
-                  image: AssetImage('assets/recipie/recipe3.jpg'),
+                  image: NetworkImage(
+                    'https://hips.hearstapps.com/del.h-cdn.co/assets/16/21/1464039955-delish-summer-salads-caprese-zoodles.jpg',
+                  ),
                   colorFilter: ColorFilter.mode(
                       Colors.black.withOpacity(0.3), BlendMode.darken),
                   height: 240,
@@ -436,7 +442,9 @@ class _RecipePageState extends State<RecipePage> {
             Stack(
               children: [
                 Ink.image(
-                  image: AssetImage('assets/recipie/recipe4.jpg'),
+                  image: NetworkImage(
+                    'https://hips.hearstapps.com/del.h-cdn.co/assets/17/27/1499459298-delish-garlicky-greek-chicken-front00-00-02-20still002.jpg',
+                  ),
                   colorFilter: ColorFilter.mode(
                       Colors.black.withOpacity(0.3), BlendMode.darken),
                   height: 240,
@@ -502,7 +510,9 @@ class _RecipePageState extends State<RecipePage> {
             Stack(
               children: [
                 Ink.image(
-                  image: AssetImage('assets/recipie/recipe5.jpg'),
+                  image: NetworkImage(
+                    'https://hips.hearstapps.com/del.h-cdn.co/assets/17/36/1600x2399/gallery-1504715772-delish-baked-salmon-1.jpg?resize=480:*',
+                  ),
                   colorFilter: ColorFilter.mode(
                       Colors.black.withOpacity(0.3), BlendMode.darken),
                   height: 240,
@@ -568,7 +578,9 @@ class _RecipePageState extends State<RecipePage> {
             Stack(
               children: [
                 Ink.image(
-                  image: AssetImage('assets/recipie/recipe6.jpg'),
+                  image: NetworkImage(
+                    'https://hips.hearstapps.com/del.h-cdn.co/assets/17/25/1498147867-delish-easy-crockpot-chicken-and-dumplings-horizontal-1024.jpg?crop=1xw:1xh;center,top&resize=480:*',
+                  ),
                   colorFilter: ColorFilter.mode(
                       Colors.black.withOpacity(0.3), BlendMode.darken),
                   height: 240,

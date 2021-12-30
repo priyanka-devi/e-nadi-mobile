@@ -48,7 +48,9 @@ class RecipeDetail2 extends StatelessWidget {
                       )
                     ],
                     image: DecorationImage(
-                      image: AssetImage('assets/recipie/recipe2.png'),
+                      image: NetworkImage(
+                        'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/honey-walnut-shrimp-horizontal-1548093880.png',
+                      ),
                       fit: BoxFit.cover,
                     )),
               ),

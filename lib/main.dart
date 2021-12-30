@@ -1,8 +1,9 @@
-import 'package:accounts/utils/network_service.dart';
+import 'package:enadi_mobile/network_service.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:accounts/screens/welcome_screen.dart';
 import 'package:accounts/constants.dart';
+import 'package:recipe/main.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,12 +22,16 @@ class MyApp extends StatelessWidget {
         return request;
       },
       child: MaterialApp(
-        title: "E-Nadi Login",
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-            primaryColor: kPrimaryColor, scaffoldBackgroundColor: Colors.white),
-        home: const WelcomeScreen(),
-      ),
+          title: "E-Nadi Login",
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+              primaryColor: kPrimaryColor,
+              scaffoldBackgroundColor: Colors.white),
+          home: const WelcomeScreen(),
+          routes: {
+            RecipePage.routeName: (context) =>
+                const RecipePage(title: 'Recipe'),
+          }),
     );
   }
 }
