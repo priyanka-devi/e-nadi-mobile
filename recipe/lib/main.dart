@@ -31,7 +31,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp(
         debugShowCheckedModeBanner: false,
         title: title,
-        theme: ThemeData(primarySwatch: Colors.deepOrange),
         home: RecipePage(title: title),
       );
 }
@@ -168,18 +167,17 @@ class _RecipePageState extends State<RecipePage> {
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       final response = await request.postJson(
-                          "http://e-nadi.herokuapp.com/recipe/addAPI",
+                          "https://e-nadi.herokuapp.com/recipe/addAPI",
                           convert.jsonEncode(<String, String>{
-                            'commentator_name': request.username,
-                            'comment_field': textFieldsValue.toString(),
-                            'comment_date': cdate
+                            'username': request.username,
+                            'content': textFieldsValue.toString(),
+                            'post_date': cdate,
                           }));
                       if (response["status"] == "success") {
                         ScaffoldMessenger.of(context)
                             .showSnackBar(const SnackBar(
                           content: Text("Comment success"),
                         ));
-
                         Navigator.pushReplacementNamed(
                             context, RecipePage.routeName);
                       } else {
@@ -188,7 +186,7 @@ class _RecipePageState extends State<RecipePage> {
                           content: Text("Please try again."),
                         ));
                       }
-                      // print(textFieldsValue);
+                      // ignore: empty_statements
                     }
                   },
                   child: const Text('Post'),
