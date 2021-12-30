@@ -1,6 +1,8 @@
+import 'package:accounts/utils/network_service.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:accounts/screens/welcome_screen.dart';
-import '/constants.dart';
+import 'package:accounts/constants.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,12 +15,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'E-Nadi Login',
-      theme: ThemeData(
-          primaryColor: kPrimaryColor, scaffoldBackgroundColor: Colors.white),
-      home: const WelcomeScreen(),
+    return Provider(
+      create: (_) {
+        NetworkService request = NetworkService();
+        return request;
+      },
+      child: MaterialApp(
+        title: "E-Nadi Login",
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            primaryColor: kPrimaryColor, scaffoldBackgroundColor: Colors.white),
+        home: const WelcomeScreen(),
+      ),
     );
   }
 }

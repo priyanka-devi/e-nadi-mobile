@@ -1,9 +1,9 @@
 import 'package:accounts/components/button.dart';
 import 'package:flutter/material.dart';
-import '/constants.dart';
+import 'package:accounts/constants.dart';
 
-import 'login_screen.dart';
-import 'signup_screen.dart';
+import 'package:accounts/screens/login_screen.dart';
+import 'package:accounts/screens/signup_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -49,20 +49,22 @@ class WelcomeScreen extends StatelessWidget {
                   ),
                   SizedBox(height: size.height * 0.05),
                   SizedBox(height: size.height * 0.05),
-                  Button(text: "LOGIN",
-                      onPressed: () async{
+                  Button(
+                      text: "LOGIN",
+                      onPressed: () async {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
                               return const LoginScreen();
                             }));
                       }),
-                  Button(text: "SIGN UP",
-                      onPressed: () async{
+                  Button(
+                      text: "SIGN UP",
+                      onPressed: () async {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
                               return const SignUpScreen();
                             }));
-                  }),
+                      }),
                 ],
               ),
             )
