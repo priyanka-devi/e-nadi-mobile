@@ -14,7 +14,7 @@ class RecipeDetail3 extends StatelessWidget {
       decoration: const BoxDecoration(
         image: DecorationImage(
           image: NetworkImage(
-              "https://c0.wallpaperflare.com/preview/457/952/1022/paper-texture-structure-stained-paper.jpg"),
+              "https://m.media-amazon.com/images/I/61tNcU3oKjL._AC_SL1500_.jpg"),
           fit: BoxFit.cover,
         ),
       ),

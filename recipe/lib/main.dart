@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unnecessary_new, non_constant_identifier_names, unused_field, use_key_in_widget_constructors
+// ignore_for_file: prefer_const_constructors, unnecessary_new, non_constant_identifier_names, unused_field, use_key_in_widget_constructors, avoid_print
 
 import 'dart:convert';
 
@@ -59,7 +59,7 @@ class _RecipePageState extends State<RecipePage> {
   fetchData() async {
     // const url = 'https://e-nadi.herokuapp.com/recipe/get_all_comment';
     final response = await http
-        .get(Uri.parse('http://10.0.2.2:8000/recipe/get_all_comment'));
+        .get(Uri.parse('http://e-nadi.herokuapp.com/recipe/get_all_comment'));
     if (response.statusCode == 200) {
       try {
         extractedData = [];
@@ -74,7 +74,6 @@ class _RecipePageState extends State<RecipePage> {
               IsiComment(model: i["model"], pk: i["pk"], fields: fields);
           extractedData.add(comment);
         }
-        print(extractedData.length);
         return extractedData;
       } catch (error) {
         print(error);
@@ -169,7 +168,7 @@ class _RecipePageState extends State<RecipePage> {
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       final response = await request.postJson(
-                          "http://10.0.2.2:8000/recipe/addAPI",
+                          "http://e-nadi.herokuapp.com/recipe/addAPI",
                           convert.jsonEncode(<String, String>{
                             'commentator_name': request.username,
                             'comment_field': textFieldsValue.toString(),

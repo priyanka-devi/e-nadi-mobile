@@ -83,7 +83,7 @@ class _ModalDeleteState extends State<ModalDelete> {
                   onPressed: () async {
                     final response = await http.post(
                         Uri.parse(
-                          "http://10.0.2.2:8000/recipe/delete/" +
+                          "http://e-nadi.herokuapp.com/recipe/delete/" +
                               widget.comment.commentPk.toString(),
                         ),
                         headers: {
