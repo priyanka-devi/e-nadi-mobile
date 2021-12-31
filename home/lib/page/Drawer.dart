@@ -1,24 +1,22 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import './PageSatu.dart';
 
-
-
-
-class DrawerPage extends StatelessWidget{
+class DrawerPage extends StatelessWidget {
+  const DrawerPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Drawer(
-      child:Material(
-        child : ListView(
+      child: Material(
+        child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            DrawerHeader(
+            const DrawerHeader(
               decoration: BoxDecoration(
                 color: Color(0xFF212121),
-
               ),
-
               child: Text(
                 'E-Nadi',
                 style: TextStyle(
@@ -28,22 +26,21 @@ class DrawerPage extends StatelessWidget{
               ),
             ),
             ListTile(
-              onTap: (){
+              onTap: () {
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => PageSatu(),),
+                  MaterialPageRoute(
+                    builder: (context) => PageSatu(),
+                  ),
                 );
               },
-              leading: Icon(Icons.message),
-              title: Text('FeedBack'),
-
-
-
+              leading: const Icon(Icons.message),
+              title: const Text('FeedBack'),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.account_circle),
               title: Text('Profile'),
             ),
-            ListTile(
+            const ListTile(
               leading: Icon(Icons.settings),
               title: Text('Settings'),
             ),
