@@ -17,7 +17,9 @@ class SummaryApp extends StatelessWidget {
       title: 'E-Nadi Summary',
       theme: ThemeData(
           primaryColor: Colors.blue, scaffoldBackgroundColor: Colors.white),
-      home: ActivitySummaryApp(),
+      home: ActivitySummaryApp(
+        title: '',
+      ),
     );
   }
 }

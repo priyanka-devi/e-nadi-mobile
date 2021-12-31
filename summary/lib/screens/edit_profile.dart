@@ -1,46 +1,35 @@
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+import 'dart:convert' as convert;
 import 'package:flutter/material.dart';
 import 'package:summary/screens/summary_screen.dart';
+import 'package:accounts/utils/drawer_screen.dart';
+import 'package:accounts/utils/network_service.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
+import 'package:summary/components/input.dart';
 
-class EditProfileApp extends StatelessWidget {
+class EditProfileApp extends StatefulWidget {
   const EditProfileApp({Key? key}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Edit Profile',
-      theme: ThemeData(
-          appBarTheme: AppBarTheme(
-        color: const Color(0xFF000000),
-      )),
-      home: EditForm(),
-    );
-  }
-}
-
-class EditForm extends StatefulWidget {
-  const EditForm({Key? key}) : super(key: key);
 
   @override
-  EditApp createState() {
-    return EditApp();
-  }
+  _EditAppState createState() => _EditAppState();
 }
 
-class EditApp extends State<EditForm> {
+class _EditAppState extends State<EditProfileApp> {
   final _formKey = GlobalKey<FormState>();
-  String username = "";
-  String gender = "";
-  String age = "";
-  String profession = "";
-  String firstname = "";
-  String lastname = "";
-  String email = "";
-  String mobile = "";
-  String address = "";
+  final TextEditingController unameController = TextEditingController();
+  final TextEditingController genderController = TextEditingController();
+  final TextEditingController ageController = TextEditingController();
+  final TextEditingController profController = TextEditingController();
+  final TextEditingController fnameController = TextEditingController();
+  final TextEditingController lnameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController mobController = TextEditingController();
+  final TextEditingController addrController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<NetworkService>();
     return Scaffold(
       appBar: AppBar(
         title: Text("e-Nadi", style: TextStyle(color: Colors.red)),
@@ -54,11 +43,7 @@ class EditApp extends State<EditForm> {
                 gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [Colors.black12, Colors.black38]),
-                image: DecorationImage(
-                  image: AssetImage("lib/assets/images/bg4.jpg"),
-                  fit: BoxFit.cover,
-                ),
+                    colors: [Colors.black, Colors.black]),
               ),
               child: Center(
                 child: Column(
@@ -105,164 +90,46 @@ class EditApp extends State<EditForm> {
                       key: _formKey,
                       child: Column(children: <Widget>[
                         Card(
-                          margin: EdgeInsets.symmetric(
-                              horizontal: 50.0, vertical: 5.0),
-                          clipBehavior: Clip.antiAlias,
-                          color: Color.fromRGBO(242, 248, 243, 0.5),
-                          elevation: 5.0,
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0, vertical: 22.0),
-                            child: Row(
-                              children: <Widget>[
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: <Widget>[
-                                      SizedBox(
-                                        height: 10.0,
-                                      ),
-                                      CircleAvatar(
-                                        backgroundColor: Colors.black,
-                                        radius: 45.0,
-                                      ),
-                                      SizedBox(
-                                        height: 30.0,
-                                      ),
-                                      TextFormField(
-                                          validator: (value) {
-                                            if (value == null ||
-                                                value.isEmpty) {
-                                              return 'Please fill out this field.';
-                                            }
-                                            username = value;
-                                            return null;
-                                          },
-                                          decoration: InputDecoration(
-                                            labelText: "USERNAME",
-                                            labelStyle: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                            ),
-                                            floatingLabelBehavior:
-                                                FloatingLabelBehavior.always,
-                                            hintStyle: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.black,
-                                            ),
-                                            contentPadding: EdgeInsets.fromLTRB(
-                                                20.0, 15.0, 20.0, 15.0),
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        32.0)),
-                                          )),
-                                      SizedBox(
-                                        height: 20.0,
-                                      ),
-                                      TextFormField(
-                                          validator: (value) {
-                                            if (value == null ||
-                                                value.isEmpty) {
-                                              return 'Please fill out this field.';
-                                            }
-                                            gender = value;
-                                            return null;
-                                          },
-                                          decoration: InputDecoration(
-                                            labelText: "GENDER (M/F)",
-                                            labelStyle: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                            ),
-                                            floatingLabelBehavior:
-                                                FloatingLabelBehavior.always,
-                                            hintStyle: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.black,
-                                            ),
-                                            contentPadding: EdgeInsets.fromLTRB(
-                                                20.0, 15.0, 20.0, 15.0),
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        32.0)),
-                                          )),
-                                      SizedBox(
-                                        height: 20.0,
-                                      ),
-                                      TextFormField(
-                                          validator: (value) {
-                                            if (value == null ||
-                                                value.isEmpty) {
-                                              return 'Please fill out this field.';
-                                            }
-                                            age = value;
-                                            return null;
-                                          },
-                                          decoration: InputDecoration(
-                                            labelText: "AGE",
-                                            labelStyle: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                            ),
-                                            floatingLabelBehavior:
-                                                FloatingLabelBehavior.always,
-                                            hintStyle: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.black,
-                                            ),
-                                            contentPadding: EdgeInsets.fromLTRB(
-                                                20.0, 15.0, 20.0, 15.0),
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        32.0)),
-                                          )),
-                                      SizedBox(
-                                        height: 20.0,
-                                      ),
-                                      TextFormField(
-                                          validator: (value) {
-                                            if (value == null ||
-                                                value.isEmpty) {
-                                              return 'Please fill out this field.';
-                                            }
-                                            profession = value;
-                                            return null;
-                                          },
-                                          decoration: InputDecoration(
-                                            labelText: "PROFESSION",
-                                            labelStyle: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                            ),
-                                            floatingLabelBehavior:
-                                                FloatingLabelBehavior.always,
-                                            hintStyle: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.black,
-                                            ),
-                                            contentPadding: EdgeInsets.fromLTRB(
-                                                20.0, 15.0, 20.0, 15.0),
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        32.0)),
-                                          )),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
+                            margin: EdgeInsets.symmetric(
+                                horizontal: 50.0, vertical: 5.0),
+                            clipBehavior: Clip.antiAlias,
+                            color: Color.fromRGBO(242, 248, 243, 0.5),
+                            elevation: 5.0,
+                            child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 12.0, vertical: 22.0),
+                                child: Row(children: <Widget>[
+                                  Expanded(
+                                      child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: <Widget>[
+                                        SizedBox(
+                                          height: 10.0,
+                                        ),
+                                        CircleAvatar(
+                                          backgroundColor: Colors.black,
+                                          radius: 45.0,
+                                        ),
+                                        SizedBox(
+                                          height: 30.0,
+                                        ),
+                                        InputField(
+                                            hint: "Username",
+                                            controller: unameController),
+                                        InputField(
+                                            hint: "Gender (Male/Female)",
+                                            controller: genderController),
+                                        InputField(
+                                            hint: "Age",
+                                            controller: ageController),
+                                        InputField(
+                                            hint: "Profession",
+                                            controller: profController),
+                                      ]))
+                                ]))),
                         SizedBox(
                           height: 20.0,
                         ),
@@ -274,174 +141,35 @@ class EditApp extends State<EditForm> {
                           elevation: 5.0,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                horizontal: 8.0, vertical: 22.0),
+                                horizontal: 12.0, vertical: 22.0),
                             child: Row(
                               children: <Widget>[
                                 Expanded(
                                   child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
                                       SizedBox(
-                                        height: 20.0,
+                                        height: 10.0,
                                       ),
-                                      TextFormField(
-                                          validator: (value) {
-                                            if (value == null ||
-                                                value.isEmpty) {
-                                              return 'Please fill out this field.';
-                                            }
-                                            firstname = value;
-                                            return null;
-                                          },
-                                          decoration: InputDecoration(
-                                            labelText: "FIRST NAME",
-                                            labelStyle: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                            ),
-                                            floatingLabelBehavior:
-                                                FloatingLabelBehavior.always,
-                                            hintStyle: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.black,
-                                            ),
-                                            contentPadding: EdgeInsets.fromLTRB(
-                                                20.0, 15.0, 20.0, 15.0),
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        32.0)),
-                                          )),
+                                      InputField(
+                                          hint: "First Name",
+                                          controller: fnameController),
+                                      InputField(
+                                          hint: "Last Name",
+                                          controller: lnameController),
+                                      InputField(
+                                          hint: "Email",
+                                          controller: emailController),
+                                      InputField(
+                                          hint: "Mobile",
+                                          controller: mobController),
+                                      InputField(
+                                          hint: "Address",
+                                          controller: addrController),
                                       SizedBox(
-                                        height: 20.0,
-                                      ),
-                                      TextFormField(
-                                          validator: (value) {
-                                            if (value == null ||
-                                                value.isEmpty) {
-                                              return 'Please fill out this field.';
-                                            }
-                                            lastname = value;
-                                            return null;
-                                          },
-                                          decoration: InputDecoration(
-                                            labelText: "LAST NAME",
-                                            labelStyle: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                            ),
-                                            floatingLabelBehavior:
-                                                FloatingLabelBehavior.always,
-                                            hintStyle: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.black,
-                                            ),
-                                            contentPadding: EdgeInsets.fromLTRB(
-                                                20.0, 15.0, 20.0, 15.0),
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        32.0)),
-                                          )),
-                                      SizedBox(
-                                        height: 20.0,
-                                      ),
-                                      TextFormField(
-                                          validator: (value) {
-                                            if (value == null ||
-                                                value.isEmpty) {
-                                              return 'Please fill out this field.';
-                                            }
-                                            email = value;
-                                            return null;
-                                          },
-                                          decoration: InputDecoration(
-                                            labelText: "EMAIL",
-                                            labelStyle: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                            ),
-                                            floatingLabelBehavior:
-                                                FloatingLabelBehavior.always,
-                                            hintStyle: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.black,
-                                            ),
-                                            contentPadding: EdgeInsets.fromLTRB(
-                                                20.0, 15.0, 20.0, 15.0),
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        32.0)),
-                                          )),
-                                      SizedBox(
-                                        height: 20.0,
-                                      ),
-                                      TextFormField(
-                                          validator: (value) {
-                                            if (value == null ||
-                                                value.isEmpty) {
-                                              return 'Please fill out this field.';
-                                            }
-                                            mobile = value;
-                                            return null;
-                                          },
-                                          decoration: InputDecoration(
-                                            labelText: "MOBILE",
-                                            labelStyle: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                            ),
-                                            floatingLabelBehavior:
-                                                FloatingLabelBehavior.always,
-                                            hintStyle: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.black,
-                                            ),
-                                            contentPadding: EdgeInsets.fromLTRB(
-                                                20.0, 15.0, 20.0, 15.0),
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        32.0)),
-                                          )),
-                                      SizedBox(
-                                        height: 20.0,
-                                      ),
-                                      TextFormField(
-                                          validator: (value) {
-                                            if (value == null ||
-                                                value.isEmpty) {
-                                              return 'Please fill out this field.';
-                                            }
-                                            address = value;
-                                            return null;
-                                          },
-                                          decoration: InputDecoration(
-                                            labelText: "ADDRESS",
-                                            labelStyle: TextStyle(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white,
-                                            ),
-                                            floatingLabelBehavior:
-                                                FloatingLabelBehavior.always,
-                                            hintStyle: TextStyle(
-                                              fontSize: 14,
-                                              color: Colors.black,
-                                            ),
-                                            contentPadding: EdgeInsets.fromLTRB(
-                                                20.0, 15.0, 20.0, 15.0),
-                                            border: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        32.0)),
-                                          )),
-                                      SizedBox(
-                                        height: 25.0,
+                                        height: 15.0,
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
@@ -455,36 +183,34 @@ class EditApp extends State<EditForm> {
                                           onPressed: () async {
                                             if (_formKey.currentState!
                                                 .validate()) {
-                                              final response = await http.post(
-                                                  Uri.parse(
-                                                      "http://127.0.0.1:8000/summary/post_profile/"),
-                                                  headers: <String, String>{
-                                                    'Content-Type':
-                                                        'application/json; charset=UTF-8',
-                                                  },
-                                                  body: jsonEncode(<String,
-                                                      String>{
-                                                    'username': username,
-                                                    'gender': gender,
-                                                    'age': age,
-                                                    'profession': profession,
-                                                    'first_name': firstname,
-                                                    'last_name': lastname,
-                                                    'email': email,
-                                                    'mobile': mobile,
-                                                    'address': address,
-                                                  }));
-
-                                              print(response.body);
-                                              print(username);
-                                              print(gender);
-                                              print(age);
-                                              print(profession);
-                                              print(firstname);
-                                              print(lastname);
-                                              print(email);
-                                              print(mobile);
-                                              print(address);
+                                              final response =
+                                                  await request.postJson(
+                                                      "https://e-nadi.herokuapp.com/summary/post_profile/",
+                                                      convert.jsonEncode(<
+                                                          String, String>{
+                                                        'username':
+                                                            unameController
+                                                                .text,
+                                                        'gender':
+                                                            genderController
+                                                                .text,
+                                                        'age':
+                                                            ageController.text,
+                                                        'profession':
+                                                            profController.text,
+                                                        'first_name':
+                                                            fnameController
+                                                                .text,
+                                                        'last_name':
+                                                            lnameController
+                                                                .text,
+                                                        'email': emailController
+                                                            .text,
+                                                        'mobile':
+                                                            mobController.text,
+                                                        'address':
+                                                            addrController.text,
+                                                      }));
 
                                               showDialog(
                                                 context: context,
@@ -499,9 +225,10 @@ class EditApp extends State<EditForm> {
                                                             Navigator.push(
                                                                 context,
                                                                 MaterialPageRoute(
-                                                                    builder:
-                                                                        (context) =>
-                                                                            ActivitySummaryApp()));
+                                                                    builder: (context) =>
+                                                                        ActivitySummaryApp(
+                                                                            title:
+                                                                                'e-nadi Summary')));
                                                           }),
                                                     ],
                                                   );
@@ -526,7 +253,9 @@ class EditApp extends State<EditForm> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      ActivitySummaryApp()));
+                                                      ActivitySummaryApp(
+                                                          title:
+                                                              'e-nadi Summary')));
                                         },
                                       ),
                                     ],

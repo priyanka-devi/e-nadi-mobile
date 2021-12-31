@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:accounts/screens/welcome_screen.dart';
 import 'package:accounts/constants.dart';
+import 'package:summary/screens/summary_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   // This widget is the root of your application.
 
   @override
@@ -21,12 +20,16 @@ class MyApp extends StatelessWidget {
         return request;
       },
       child: MaterialApp(
-        title: "E-Nadi Login",
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-            primaryColor: kPrimaryColor, scaffoldBackgroundColor: Colors.white),
-        home: const WelcomeScreen(),
-      ),
+          title: "E-Nadi Login",
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+              primaryColor: kPrimaryColor,
+              scaffoldBackgroundColor: Colors.white),
+          home: const WelcomeScreen(),
+          routes: {
+            ActivitySummaryApp.routeName: (context) =>
+                ActivitySummaryApp(title: 'e-nadi Summary')
+          }),
     );
   }
 }
