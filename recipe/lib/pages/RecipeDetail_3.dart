@@ -32,70 +32,82 @@ class RecipeDetail3 extends StatelessWidget {
           child: Scrollbar(
             isAlwaysShown: true,
             thickness: 5,
-            child: ListView(children: <Widget>[
-              Container(
-                height: 550,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(63),
-                      bottomRight: Radius.circular(63),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        offset: Offset(0, 10),
-                        blurRadius: 60,
-                        color: Colors.grey,
-                      )
-                    ],
-                    image: DecorationImage(
-                      image: NetworkImage(
-                        'https://hips.hearstapps.com/del.h-cdn.co/assets/16/21/1464039955-delish-summer-salads-caprese-zoodles.jpg',
+            child: SingleChildScrollView(
+                child:
+                Column(
+                    children: <Widget>[
+                      Container(
+                        height: 550,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(63),
+                              bottomRight: Radius.circular(63),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                offset: Offset(0, 10),
+                                blurRadius: 60,
+                                color: Colors.grey,
+                              )
+                            ],
+                            image: DecorationImage(
+                              image: NetworkImage(
+                                'https://hips.hearstapps.com/del.h-cdn.co/assets/16/21/1464039955-delish-summer-salads-caprese-zoodles.jpg',
+                              ),
+                              fit: BoxFit.cover,
+                            )),
                       ),
-                      fit: BoxFit.cover,
-                    )),
-              ),
-              Container(
-                child: buildCardRecipeStep(),
-                margin: EdgeInsets.fromLTRB(25, 20, 25, 10),
-              ),
-              Container(
-                child: buildCardRecipeIng(),
-                margin: EdgeInsets.fromLTRB(25, 20, 25, 10),
-              ),
-              Container(
-                child: Text('FEATURED RECIPE',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    )),
-                margin: EdgeInsets.fromLTRB(20, 30, 0, 20),
-              ),
-              Container(
-                padding: EdgeInsets.all(20),
-                child: CarouselRecipe(),
-              ),
-              Positioned(
-                  child: ButtonBar(
-                alignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18.0),
-                                    side: BorderSide(
-                                      color: Colors.transparent,
-                                    )))),
-                    child: Text('Go back!'),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ],
-              )),
-            ]),
+                      Container(
+                        child: buildCardRecipeStep(),
+                        margin: EdgeInsets.fromLTRB(25, 20, 25, 10),
+                      ),
+                      Container(
+                        child: buildCardRecipeIng(),
+                        margin: EdgeInsets.fromLTRB(25, 20, 25, 10),
+                      ),
+                      Container(
+                        child: Text('FEATURED RECIPE',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            )),
+                        margin: EdgeInsets.fromLTRB(20, 30, 0, 20),
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(20),
+                        child: CarouselRecipe(),
+                      ),
+                      Stack(
+                        children: [
+                          Positioned(
+                              child: ButtonBar(
+                                alignment: MainAxisAlignment.center,
+                                children: [
+                                  ElevatedButton(
+                                    style: ButtonStyle(
+                                        shape:
+                                        MaterialStateProperty.all<RoundedRectangleBorder>(
+                                            RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(18.0),
+                                                side: BorderSide(
+                                                  color: Colors.transparent,
+                                                )))),
+                                    child: Text('Go back!'),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                ],
+                              )
+                          ),
+
+                        ],
+                      )
+
+                    ]
+                ),
+                ),
           ),
         ),
       ),
