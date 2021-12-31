@@ -6,6 +6,8 @@ import 'package:healthy_advice/screens/healthy_advice_home.dart';
 import 'package:provider/provider.dart';
 import 'package:accounts/screens/welcome_screen.dart';
 import 'package:accounts/constants.dart';
+import 'package:workout/screens/workout_screen.dart';
+import 'package:recipe/main.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,12 +31,14 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
             primaryColor: kPrimaryColor, scaffoldBackgroundColor: Colors.white),
         home: const WelcomeScreen(),
-
         routes: {
-          HealthyAdviceHome.routeName: (context) => const HealthyAdviceHome(title: 'e-nadi Healthy Advice'),
-          LoginScreen.routeName : (context) => const LoginScreen(),
-          HomeDummy.routeName : (context) => const HomeDummy(),
-
+          WorkoutPage.routeName: (context) => const WorkoutPage(title: 'e-nadi Workout'),
+          HealthyAdviceHome.routeName: (context) =>
+              const HealthyAdviceHome(title: 'e-nadi Healthy Advice'),
+          LoginScreen.routeName: (context) => const LoginScreen(),
+          HomeDummy.routeName: (context) => const HomeDummy(),
+          RecipePage.routeName: (context) =>
+              const RecipePage(title: 'e-nadi Recipe'),
         },
       ),
     );
@@ -57,12 +61,9 @@ class _HomeDummyState extends State<HomeDummy> {
         appBar: AppBar(
           title: const Text("Home Dummy"),
         ),
-        drawer: request.username != "" ? const DrawerScreen() : const DrawerScreen(),
-        body:
-        Container(
-
-        )
-    );
+        drawer: request.username != ""
+            ? const DrawerScreen()
+            : const DrawerScreen(),
+        body: Container());
   }
 }
-

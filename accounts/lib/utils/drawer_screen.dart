@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:healthy_advice/screens/healthy_advice_home.dart';
 import 'package:provider/provider.dart';
 import 'package:accounts/utils/network_service.dart';
+import 'package:recipe/main.dart';
+import 'package:workout/screens/workout_screen.dart';
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({Key? key}) : super(key: key);
@@ -27,14 +29,15 @@ class _DrawerScreenState extends State<DrawerScreen> {
             iconData: Icons.home,
             title: "Home",
             onTilePressed: () {
-              Navigator.pushReplacementNamed(
-                  context, HomeDummy.routeName);
+              Navigator.pushReplacementNamed(context, HomeDummy.routeName);
             },
           ),
           DrawerListTile(
             iconData: Icons.assignment_turned_in_rounded,
             title: "Workout Tracker",
-            onTilePressed: () {},
+            onTilePressed: () {
+              Navigator.pushReplacementNamed(context, WorkoutPage.routeName);
+            },
           ),
           DrawerListTile(
             iconData: Icons.airline_seat_individual_suite,
@@ -44,7 +47,9 @@ class _DrawerScreenState extends State<DrawerScreen> {
           DrawerListTile(
             iconData: Icons.flatware_outlined,
             title: "Recipe",
-            onTilePressed: () {},
+            onTilePressed: () {
+              Navigator.pushReplacementNamed(context, RecipePage.routeName);
+            },
           ),
           DrawerListTile(
             iconData: Icons.article,
@@ -61,17 +66,20 @@ class _DrawerScreenState extends State<DrawerScreen> {
           ),
           ElevatedButton(
             onPressed: () async {
-              final response = await request.logoutAccount("https://e-nadi.herokuapp.com/authentication/logout_flutter/");
-              if (response['status']){
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Successfully logged out!"),));
-                Navigator.pushReplacementNamed(
-                    context, LoginScreen.routeName);
-              }else{
+              final response = await request.logoutAccount(
+                  "https://e-nadi.herokuapp.com/authentication/logout_flutter/");
+              if (response['status']) {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text("Successfully logged out!"),
+                ));
+                Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+              } else {
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text("Failed to Logout"),
                 ));
               }
-            }, child: const Text("Logout"),
+            },
+            child: const Text("Logout"),
           ),
         ],
       ),
