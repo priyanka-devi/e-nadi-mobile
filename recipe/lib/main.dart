@@ -104,7 +104,6 @@ class _RecipePageState extends State<RecipePage> {
                 child: buildRecipeCard6(),
                 margin: EdgeInsets.fromLTRB(0, 0, 10, 50),
               ),
-
               Container(
                 child: Text('COMMENTS & FEEDBACK',
                     textAlign: TextAlign.center,
@@ -118,77 +117,80 @@ class _RecipePageState extends State<RecipePage> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    isUser?
-                    TextFormField(
-                      autofocus: false,
-                      keyboardType: TextInputType.url,
-                      maxLength: 200,
-                      decoration: InputDecoration(
-                          hintText: "Enter a Feedback",
-                          contentPadding: EdgeInsets.fromLTRB(12, 0, 0, 0),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          )),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Please Insert a Feedback';
-                        }
-                        textFieldsValue = value;
-                        return null;
-                      },
-                    ):
-                    const Text("Please login to add a comment"),
+                    isUser
+                        ? TextFormField(
+                            autofocus: false,
+                            keyboardType: TextInputType.url,
+                            maxLength: 200,
+                            decoration: InputDecoration(
+                                hintText: "Enter a Feedback",
+                                contentPadding:
+                                    EdgeInsets.fromLTRB(12, 0, 0, 0),
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                )),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Please Insert a Feedback';
+                              }
+                              textFieldsValue = value;
+                              return null;
+                            },
+                          )
+                        :
+                        // ignore: avoid_unnecessary_containers
+                        Container(
+                            child: Text("Please login to add comment"),
+                          ),
                     SizedBox(
                       height: 12,
                     ),
-                    isUser?
-                        Column(
-                          children: [
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                textStyle: const TextStyle(fontSize: 16),
-                                primary: Colors.orange.shade800,
-                                onPrimary: Colors.white,
-                                side: BorderSide(width: 2, color: Colors.transparent),
-                                padding: EdgeInsets.only(
-                                    left: 12, right: 12, top: 8, bottom: 8),
-                                shape: new RoundedRectangleBorder(
-                                    borderRadius: new BorderRadius.circular(18.0)),
-                              ),
-                              onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  final response = await request.postJson(
-                                      "https://e-nadi.herokuapp.com/recipe/addAPI",
-                                      convert.jsonEncode(<String, String>{
-                                        'username': request.username,
-                                        'content': textFieldsValue.toString(),
-                                        'post_date': cdate,
-                                      }));
-                                  if (response["status"] == "success") {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(const SnackBar(
-                                      content: Text("Comment success"),
-                                    ));
-                                    Navigator.pushReplacementNamed(
-                                        context, RecipePage.routeName);
-                                  } else {
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(const SnackBar(
-                                      content: Text("Please try again."),
-                                    ));
-                                  }
-                                  // ignore: empty_statements
+                    isUser
+                        ? ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              textStyle: const TextStyle(fontSize: 16),
+                              primary: Colors.orange.shade800,
+                              onPrimary: Colors.white,
+                              side: BorderSide(
+                                  width: 2, color: Colors.transparent),
+                              padding: EdgeInsets.only(
+                                  left: 12, right: 12, top: 8, bottom: 8),
+                              shape: new RoundedRectangleBorder(
+                                  borderRadius:
+                                      new BorderRadius.circular(18.0)),
+                            ),
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                final response = await request.postJson(
+                                    "https://e-nadi.herokuapp.com/recipe/addAPI",
+                                    convert.jsonEncode(<String, String>{
+                                      'username': request.username,
+                                      'content': textFieldsValue.toString(),
+                                      'post_date': cdate,
+                                    }));
+                                if (response["status"] == "success") {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(const SnackBar(
+                                    content: Text("Comment success"),
+                                  ));
+                                  Navigator.pushReplacementNamed(
+                                      context, RecipePage.routeName);
+                                } else {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(const SnackBar(
+                                    content: Text("Please try again."),
+                                  ));
                                 }
-                              },
-                              child: const Text('Post'),
-                            )
-                          ],
-                        )
-                    : Column(
-                      children: const [
-                        Text("")
-                      ],
-                    ),
+                                // ignore: empty_statements
+                              }
+                            },
+                            child: const Text('Post'),
+                          )
+                        :
+                        // ignore: avoid_unnecessary_containers
+                        Container(
+                            child: Text(""),
+                          ),
                     SizedBox(
                       height: 20,
                     ),
