@@ -1,4 +1,3 @@
-import 'package:enadi_mobile/main.dart';
 import 'package:flutter/material.dart';
 import 'package:healthy_advice/screens/healthy_advice_home.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +5,7 @@ import 'package:accounts/utils/network_service.dart';
 import 'package:recipe/main.dart';
 import 'package:workout/screens/workout_screen.dart';
 import 'package:summary/screens/summary_screen.dart';
+import 'package:home/page/mainPage.dart';
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({Key? key}) : super(key: key);
@@ -29,7 +29,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
             iconData: Icons.home,
             title: "Home",
             onTilePressed: () {
-              Navigator.pushReplacementNamed(context, HomeDummy.routeName);
+              Navigator.pushReplacementNamed(context, MainPage.routeName);
             },
           ),
           DrawerListTile(
@@ -75,7 +75,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text("Successfully logged out!"),
                 ));
-                Navigator.pushReplacementNamed(context, HomeDummy.routeName);
+                Navigator.pushReplacementNamed(context, MainPage.routeName);
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text("Failed to Logout"),

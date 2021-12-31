@@ -1,7 +1,27 @@
 library home;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
+import 'package:flutter/material.dart';
+
+import './page/mainPage.dart';
+
+void main() => runApp(const MyApp());
+
+/// This is the main application widget.
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  static const String _title = 'Flutter Code Sample';
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: _title,
+      home: MainPage(),
+    );
+  }
 }
+
+
+
+/// This is the stateful widget that the main application instantiates.
+

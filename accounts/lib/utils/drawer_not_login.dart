@@ -1,11 +1,10 @@
-import 'package:enadi_mobile/main.dart';
 import 'package:flutter/material.dart';
 import 'package:healthy_advice/screens/healthy_advice_home.dart';
 import 'package:provider/provider.dart';
 import 'package:accounts/utils/network_service.dart';
 import 'package:recipe/main.dart';
 import 'package:accounts/screens/welcome_screen.dart';
-
+import 'package:home/page/mainPage.dart';
 
 class DrawerNotLoginScreen extends StatefulWidget {
   const DrawerNotLoginScreen({Key? key}) : super(key: key);
@@ -29,7 +28,7 @@ class _DrawerNotLoginScreenState extends State<DrawerNotLoginScreen> {
             iconData: Icons.home,
             title: "Home",
             onTilePressed: () {
-              Navigator.pushReplacementNamed(context, HomeDummy.routeName);
+              Navigator.pushReplacementNamed(context, MainPage.routeName);
             },
           ),
           DrawerListTile(
@@ -49,10 +48,9 @@ class _DrawerNotLoginScreenState extends State<DrawerNotLoginScreen> {
           ),
           DrawerListTile(
             iconData: Icons.arrow_right_alt_outlined,
-           title: "Login/Sign Up",
+            title: "Login/Sign Up",
             onTilePressed: () {
-              Navigator.pushReplacementNamed(
-                  context, WelcomeScreen.routeName);
+              Navigator.pushReplacementNamed(context, WelcomeScreen.routeName);
             },
           ),
         ],
@@ -60,15 +58,16 @@ class _DrawerNotLoginScreenState extends State<DrawerNotLoginScreen> {
     );
   }
 }
+
 class DrawerListTile extends StatelessWidget {
   final IconData iconData;
   final String title;
   final VoidCallback onTilePressed;
   const DrawerListTile(
       {Key? key,
-        required this.iconData,
-        required this.title,
-        required this.onTilePressed})
+      required this.iconData,
+      required this.title,
+      required this.onTilePressed})
       : super(key: key);
 
   @override
