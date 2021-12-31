@@ -1,15 +1,14 @@
-import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 import 'package:flutter/material.dart';
 import 'package:summary/screens/summary_screen.dart';
 import 'package:accounts/utils/drawer_screen.dart';
 import 'package:accounts/utils/network_service.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:summary/components/input.dart';
 
 class EditProfileApp extends StatefulWidget {
-  const EditProfileApp({Key? key}) : super(key: key);
+  const EditProfileApp({Key? key, required this.title}) : super(key: key);
+  final String title;
 
   @override
   _EditAppState createState() => _EditAppState();
@@ -32,69 +31,76 @@ class _EditAppState extends State<EditProfileApp> {
     final request = context.watch<NetworkService>();
     return Scaffold(
       appBar: AppBar(
-        title: Text("e-Nadi", style: TextStyle(color: Colors.red)),
-        backgroundColor: Colors.black,
+        title: Text(widget.title),
       ),
+      drawer: const DrawerScreen(),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [Colors.black, Colors.black]),
+                    colors: [
+                      Color.fromRGBO(241, 230, 255, 0.7),
+                      Color.fromRGBO(241, 230, 255, 0.7)
+                    ]),
+                image: DecorationImage(
+                  image: AssetImage("assets/images/login_bottom.png"),
+                  fit: BoxFit.cover,
+                ),
               ),
               child: Center(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    SizedBox(
+                    const SizedBox(
                       height: 40.0,
                     ),
-                    Text(
+                    const Text(
                       "HELLO !",
                       style: TextStyle(
-                        fontSize: 20.0,
-                        color: Colors.white,
+                        fontSize: 23.0,
+                        color: Colors.black,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10.0,
                     ),
-                    Text(
+                    const Text(
                       "Edit Your Profile",
                       style: TextStyle(
-                        fontSize: 18.0,
-                        color: Colors.white,
+                        fontSize: 20.0,
+                        color: Colors.black,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10.0,
                     ),
-                    Text(
+                    const Text(
                       "---------------------",
                       style: TextStyle(
-                        fontSize: 18.0,
-                        color: Colors.yellow[700],
+                        fontSize: 21.0,
+                        color: Colors.indigo,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15.0,
                     ),
                     Form(
                       key: _formKey,
                       child: Column(children: <Widget>[
                         Card(
-                            margin: EdgeInsets.symmetric(
+                            margin: const EdgeInsets.symmetric(
                                 horizontal: 50.0, vertical: 5.0),
                             clipBehavior: Clip.antiAlias,
-                            color: Color.fromRGBO(242, 248, 243, 0.5),
-                            elevation: 5.0,
+                            color: Colors.white,
+                            elevation: 13.0,
                             child: Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 12.0, vertical: 22.0),
@@ -106,14 +112,14 @@ class _EditAppState extends State<EditProfileApp> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: <Widget>[
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 10.0,
                                         ),
-                                        CircleAvatar(
+                                        const CircleAvatar(
                                           backgroundColor: Colors.black,
                                           radius: 45.0,
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           height: 30.0,
                                         ),
                                         InputField(
@@ -130,15 +136,15 @@ class _EditAppState extends State<EditProfileApp> {
                                             controller: profController),
                                       ]))
                                 ]))),
-                        SizedBox(
+                        const SizedBox(
                           height: 20.0,
                         ),
                         Card(
-                          margin: EdgeInsets.symmetric(
+                          margin: const EdgeInsets.symmetric(
                               horizontal: 50.0, vertical: 5.0),
                           clipBehavior: Clip.antiAlias,
-                          color: Color.fromRGBO(242, 248, 243, 0.5),
-                          elevation: 5.0,
+                          color: Colors.white,
+                          elevation: 13.0,
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 12.0, vertical: 22.0),
@@ -150,7 +156,7 @@ class _EditAppState extends State<EditProfileApp> {
                                         CrossAxisAlignment.center,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: <Widget>[
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 10.0,
                                       ),
                                       InputField(
@@ -168,7 +174,7 @@ class _EditAppState extends State<EditProfileApp> {
                                       InputField(
                                           hint: "Address",
                                           controller: addrController),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 15.0,
                                       ),
                                       Padding(
@@ -178,7 +184,7 @@ class _EditAppState extends State<EditProfileApp> {
                                           style: ButtonStyle(
                                             backgroundColor:
                                                 MaterialStateProperty.all(
-                                                    Colors.grey[800]),
+                                                    Colors.indigo),
                                           ),
                                           onPressed: () async {
                                             if (_formKey.currentState!
@@ -212,40 +218,43 @@ class _EditAppState extends State<EditProfileApp> {
                                                             addrController.text,
                                                       }));
 
-                                              showDialog(
-                                                context: context,
-                                                builder: (context) {
-                                                  return AlertDialog(
-                                                    content: Text(
-                                                        'Profile Successfully Updated!'),
-                                                    actions: <Widget>[
-                                                      TextButton(
-                                                          child: Text('Ok'),
-                                                          onPressed: () {
-                                                            Navigator.push(
-                                                                context,
-                                                                MaterialPageRoute(
-                                                                    builder: (context) =>
-                                                                        ActivitySummaryApp(
-                                                                            title:
-                                                                                'e-nadi Summary')));
-                                                          }),
-                                                    ],
-                                                  );
-                                                },
-                                              );
+                                              if (response["status"] ==
+                                                  "success") {
+                                                showDialog(
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return AlertDialog(
+                                                      content: const Text(
+                                                          'Profile Successfully Updated!'),
+                                                      actions: <Widget>[
+                                                        TextButton(
+                                                            child: const Text(
+                                                                'Ok'),
+                                                            onPressed: () {
+                                                              Navigator.push(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                      builder: (context) =>
+                                                                          const ActivitySummaryApp(
+                                                                              title: 'e-nadi Summary')));
+                                                            }),
+                                                      ],
+                                                    );
+                                                  },
+                                                );
+                                              }
                                             }
                                           },
                                           child: const Text('SAVE CHANGES'),
                                         ),
                                       ),
                                       TextButton(
-                                        child: Text(
+                                        child: const Text(
                                           'TO ACTIVITY SUMMARY',
                                           style: TextStyle(
                                             fontSize: 14.0,
                                             fontWeight: FontWeight.bold,
-                                            color: Colors.white,
+                                            color: Colors.black,
                                           ),
                                         ),
                                         onPressed: () {
@@ -253,7 +262,7 @@ class _EditAppState extends State<EditProfileApp> {
                                               context,
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      ActivitySummaryApp(
+                                                      const ActivitySummaryApp(
                                                           title:
                                                               'e-nadi Summary')));
                                         },
@@ -267,7 +276,7 @@ class _EditAppState extends State<EditProfileApp> {
                         ),
                       ]),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 35.0,
                     ),
                   ],

@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
           RecipePage.routeName: (context) =>
               const RecipePage(title: 'e-nadi Recipe'),
           ActivitySummaryApp.routeName: (context) =>
-              const RecipePage(title: 'e-nadi Summary'),
+              const ActivitySummaryApp(title: 'e-nadi Summary'),
         },
       ),
     );

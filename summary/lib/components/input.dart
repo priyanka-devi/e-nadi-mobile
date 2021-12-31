@@ -25,7 +25,7 @@ class _InputFieldState extends State<InputField> {
         padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
         width: size.width * 0.7,
         decoration: BoxDecoration(
-          color: Colors.white54,
+          color: const Color.fromRGBO(241, 230, 255, 1.0),
           borderRadius: BorderRadius.circular(29),
         ),
         child: TextFormField(
@@ -34,7 +34,7 @@ class _InputFieldState extends State<InputField> {
           decoration: InputDecoration(
             icon: const Icon(
               Icons.people,
-              color: Colors.brown,
+              color: Colors.indigo,
             ),
             hintText: widget.hint,
             border: InputBorder.none,
