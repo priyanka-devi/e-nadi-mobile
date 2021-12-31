@@ -10,6 +10,7 @@ import 'package:healthy_advice/widgets/comment_textField.dart';
 import 'package:healthy_advice/Model/isi_comment.dart';
 import 'package:healthy_advice/Model/isi_article.dart';
 import 'package:accounts/utils/drawer_screen.dart';
+import 'package:accounts/utils/drawer_not_login.dart';
 import 'package:provider/provider.dart';
 import 'package:accounts/utils/network_service.dart';
 
@@ -84,7 +85,7 @@ class _HealthyAdviceHomeState extends State<HealthyAdviceHome> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      drawer: isUser ? const DrawerScreen() : const DrawerScreen(),
+      drawer: isUser ? const DrawerScreen() : const DrawerNotLoginScreen(),
       body: SingleChildScrollView(
         child: Column(
           children: [

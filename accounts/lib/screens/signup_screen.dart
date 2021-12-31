@@ -117,7 +117,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   actions: <Widget>[
                                     TextButton(
                                       onPressed: () =>
-                                          Navigator.pop(context, 'OK'),
+                                  Navigator.pushReplacementNamed(context, LoginScreen.routeName),
+                                          // Navigator.pop(context, 'OK'),
                                       child: const Text('OK'),
                                     ),
                                   ],

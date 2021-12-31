@@ -9,6 +9,7 @@ import 'package:accounts/constants.dart';
 import 'package:workout/screens/workout_screen.dart';
 import 'package:recipe/main.dart';
 import 'package:summary/screens/summary_screen.dart';
+import 'package:accounts/utils/drawer_not_login.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             primaryColor: kPrimaryColor, scaffoldBackgroundColor: Colors.white),
-        home: const WelcomeScreen(),
+        home: const HomeDummy(),
         routes: {
           WorkoutPage.routeName: (context) =>
               const WorkoutPage(title: 'e-nadi Workout'),
@@ -42,6 +43,8 @@ class MyApp extends StatelessWidget {
               const RecipePage(title: 'e-nadi Recipe'),
           ActivitySummaryApp.routeName: (context) =>
               const ActivitySummaryApp(title: 'e-nadi Summary'),
+          WelcomeScreen.routeName : (context) =>
+              const WelcomeScreen(),
         },
       ),
     );
@@ -66,7 +69,7 @@ class _HomeDummyState extends State<HomeDummy> {
         ),
         drawer: request.username != ""
             ? const DrawerScreen()
-            : const DrawerScreen(),
+            : const DrawerNotLoginScreen(),
         body: Container());
   }
 }

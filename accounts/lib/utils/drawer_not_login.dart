@@ -4,17 +4,17 @@ import 'package:healthy_advice/screens/healthy_advice_home.dart';
 import 'package:provider/provider.dart';
 import 'package:accounts/utils/network_service.dart';
 import 'package:recipe/main.dart';
-import 'package:workout/screens/workout_screen.dart';
-import 'package:summary/screens/summary_screen.dart';
+import 'package:accounts/screens/welcome_screen.dart';
 
-class DrawerScreen extends StatefulWidget {
-  const DrawerScreen({Key? key}) : super(key: key);
+
+class DrawerNotLoginScreen extends StatefulWidget {
+  const DrawerNotLoginScreen({Key? key}) : super(key: key);
 
   @override
-  _DrawerScreenState createState() => _DrawerScreenState();
+  _DrawerNotLoginScreenState createState() => _DrawerNotLoginScreenState();
 }
 
-class _DrawerScreenState extends State<DrawerScreen> {
+class _DrawerNotLoginScreenState extends State<DrawerNotLoginScreen> {
   @override
   Widget build(BuildContext context) {
     final request = context.watch<NetworkService>();
@@ -33,30 +33,10 @@ class _DrawerScreenState extends State<DrawerScreen> {
             },
           ),
           DrawerListTile(
-            iconData: Icons.assignment_turned_in_rounded,
-            title: "Workout Tracker",
-            onTilePressed: () {
-              Navigator.pushReplacementNamed(context, WorkoutPage.routeName);
-            },
-          ),
-          DrawerListTile(
-            iconData: Icons.airline_seat_individual_suite,
-            title: "Sleep Tracker",
-            onTilePressed: () {},
-          ),
-          DrawerListTile(
             iconData: Icons.flatware_outlined,
             title: "Recipe",
             onTilePressed: () {
               Navigator.pushReplacementNamed(context, RecipePage.routeName);
-            },
-          ),
-          DrawerListTile(
-            iconData: Icons.article,
-            title: "Activity Summary",
-            onTilePressed: () {
-              Navigator.pushReplacementNamed(
-                  context, ActivitySummaryApp.routeName);
             },
           ),
           DrawerListTile(
@@ -67,38 +47,28 @@ class _DrawerScreenState extends State<DrawerScreen> {
                   context, HealthyAdviceHome.routeName);
             },
           ),
-          ElevatedButton(
-            onPressed: () async {
-              final response = await request.logoutAccount(
-                  "https://e-nadi.herokuapp.com/authentication/logout_flutter/");
-              if (response['status']) {
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text("Successfully logged out!"),
-                ));
-                Navigator.pushReplacementNamed(context, HomeDummy.routeName);
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text("Failed to Logout"),
-                ));
-              }
+          DrawerListTile(
+            iconData: Icons.arrow_right_alt_outlined,
+           title: "Login/Sign Up",
+            onTilePressed: () {
+              Navigator.pushReplacementNamed(
+                  context, WelcomeScreen.routeName);
             },
-            child: const Text("Logout"),
           ),
         ],
       ),
     );
   }
 }
-
 class DrawerListTile extends StatelessWidget {
   final IconData iconData;
   final String title;
   final VoidCallback onTilePressed;
   const DrawerListTile(
       {Key? key,
-      required this.iconData,
-      required this.title,
-      required this.onTilePressed})
+        required this.iconData,
+        required this.title,
+        required this.onTilePressed})
       : super(key: key);
 
   @override
