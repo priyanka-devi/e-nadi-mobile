@@ -1,4 +1,12 @@
+import 'package:accounts/screens/login_screen.dart';
+import 'package:enadi_mobile/main.dart';
 import 'package:flutter/material.dart';
+import 'package:healthy_advice/screens/healthy_advice_home.dart';
+import 'package:provider/provider.dart';
+import 'package:accounts/utils/network_service.dart';
+import 'package:recipe/main.dart';
+import 'package:workout/screens/workout_screen.dart';
+import 'package:summary/screens/summary_screen.dart';
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({Key? key}) : super(key: key);
@@ -10,22 +18,27 @@ class DrawerScreen extends StatefulWidget {
 class _DrawerScreenState extends State<DrawerScreen> {
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<NetworkService>();
     return Drawer(
       child: ListView(
         children: <Widget>[
-          const UserAccountsDrawerHeader(
-            accountName: Text("Priyanka Devi"),
-            accountEmail: Text("priyankadevi64@gmail.com"),
+          UserAccountsDrawerHeader(
+            // ignore: unnecessary_string_interpolations
+            accountName: Text("${request.username}"), accountEmail: null,
           ),
           DrawerListTile(
             iconData: Icons.home,
             title: "Home",
-            onTilePressed: () {},
+            onTilePressed: () {
+              Navigator.pushReplacementNamed(context, HomeDummy.routeName);
+            },
           ),
           DrawerListTile(
             iconData: Icons.assignment_turned_in_rounded,
             title: "Workout Tracker",
-            onTilePressed: () {},
+            onTilePressed: () {
+              Navigator.pushReplacementNamed(context, WorkoutPage.routeName);
+            },
           ),
           DrawerListTile(
             iconData: Icons.airline_seat_individual_suite,
@@ -35,22 +48,42 @@ class _DrawerScreenState extends State<DrawerScreen> {
           DrawerListTile(
             iconData: Icons.flatware_outlined,
             title: "Recipe",
-            onTilePressed: () {},
+            onTilePressed: () {
+              Navigator.pushReplacementNamed(context, RecipePage.routeName);
+            },
           ),
           DrawerListTile(
             iconData: Icons.article,
             title: "Activity Summary",
-            onTilePressed: () {},
+            onTilePressed: () {
+              Navigator.pushReplacementNamed(
+                  context, ActivitySummaryApp.routeName);
+            },
           ),
           DrawerListTile(
             iconData: Icons.apartment,
             title: "Healthy Advice",
-            onTilePressed: () {},
+            onTilePressed: () {
+              Navigator.pushReplacementNamed(
+                  context, HealthyAdviceHome.routeName);
+            },
           ),
-          DrawerListTile(
-            iconData: Icons.arrow_back_rounded,
-            title: "Log out",
-            onTilePressed: () {},
+          ElevatedButton(
+            onPressed: () async {
+              final response = await request.logoutAccount(
+                  "https://e-nadi.herokuapp.com/authentication/logout_flutter/");
+              if (response['status']) {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text("Successfully logged out!"),
+                ));
+                Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text("Failed to Logout"),
+                ));
+              }
+            },
+            child: const Text("Logout"),
           ),
         ],
       ),
