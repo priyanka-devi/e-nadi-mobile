@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:accounts/utils/network_service.dart';
 import 'package:recipe/main.dart';
 import 'package:workout/screens/workout_screen.dart';
+import 'package:summary/screens/summary_screen.dart';
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({Key? key}) : super(key: key);
@@ -54,7 +55,10 @@ class _DrawerScreenState extends State<DrawerScreen> {
           DrawerListTile(
             iconData: Icons.article,
             title: "Activity Summary",
-            onTilePressed: () {},
+            onTilePressed: () {
+              Navigator.pushReplacementNamed(
+                  context, ActivitySummaryApp.routeName);
+            },
           ),
           DrawerListTile(
             iconData: Icons.apartment,

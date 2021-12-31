@@ -8,14 +8,14 @@ import 'package:accounts/screens/welcome_screen.dart';
 import 'package:accounts/constants.dart';
 import 'package:workout/screens/workout_screen.dart';
 import 'package:recipe/main.dart';
+import 'package:summary/screens/summary_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
+// ignore: use_key_in_widget_constructors
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   // This widget is the root of your application.
 
   @override
@@ -32,13 +32,16 @@ class MyApp extends StatelessWidget {
             primaryColor: kPrimaryColor, scaffoldBackgroundColor: Colors.white),
         home: const WelcomeScreen(),
         routes: {
-          WorkoutPage.routeName: (context) => const WorkoutPage(title: 'e-nadi Workout'),
+          WorkoutPage.routeName: (context) =>
+              const WorkoutPage(title: 'e-nadi Workout'),
           HealthyAdviceHome.routeName: (context) =>
               const HealthyAdviceHome(title: 'e-nadi Healthy Advice'),
           LoginScreen.routeName: (context) => const LoginScreen(),
           HomeDummy.routeName: (context) => const HomeDummy(),
           RecipePage.routeName: (context) =>
               const RecipePage(title: 'e-nadi Recipe'),
+          ActivitySummaryApp.routeName: (context) =>
+              const ActivitySummaryApp(title: 'e-nadi Summary'),
         },
       ),
     );
