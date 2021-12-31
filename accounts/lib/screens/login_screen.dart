@@ -2,13 +2,14 @@ import 'package:accounts/components/textfield_input.dart';
 import 'package:accounts/components/textfield_inputpassword.dart';
 import 'package:accounts/screens/welcome_screen.dart';
 import 'package:accounts/utils/network_service.dart';
-import 'package:enadi_mobile/main.dart';
+
 import 'package:flutter/material.dart';
 import 'package:accounts/components/already_have_an_account_check.dart';
 import 'package:accounts/screens/signup_screen.dart';
 import 'package:accounts/constants.dart';
 import 'package:accounts/components/button.dart';
 import 'package:provider/provider.dart';
+import 'package:home/page/mainPage.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login';
@@ -114,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     TextButton(
                                       onPressed: () =>
                                           Navigator.pushReplacementNamed(
-                                              context, HomeDummy.routeName),
+                                              context, MainPage.routeName),
                                       child: const Text('OK'),
                                     ),
                                   ],

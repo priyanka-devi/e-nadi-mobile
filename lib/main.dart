@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:accounts/screens/login_screen.dart';
 import 'package:accounts/utils/drawer_screen.dart';
 import 'package:accounts/utils/network_service.dart';
@@ -9,7 +11,9 @@ import 'package:accounts/constants.dart';
 import 'package:workout/screens/workout_screen.dart';
 import 'package:recipe/main.dart';
 import 'package:summary/screens/summary_screen.dart';
+import 'package:home/page/mainPage.dart';
 
+/// This is the main application widget.
 void main() {
   runApp(MyApp());
 }
@@ -30,14 +34,14 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             primaryColor: kPrimaryColor, scaffoldBackgroundColor: Colors.white),
-        home: const WelcomeScreen(),
+        home: const MainPage(),
         routes: {
           WorkoutPage.routeName: (context) =>
               const WorkoutPage(title: 'e-nadi Workout'),
           HealthyAdviceHome.routeName: (context) =>
               const HealthyAdviceHome(title: 'e-nadi Healthy Advice'),
           LoginScreen.routeName: (context) => const LoginScreen(),
-          HomeDummy.routeName: (context) => const HomeDummy(),
+          MainPage.routeName: (context) => const MainPage(),
           RecipePage.routeName: (context) =>
               const RecipePage(title: 'e-nadi Recipe'),
           ActivitySummaryApp.routeName: (context) =>
@@ -48,25 +52,25 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomeDummy extends StatefulWidget {
-  static const routeName = '/homedummy';
-  const HomeDummy({Key? key}) : super(key: key);
-
-  @override
-  _HomeDummyState createState() => _HomeDummyState();
-}
-
-class _HomeDummyState extends State<HomeDummy> {
-  @override
-  Widget build(BuildContext context) {
-    final request = context.watch<NetworkService>();
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text("Home Dummy"),
-        ),
-        drawer: request.username != ""
-            ? const DrawerScreen()
-            : const DrawerScreen(),
-        body: Container());
-  }
-}
+// class HomeDummy extends StatefulWidget {
+//   static const routeName = '/homedummy';
+//   const HomeDummy({Key? key}) : super(key: key);
+//
+//   @override
+//   _HomeDummyState createState() => _HomeDummyState();
+// }
+//
+// class _HomeDummyState extends State<HomeDummy> {
+//   @override
+//   Widget build(BuildContext context) {
+//     final request = context.watch<NetworkService>();
+//     return Scaffold(
+//         appBar: AppBar(
+//           title: const Text("Home Dummy"),
+//         ),
+//         drawer: request.username != ""
+//             ? const DrawerScreen()
+//             : const DrawerScreen(),
+//         body: Container());
+//   }
+// }
