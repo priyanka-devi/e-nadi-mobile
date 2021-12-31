@@ -6,6 +6,7 @@ import 'package:recipe/main.dart';
 import 'package:workout/screens/workout_screen.dart';
 import 'package:summary/screens/summary_screen.dart';
 import 'package:home/page/mainPage.dart';
+import 'package:sleep/screens/sleep_screens.dart';
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({Key? key}) : super(key: key);
@@ -42,7 +43,9 @@ class _DrawerScreenState extends State<DrawerScreen> {
           DrawerListTile(
             iconData: Icons.airline_seat_individual_suite,
             title: "Sleep Tracker",
-            onTilePressed: () {},
+            onTilePressed: () {
+              Navigator.pushReplacementNamed(context, SleepPage.routeName);
+            },
           ),
           DrawerListTile(
             iconData: Icons.flatware_outlined,

@@ -5,6 +5,7 @@ import 'package:healthy_advice/screens/healthy_advice_home.dart';
 import 'package:provider/provider.dart';
 import 'package:accounts/screens/welcome_screen.dart';
 import 'package:accounts/constants.dart';
+import 'package:sleep/screens/sleep_screens.dart';
 import 'package:workout/screens/workout_screen.dart';
 import 'package:recipe/main.dart';
 import 'package:summary/screens/summary_screen.dart';
@@ -44,6 +45,8 @@ class MyApp extends StatelessWidget {
           ActivitySummaryApp.routeName: (context) =>
               const ActivitySummaryApp(title: 'e-nadi Summary'),
           WelcomeScreen.routeName: (context) => const WelcomeScreen(),
+          SleepPage.routeName: (context) =>
+              const SleepPage(title: 'e-nadi Sleep Tracker'),
         },
       ),
     );
