@@ -74,136 +74,138 @@ class _RecipePageState extends State<RecipePage> {
         title: Text(widget.title),
       ),
       drawer: isUser ? const DrawerScreen() : const DrawerScreen(),
-      body: ListView(
+      body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
-        children: [
-          // _widgetOptions.elementAt(_RecipePageStateIndex),
-          Container(
-            child: buildRecipeCard1(),
-            margin: EdgeInsets.fromLTRB(0, 0, 10, 20),
-          ),
-          Container(
-            child: buildRecipeCard2(),
-            margin: EdgeInsets.fromLTRB(0, 0, 10, 20),
-          ),
-          Container(
-            child: buildRecipeCard3(),
-            margin: EdgeInsets.fromLTRB(0, 0, 10, 20),
-          ),
-          Container(
-            child: buildRecipeCard4(),
-            margin: EdgeInsets.fromLTRB(0, 0, 10, 20),
-          ),
-          Container(
-            child: buildRecipeCard5(),
-            margin: EdgeInsets.fromLTRB(0, 0, 10, 20),
-          ),
-          Container(
-            child: buildRecipeCard6(),
-            margin: EdgeInsets.fromLTRB(0, 0, 10, 50),
-          ),
-          Container(
-            child: Text('COMMENTS & FEEDBACK',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 35,
-                )),
-            margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
-          ),
-          Form(
-            key: _formKey,
-            child: Column(
-              children: [
-                TextFormField(
-                  autofocus: false,
-                  keyboardType: TextInputType.url,
-                  maxLength: 200,
-                  decoration: InputDecoration(
-                      hintText: "Enter a Feedback",
-                      contentPadding: EdgeInsets.fromLTRB(12, 0, 0, 0),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      )),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please Insert a Feedback';
-                    }
-                    textFieldsValue = value;
-                    return null;
-                  },
-                ),
-                SizedBox(
-                  height: 12,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    textStyle: const TextStyle(fontSize: 16),
-                    primary: Colors.orange.shade800,
-                    onPrimary: Colors.white,
-                    side: BorderSide(width: 2, color: Colors.transparent),
-                    padding:
-                    EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 8),
-                    shape: new RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(18.0)),
-                  ),
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      final response = await request.postJson(
-                          "https://e-nadi.herokuapp.com/recipe/addAPI",
-                          convert.jsonEncode(<String, String>{
-                            'username': request.username,
-                            'content': textFieldsValue.toString(),
-                            'post_date': cdate,
-                          }));
-                      if (response["status"] == "success") {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
-                          content: Text("Comment success"),
-                        ));
-                        Navigator.pushReplacementNamed(
-                            context, RecipePage.routeName);
-                      } else {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(
-                          content: Text("Please try again."),
-                        ));
-                      }
-                      // ignore: empty_statements
-                    }
-                  },
-                  child: const Text('Post'),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                FutureBuilder(
-                    future: fetchData(),
-                    builder: (context, AsyncSnapshot snapshot) {
-                      if (snapshot.data == null) {
-                        return Center(
-                            child: Text(
-                              "Loading...",
-                            ));
-                      } else {
-                        return Column(
-                            children: extractedData.map((i) {
-                              return CardComment(
-                                commentatorName: i.fields.commentatorName,
-                                commentField: i.fields.commentField,
-                                commentDate: i.fields.commentDate,
-                                commentPk: i.pk,
-                              );
-                            }).toList());
-                      }
-                    }),
-                SizedBox(
-                  height: 20,
-                ),
-              ],
+        child: Column(
+          children: [
+            // _widgetOptions.elementAt(_RecipePageStateIndex),
+            Container(
+              child: buildRecipeCard1(),
+              margin: EdgeInsets.fromLTRB(0, 0, 10, 20),
             ),
-          ),
-        ],
+            Container(
+              child: buildRecipeCard2(),
+              margin: EdgeInsets.fromLTRB(0, 0, 10, 20),
+            ),
+            Container(
+              child: buildRecipeCard3(),
+              margin: EdgeInsets.fromLTRB(0, 0, 10, 20),
+            ),
+            Container(
+              child: buildRecipeCard4(),
+              margin: EdgeInsets.fromLTRB(0, 0, 10, 20),
+            ),
+            Container(
+              child: buildRecipeCard5(),
+              margin: EdgeInsets.fromLTRB(0, 0, 10, 20),
+            ),
+            Container(
+              child: buildRecipeCard6(),
+              margin: EdgeInsets.fromLTRB(0, 0, 10, 50),
+            ),
+            Container(
+              child: Text('COMMENTS & FEEDBACK',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 35,
+                  )),
+              margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
+            ),
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    autofocus: false,
+                    keyboardType: TextInputType.url,
+                    maxLength: 200,
+                    decoration: InputDecoration(
+                        hintText: "Enter a Feedback",
+                        contentPadding: EdgeInsets.fromLTRB(12, 0, 0, 0),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        )),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please Insert a Feedback';
+                      }
+                      textFieldsValue = value;
+                      return null;
+                    },
+                  ),
+                  SizedBox(
+                    height: 12,
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      textStyle: const TextStyle(fontSize: 16),
+                      primary: Colors.orange.shade800,
+                      onPrimary: Colors.white,
+                      side: BorderSide(width: 2, color: Colors.transparent),
+                      padding:
+                      EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 8),
+                      shape: new RoundedRectangleBorder(
+                          borderRadius: new BorderRadius.circular(18.0)),
+                    ),
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        final response = await request.postJson(
+                            "https://e-nadi.herokuapp.com/recipe/addAPI",
+                            convert.jsonEncode(<String, String>{
+                              'username': request.username,
+                              'content': textFieldsValue.toString(),
+                              'post_date': cdate,
+                            }));
+                        if (response["status"] == "success") {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text("Comment success"),
+                          ));
+                          Navigator.pushReplacementNamed(
+                              context, RecipePage.routeName);
+                        } else {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text("Please try again."),
+                          ));
+                        }
+                        // ignore: empty_statements
+                      }
+                    },
+                    child: const Text('Post'),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  FutureBuilder(
+                      future: fetchData(),
+                      builder: (context, AsyncSnapshot snapshot) {
+                        if (snapshot.data == null) {
+                          return Center(
+                              child: Text(
+                                "Loading...",
+                              ));
+                        } else {
+                          return Column(
+                              children: extractedData.map((i) {
+                                return CardComment(
+                                  commentatorName: i.fields.commentatorName,
+                                  commentField: i.fields.commentField,
+                                  commentDate: i.fields.commentDate,
+                                  commentPk: i.pk,
+                                );
+                              }).toList());
+                        }
+                      }),
+                  SizedBox(
+                    height: 20,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        )
       ),
     );
   }
