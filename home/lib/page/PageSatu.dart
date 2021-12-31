@@ -1,11 +1,45 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
+import './mainPage.dart';
 import 'package:http/http.dart' as http;
 
 class PageSatu extends StatelessWidget{
   final _myKey = GlobalKey<FormState>();
   String formValue = "";
+  String name = "";
   final TextEditingController myController = TextEditingController();
+
+  Future post_feedback(String feedback, String name) async{
+    print("masuk");
+    final response = await http.post(Uri.parse("http://127.0.0.1:8000/home/post_feedback"),
+        headers: <String, String>{
+
+          'Content-type' : 'application/json;charset=UTF-8',
+          "Accept": "application/json",
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "POST, GET, OPTIONS, PUT, DELETE, HEAD",
+        },
+
+        body : jsonEncode(<String, String>{
+          'name' : name,
+          'the_feedback' : feedback,
+
+        })
+
+    );
+
+    //print(response.body);
+
+    if (response.statusCode == 201){
+      return true;
+    }else{
+      return false;
+    }
+
+
+  }
+
+
 
   @override
   Widget build(BuildContext context){
@@ -54,19 +88,11 @@ class PageSatu extends StatelessWidget{
                   ElevatedButton(
                     onPressed: () async {
                       if (_myKey.currentState!.validate()){
-                        print(formValue);
 
-                        final response = await http.post(Uri.parse(
-                            'https://e-nadi.herokuapp.com/home/getnews'),
-                            headers: <String, String>{
-                              'Content-Type' : 'application/json;charset=UTF-8',
-                            },
-                            body: jsonEncode(<String, String>{
-                              "name" : "Arsan",
-                              "the_feedback" : formValue,
+                        post_feedback(formValue, "username");
 
-                            })
-                        );
+
+
                       }
 
                     },
