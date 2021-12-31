@@ -1,7 +1,4 @@
-// ignore_for_file: unused_import
-
 import 'package:accounts/screens/login_screen.dart';
-import 'package:accounts/utils/drawer_screen.dart';
 import 'package:accounts/utils/network_service.dart';
 import 'package:flutter/material.dart';
 import 'package:healthy_advice/screens/healthy_advice_home.dart';
@@ -46,6 +43,7 @@ class MyApp extends StatelessWidget {
               const RecipePage(title: 'e-nadi Recipe'),
           ActivitySummaryApp.routeName: (context) =>
               const ActivitySummaryApp(title: 'e-nadi Summary'),
+          WelcomeScreen.routeName: (context) => const WelcomeScreen(),
         },
       ),
     );

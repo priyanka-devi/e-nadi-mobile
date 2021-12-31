@@ -33,78 +33,74 @@ class RecipeDetail4 extends StatelessWidget {
             isAlwaysShown: true,
             thickness: 5,
             child: SingleChildScrollView(
-                child:
-                Column(
-                    children: <Widget>[
-                      Container(
-                        height: 440,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(63),
-                              bottomRight: Radius.circular(63),
-                            ),
-                            boxShadow: [
-                              BoxShadow(
-                                offset: Offset(0, 10),
-                                blurRadius: 60,
-                                color: Colors.grey,
-                              )
-                            ],
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                'https://hips.hearstapps.com/del.h-cdn.co/assets/17/27/1499459298-delish-garlicky-greek-chicken-front00-00-02-20still002.jpg',
-                              ),
-                              fit: BoxFit.cover,
-                            )),
+              child: Column(children: <Widget>[
+                Container(
+                  height: 440,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(63),
+                        bottomRight: Radius.circular(63),
                       ),
-                      Container(
-                        child: buildCardRecipeStep(),
-                        margin: EdgeInsets.fromLTRB(25, 20, 25, 10),
-                      ),
-                      Container(
-                        child: buildCardRecipeIng(),
-                        margin: EdgeInsets.fromLTRB(25, 20, 25, 10),
-                      ),
-                      Container(
-                        child: Text('FEATURED RECIPE',
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 20,
-                            )),
-                        margin: EdgeInsets.fromLTRB(20, 30, 0, 20),
-                      ),
-                      Container(
-                        padding: EdgeInsets.all(20),
-                        child: CarouselRecipe(),
-                      ),
-                      Stack(
-                        children: [
-                          Positioned(
-                              child: ButtonBar(
-                                alignment: MainAxisAlignment.center,
-                                children: [
-                                  ElevatedButton(
-                                    style: ButtonStyle(
-                                        shape:
-                                        MaterialStateProperty.all<RoundedRectangleBorder>(
-                                            RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(18.0),
-                                                side: BorderSide(
-                                                  color: Colors.transparent,
-                                                )))),
-                                    child: Text('Go back!'),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                  ),
-                                ],
-                              )
-                          ),
-                        ],
-                      )
-                    ]
+                      boxShadow: [
+                        BoxShadow(
+                          offset: Offset(0, 10),
+                          blurRadius: 60,
+                          color: Colors.grey,
+                        )
+                      ],
+                      image: DecorationImage(
+                        image: NetworkImage(
+                          'https://hips.hearstapps.com/del.h-cdn.co/assets/17/27/1499459298-delish-garlicky-greek-chicken-front00-00-02-20still002.jpg',
+                        ),
+                        fit: BoxFit.cover,
+                      )),
                 ),
+                Container(
+                  child: buildCardRecipeStep(),
+                  margin: EdgeInsets.fromLTRB(25, 20, 25, 10),
+                ),
+                Container(
+                  child: buildCardRecipeIng(),
+                  margin: EdgeInsets.fromLTRB(25, 20, 25, 10),
+                ),
+                Container(
+                  child: Text('FEATURED RECIPE',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      )),
+                  margin: EdgeInsets.fromLTRB(20, 30, 0, 20),
+                ),
+                Container(
+                  padding: EdgeInsets.all(20),
+                  child: CarouselRecipe(),
+                ),
+                Stack(
+                  children: [
+                    Positioned(
+                        child: ButtonBar(
+                      alignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          style: ButtonStyle(
+                              shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                      side: BorderSide(
+                                        color: Colors.transparent,
+                                      )))),
+                          child: Text('Go back!'),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ],
+                    )),
+                  ],
+                )
+              ]),
             ),
           ),
         ),

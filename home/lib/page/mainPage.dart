@@ -6,6 +6,7 @@ import './PageSatu.dart';
 import './FeedBack.dart';
 import './ListNews.dar.dart';
 import 'package:accounts/utils/drawer_screen.dart';
+import 'package:accounts/utils/drawer_not_login.dart';
 import 'package:provider/provider.dart';
 import 'package:accounts/utils/network_service.dart';
 
@@ -236,7 +237,6 @@ class _MainPage extends State<MainPage> {
                 title: Text('NEWS'),
                 subtitle: Text('Keep update by seeing recent headlines'),
               ),
-
               Row(
                 children: <Widget>[
                   TextButton(
@@ -363,7 +363,7 @@ class _MainPage extends State<MainPage> {
         title: const Text("E - Nadi"),
       ),
       body: isUser ? bodyLogin() : body(),
-      drawer: isUser ? const DrawerScreen() : const DrawerScreen(),
+      drawer: isUser ? const DrawerScreen() : const DrawerNotLoginScreen(),
     );
   }
 }

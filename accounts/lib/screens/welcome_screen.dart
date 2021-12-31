@@ -6,6 +6,7 @@ import 'package:accounts/screens/login_screen.dart';
 import 'package:accounts/screens/signup_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
+  static const routeName = '/welcomescreen';
   const WelcomeScreen({Key? key}) : super(key: key);
 
   @override
