@@ -3,9 +3,9 @@ import './Drawer.dart';
 import './PageSatu.dart';
 import './FeedBack.dart';
 import './ListNews.dar.dart';
-// import 'package:accounts/utils/drawer_screen.dart';
-// import 'package:provider/provider.dart';
-// import 'package:accounts/utils/network_service.dart';
+import 'package:accounts/utils/drawer_screen.dart';
+import 'package:provider/provider.dart';
+import 'package:accounts/utils/network_service.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage ({Key? key}) : super(key: key);
